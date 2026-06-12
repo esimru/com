@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title id="pageTitle">eSIM для страны — eSIMsale</title>
+    <title id="pageTitle">eSIM для страны — eSIMru</title>
     <meta name="description" id="pageDescription" content="Купить eSIM для страны с безлимитным интернетом. Выберите срок действия и номер. Мгновенная доставка.">
     <meta name="keywords" content="eSIM, купить eSIM, безлимитный интернет, eSIM для путешествий">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" id="canonicalLink" href="https://esimsale.com/country.html">
-    <meta property="og:title" id="ogTitle" content="eSIM для страны — eSIMsale">
+    <link rel="canonical" id="canonicalLink" href="https://esimru.github.io/com/country.html">
+    <meta property="og:title" id="ogTitle" content="eSIM для страны — eSIMru">
     <meta property="og:description" id="ogDescription" content="Безлимитный интернет для путешествий. Мгновенная установка.">
-    <meta property="og:image" content="https://esimsale.com/og-country.jpg">
-    <meta property="og:url" content="https://esimsale.com/country.html">
+    <meta property="og:image" content="https://esimru.github.io/com/og-country.jpg">
+    <meta property="og:url" content="https://esimru.github.io/com/country.html">
     <meta property="og:type" content="product">
     <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json" id="productSchema">
@@ -20,7 +20,7 @@
       "@type": "Product",
       "name": "eSIM для выбранной страны",
       "description": "Безлимитный интернет на 7-90 дней с возможностью звонков",
-      "brand": { "@type": "Brand", "name": "eSIMsale" },
+      "brand": { "@type": "Brand", "name": "eSIMru" },
       "offers": {
         "@type": "Offer",
         "price": "2050",
@@ -247,19 +247,19 @@
     }
 
     // SEO динамика
-    document.title = `eSIM для ${countryInfo.name} — безлимит от ${countryInfo.basePrice7} ₽ | eSIMsale`;
+    document.title = `eSIM для ${countryInfo.name} — безлимит от ${countryInfo.basePrice7} ₽ | eSIMru`;
     document.getElementById('pageTitle').innerHTML = document.title;
     const metaDesc = `Купить eSIM для ${countryInfo.name} с безлимитным интернетом на 7-90 дней. Скорость до ${countryInfo.maxSpeed} Мбит/с, звонки от ${countryInfo.callPrice} ₽/мин. Мгновенная доставка.`;
     document.getElementById('pageDescription').setAttribute('content', metaDesc);
     document.getElementById('ogTitle').setAttribute('content', document.title);
     document.getElementById('ogDescription').setAttribute('content', metaDesc);
-    document.getElementById('canonicalLink').setAttribute('href', `https://esimsale.com/country.html?country=${selectedCountryCode}`);
+    document.getElementById('canonicalLink').setAttribute('href', `https://esimru.github.io/com/country.html?country=${selectedCountryCode}`);
     const productSchema = {
         "@context": "https://schema.org",
         "@type": "Product",
         "name": `eSIM для ${countryInfo.name}`,
         "description": metaDesc,
-        "brand": { "@type": "Brand", "name": "eSIMsale" },
+        "brand": { "@type": "Brand", "name": "eSIMru" },
         "offers": {
             "@type": "Offer",
             "price": countryInfo.basePrice7,
