@@ -46,7 +46,6 @@
         .day-btn.active { background: #1f6392; color: white; }
         .price-hint { margin-top: 1rem; font-size: 1rem; color: #2c7da0; background: #e6f4ff; display: inline-block; padding: 0.5rem 1.2rem; border-radius: 60px; font-weight: 600; }
         .numbers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-        .number-wrapper { }
         .number-card { 
             border: 2px solid #e2e8f0; 
             border-radius: 1rem; 
@@ -61,25 +60,35 @@
         .number-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; letter-spacing: 0.5px; }
         .number-region { font-size: 0.75rem; color: #5b6e8c; margin-top: 0.3rem; }
         .operator-name { font-size: 0.7rem; color: #2c7da0; margin-top: 0.2rem; }
-        .buy-btn {
+        .show-more-numbers { background: none; border: 2px solid #9bb7d0; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem; cursor: pointer; font-weight: 500; }
+        
+        /* Фиксированная кнопка внизу */
+        .fixed-buy-btn {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: #0f3b4f;
             color: white;
             border: none;
             padding: 1rem;
             font-size: 1.2rem;
             font-weight: bold;
-            border-radius: 60px;
+            text-align: center;
             cursor: pointer;
             transition: 0.2s;
-            width: 100%;
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            transform: translateY(100%);
+            visibility: hidden;
+            transition: transform 0.3s ease, visibility 0.3s;
         }
-        .buy-btn:hover { background: #1f6392; }
-        .floating-buy-btn {
-            grid-column: 1 / -1;
+        .fixed-buy-btn.show {
+            transform: translateY(0);
+            visibility: visible;
         }
-        .show-more-numbers { background: none; border: 2px solid #9bb7d0; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem; cursor: pointer; font-weight: 500; }
+        .fixed-buy-btn:hover { background: #1f6392; }
+        body.with-fixed-btn { padding-bottom: 80px; }
         @media (max-width: 640px) { 
             .numbers-grid { grid-template-columns: 1fr; } 
             .country-name { font-size: 1.5rem; } 
@@ -108,10 +117,10 @@
         <div class="numbers-grid" id="numbersGrid"></div>
         <button class="show-more-numbers" id="showMoreNumbersBtn">Показать больше номеров</button>
     </div>
-
-    <!-- Оригинальная кнопка скрыта -->
-    <button class="buy-btn" id="buyNowBtn" style="display:none;">💳 Купить сейчас</button>
 </div>
+
+<!-- Фиксированная кнопка -->
+<div id="fixedBuyBtn" class="fixed-buy-btn">💳 Купить сейчас</div>
 
 <script>
     const priceMultipliers = { 7:1.0, 10:1.35, 15:1.85, 20:2.3, 30:3.2, 60:5.8, 90:8.0 };
@@ -309,61 +318,48 @@
     const allNumbers = generateNumbersForCountry(selectedCountryCode, countryInfo);
     let selectedNumberId = null;
     let showAllNumbers = false;
-    let floatingButton = null;
+
+    // Фиксированная кнопка
+    const fixedBtn = document.getElementById('fixedBuyBtn');
+    let selectedDays = 7;
 
     function getPriceForDays(days) { return Math.round(countryInfo.basePrice7 * (priceMultipliers[days] || 1.0)); }
     function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
 
-    function createFloatingButton() {
-        const btn = document.createElement('button');
-        btn.className = 'buy-btn floating-buy-btn';
-        btn.textContent = '💳 Купить сейчас';
-        btn.addEventListener('click', () => {
-            if (!selectedNumberId) {
-                alert("Пожалуйста, выберите номер eSIM");
-                return;
-            }
-            const num = allNumbers.find(n => n.id === selectedNumberId);
-            const params = new URLSearchParams({
-                country: selectedCountryCode,
-                countryName: countryInfo.name,
-                days: selectedDays,
-                number: num.number,
-                price: getPriceForDays(selectedDays),
-                region: num.region,
-                callPrice: countryInfo.callPrice
-            });
-            window.location.href = `checkout.html?${params}`;
-        });
-        return btn;
-    }
-
-    function placeFloatingButtonAfterWrapper(wrapperElement) {
-        if (floatingButton) floatingButton.remove();
-        floatingButton = createFloatingButton();
-        wrapperElement.insertAdjacentElement('afterend', floatingButton);
-        floatingButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    function removeFloatingButton() {
-        if (floatingButton) {
-            floatingButton.remove();
-            floatingButton = null;
+    function updateFixedButton() {
+        if (selectedNumberId) {
+            fixedBtn.classList.add('show');
+            document.body.classList.add('with-fixed-btn');
+        } else {
+            fixedBtn.classList.remove('show');
+            document.body.classList.remove('with-fixed-btn');
         }
     }
 
-    function setSelectedNumber(id, wrapperElement) {
+    function setSelectedNumber(id) {
         selectedNumberId = id;
         renderNumbers(showAllNumbers);
-        const selectedWrapper = document.querySelector(`.number-wrapper[data-id='${selectedNumberId}']`);
-        if (selectedWrapper) {
-            placeFloatingButtonAfterWrapper(selectedWrapper);
-        } else {
-            removeFloatingButton();
-        }
+        updateFixedButton();
     }
 
-    let selectedDays = 7;
+    // Обработчик фиксированной кнопки
+    fixedBtn.addEventListener('click', () => {
+        if (!selectedNumberId) {
+            alert("Пожалуйста, выберите номер eSIM");
+            return;
+        }
+        const num = allNumbers.find(n => n.id === selectedNumberId);
+        const params = new URLSearchParams({
+            country: selectedCountryCode,
+            countryName: countryInfo.name,
+            days: selectedDays,
+            number: num.number,
+            price: getPriceForDays(selectedDays),
+            region: num.region,
+            callPrice: countryInfo.callPrice
+        });
+        window.location.href = `checkout.html?${params}`;
+    });
 
     function renderDays() {
         const container = document.getElementById('daysContainer');
@@ -376,9 +372,6 @@
                 selectedDays = day;
                 renderDays();
                 updatePriceHint();
-                if (floatingButton && selectedNumberId) {
-                    floatingButton.textContent = '💳 Купить сейчас';
-                }
             };
             container.appendChild(btn);
         });
@@ -394,9 +387,6 @@
         let numbersToShow = showAll ? allNumbers : allNumbers.filter(n => n.popular);
         grid.innerHTML = '';
         numbersToShow.forEach(num => {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'number-wrapper';
-            wrapper.setAttribute('data-id', num.id);
             const card = document.createElement('div');
             card.className = `number-card ${selectedNumberId === num.id ? 'selected' : ''}`;
             card.innerHTML = `
@@ -406,19 +396,12 @@
             `;
             card.addEventListener('click', (e) => {
                 e.stopPropagation();
-                setSelectedNumber(num.id, wrapper);
+                setSelectedNumber(num.id);
             });
-            wrapper.appendChild(card);
-            grid.appendChild(wrapper);
+            grid.appendChild(card);
         });
         const moreBtn = document.getElementById('showMoreNumbersBtn');
         if (moreBtn) moreBtn.style.display = allNumbers.filter(n => !n.popular).length > 0 ? 'block' : 'none';
-        if (selectedNumberId) {
-            const selectedWrapper = document.querySelector(`.number-wrapper[data-id='${selectedNumberId}']`);
-            if (selectedWrapper && !floatingButton) {
-                placeFloatingButtonAfterWrapper(selectedWrapper);
-            }
-        }
     }
 
     document.getElementById('showMoreNumbersBtn')?.addEventListener('click', () => {
@@ -427,11 +410,9 @@
         document.getElementById('showMoreNumbersBtn').innerText = showAllNumbers ? 'Скрыть' : 'Показать больше номеров';
     });
 
-    const originalBuyBtn = document.getElementById('buyNowBtn');
-    if (originalBuyBtn) originalBuyBtn.style.display = 'none';
-
     renderDays();
     renderNumbers(false);
+    updateFixedButton();
 </script>
 </body>
 </html>
