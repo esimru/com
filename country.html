@@ -38,6 +38,7 @@
         .country-flag { width: 80px; height: 60px; display: block; margin: 0 auto 0.5rem; border-radius: 8px; object-fit: cover; }
         .country-name { font-size: 2rem; font-weight: bold; }
         .country-call-price { color: #e67e22; margin-top: 0.3rem; font-weight: 500; }
+        .country-speed { font-size: 0.8rem; color: #16a34a; margin-top: 0.3rem; }
         .days-section, .numbers-section { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 1.5rem; }
         .section-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 1.2rem; border-left: 5px solid #2c7da0; padding-left: 1rem; }
         .days-buttons { display: flex; flex-wrap: wrap; gap: 0.8rem; }
@@ -50,9 +51,26 @@
         .number-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; letter-spacing: 0.5px; }
         .number-region { font-size: 0.75rem; color: #5b6e8c; margin-top: 0.3rem; }
         .operator-name { font-size: 0.7rem; color: #2c7da0; margin-top: 0.2rem; }
-        .buy-btn { width: 100%; background: #0f3b4f; color: white; border: none; padding: 1rem; font-size: 1.2rem; font-weight: bold; border-radius: 60px; cursor: pointer; transition: 0.2s; }
+        .buy-btn {
+            width: 100%;
+            background: #0f3b4f;
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 0.5rem;
+        }
         .buy-btn:hover { background: #1f6392; }
         .show-more-numbers { background: none; border: 2px solid #9bb7d0; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem; cursor: pointer; font-weight: 500; }
+        .floating-buy-btn {
+            position: relative;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
         @media (max-width: 640px) { .numbers-grid { grid-template-columns: 1fr; } .country-name { font-size: 1.5rem; } .country-flag { width: 60px; height: 45px; } }
     </style>
 </head>
@@ -63,7 +81,7 @@
         <img class="country-flag" id="countryFlag" src="" alt="">
         <div class="country-name" id="countryName">Загрузка...</div>
         <div class="country-call-price" id="callPrice"></div>
-        <div class="country-speed" id="countrySpeed" style="font-size:0.8rem; color:#16a34a; margin-top:0.3rem;"></div>
+        <div class="country-speed" id="countrySpeed"></div>
     </div>
 
     <div class="days-section">
@@ -78,6 +96,7 @@
         <button class="show-more-numbers" id="showMoreNumbersBtn">Показать больше номеров</button>
     </div>
 
+    <!-- Оригинальная кнопка внизу (будет скрыта после выбора номера) -->
     <button class="buy-btn" id="buyNowBtn">💳 Купить сейчас</button>
 </div>
 
@@ -85,7 +104,7 @@
     const priceMultipliers = { 7:1.0, 10:1.35, 15:1.85, 20:2.3, 30:3.2, 60:5.8, 90:8.0 };
     const daysOptions = [7,10,15,20,30,60,90];
 
-    // ==================== ДАННЫЕ СТРАН С ОПЕРАТОРАМИ И ПРЕФИКСАМИ ====================
+    // ==================== ДАННЫЕ СТРАН ====================
     const countriesData = {
         tr: { name:"Турция", flag:"tr", basePrice7:2050, callPrice:20, maxSpeed:300, countryCode:"90", mobilePrefixes:["505","506","507","530","531","532","533","534","535","536","537","538","539","540","541","542","543","544","545","546","547","548","549","551","552","553","554","555","556","557","558","559","561","562"], operators:{"505":"Türk Telekom","506":"Türk Telekom","507":"Türk Telekom","530":"Turkcell","531":"Turkcell","532":"Turkcell","533":"Turkcell","534":"Turkcell","535":"Vodafone","536":"Vodafone","537":"Vodafone","538":"Vodafone","539":"Vodafone","540":"Turkcell","541":"Turkcell","542":"Turkcell","543":"Turkcell","544":"Turkcell","545":"Turkcell","546":"Turkcell","547":"Turkcell","548":"Turkcell","549":"Turkcell","551":"Türk Telekom","552":"Türk Telekom","553":"Türk Telekom","554":"Türk Telekom","555":"Türk Telekom","556":"Türk Telekom","557":"Türk Telekom","558":"Türk Telekom","559":"Türk Telekom","561":"Vodafone","562":"Vodafone"}, phoneLength:10, cities:["Стамбул","Анкара","Измир","Анталья","Бурса"] },
         ae: { name:"ОАЭ", flag:"ae", basePrice7:2800, callPrice:40, maxSpeed:750, countryCode:"971", mobilePrefixes:["50","52","54","55","56","58"], operators:{"50":"Etisalat","52":"du","54":"Etisalat","55":"du","56":"Etisalat","58":"Virgin Mobile"}, phoneLength:9, cities:["Дубай","Абу-Даби","Шарджа","Аджман","Рас-эль-Хайма"] },
@@ -246,7 +265,7 @@
         throw new Error("Country not found");
     }
 
-    // SEO динамика
+    // SEO
     document.title = `eSIM для ${countryInfo.name} — безлимит от ${countryInfo.basePrice7} ₽ | eSIMru`;
     document.getElementById('pageTitle').innerHTML = document.title;
     const metaDesc = `Купить eSIM для ${countryInfo.name} с безлимитным интернетом на 7-90 дней. Скорость до ${countryInfo.maxSpeed} Мбит/с, звонки от ${countryInfo.callPrice} ₽/мин. Мгновенная доставка.`;
@@ -275,8 +294,71 @@
     document.getElementById('countrySpeed').innerHTML = `⚡ Максимальная скорость: до ${countryInfo.maxSpeed} Мбит/с`;
 
     const allNumbers = generateNumbersForCountry(selectedCountryCode, countryInfo);
-    let selectedDays = 7, selectedNumberId = null, showAllNumbers = false;
+    let selectedNumberId = null;
+    let showAllNumbers = false;
 
+    // Хранение текущей плавающей кнопки
+    let floatingButton = null;
+
+    // Функция создания кнопки (можно клонировать оригинальную, но проще создать новую)
+    function createFloatingButton() {
+        const btn = document.createElement('button');
+        btn.className = 'buy-btn floating-buy-btn';
+        btn.textContent = '💳 Купить сейчас';
+        btn.addEventListener('click', () => {
+            if (!selectedNumberId) {
+                alert("Пожалуйста, выберите номер eSIM");
+                return;
+            }
+            const num = allNumbers.find(n => n.id === selectedNumberId);
+            const params = new URLSearchParams({
+                country: selectedCountryCode,
+                countryName: countryInfo.name,
+                days: selectedDays,
+                number: num.number,
+                price: getPriceForDays(selectedDays),
+                region: num.region,
+                callPrice: countryInfo.callPrice
+            });
+            window.location.href = `checkout.html?${params}`;
+        });
+        return btn;
+    }
+
+    function placeFloatingButtonAfterCard(cardElement) {
+        // Удаляем старую плавающую кнопку, если есть
+        if (floatingButton) floatingButton.remove();
+        // Создаём новую и вставляем после выбранной карточки
+        floatingButton = createFloatingButton();
+        cardElement.insertAdjacentElement('afterend', floatingButton);
+        // Прокручиваем к кнопке, чтобы она оказалась в поле зрения
+        floatingButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Функция для очистки плавающей кнопки (если выбор сброшен, но у нас сброса нет)
+    function removeFloatingButton() {
+        if (floatingButton) {
+            floatingButton.remove();
+            floatingButton = null;
+        }
+    }
+
+    // Обработка выбора номера
+    function setSelectedNumber(id, cardElement) {
+        selectedNumberId = id;
+        // Перерисовываем сетку, чтобы обновить класс selected
+        renderNumbers(showAllNumbers);
+        // После перерисовки находим новую карточку с выбранным номером
+        const selectedCard = document.querySelector(`.number-card.selected`);
+        if (selectedCard) {
+            placeFloatingButtonAfterCard(selectedCard);
+        } else {
+            // На всякий случай, если не нашли
+            removeFloatingButton();
+        }
+    }
+
+    let selectedDays = 7;
     function getPriceForDays(days) { return Math.round(countryInfo.basePrice7 * (priceMultipliers[days] || 1.0)); }
     function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
 
@@ -287,7 +369,17 @@
             const btn = document.createElement('button');
             btn.innerText = `${day} дней — ${formatPrice(getPriceForDays(day))}`;
             btn.className = `day-btn ${day === selectedDays ? 'active' : ''}`;
-            btn.onclick = () => { selectedDays = day; renderDays(); updatePriceHint(); };
+            btn.onclick = () => { 
+                selectedDays = day; 
+                renderDays(); 
+                updatePriceHint();
+                // Если есть выбранный номер, обновляем кнопку (цена изменилась, но сама кнопка остаётся)
+                // Можно обновить текст кнопки, но она пересоздаётся при выборе номера.
+                // При смене срока кнопка остаётся, поэтому обновим её текст, если она существует
+                if (floatingButton && selectedNumberId) {
+                    floatingButton.textContent = '💳 Купить сейчас';
+                }
+            };
             container.appendChild(btn);
         });
         updatePriceHint();
@@ -304,12 +396,26 @@
         numbersToShow.forEach(num => {
             const card = document.createElement('div');
             card.className = `number-card ${selectedNumberId === num.id ? 'selected' : ''}`;
-            card.innerHTML = `<div class="number-value">${num.displayNumber}</div><div class="number-region">📍 ${num.region}</div><div class="operator-name">📡 ${num.operator}</div>`;
-            card.onclick = () => { selectedNumberId = num.id; renderNumbers(showAllNumbers); };
+            card.innerHTML = `
+                <div class="number-value">${num.displayNumber}</div>
+                <div class="number-region">📍 ${num.region}</div>
+                <div class="operator-name">📡 ${num.operator}</div>
+            `;
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setSelectedNumber(num.id, card);
+            });
             grid.appendChild(card);
         });
         const moreBtn = document.getElementById('showMoreNumbersBtn');
         if (moreBtn) moreBtn.style.display = allNumbers.filter(n => !n.popular).length > 0 ? 'block' : 'none';
+        // Если после перерисовки сетки был выбран номер, но кнопка не появилась (например, при showAll), восстановим её
+        if (selectedNumberId) {
+            const selectedCard = document.querySelector(`.number-card.selected`);
+            if (selectedCard && !floatingButton) {
+                placeFloatingButtonAfterCard(selectedCard);
+            }
+        }
     }
 
     document.getElementById('showMoreNumbersBtn')?.addEventListener('click', () => {
@@ -318,20 +424,9 @@
         document.getElementById('showMoreNumbersBtn').innerText = showAllNumbers ? 'Скрыть' : 'Показать больше номеров';
     });
 
-    document.getElementById('buyNowBtn')?.addEventListener('click', () => {
-        if (!selectedNumberId) { alert("Пожалуйста, выберите номер eSIM"); return; }
-        const num = allNumbers.find(n => n.id === selectedNumberId);
-        const params = new URLSearchParams({
-            country: selectedCountryCode,
-            countryName: countryInfo.name,
-            days: selectedDays,
-            number: num.number,
-            price: getPriceForDays(selectedDays),
-            region: num.region,
-            callPrice: countryInfo.callPrice
-        });
-        window.location.href = `checkout.html?${params}`;
-    });
+    // Скрываем оригинальную нижнюю кнопку (она больше не нужна, так как есть плавающая)
+    const originalBuyBtn = document.getElementById('buyNowBtn');
+    if (originalBuyBtn) originalBuyBtn.style.display = 'none';
 
     renderDays();
     renderNumbers(false);
