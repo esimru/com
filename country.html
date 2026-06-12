@@ -45,14 +45,8 @@
         .day-btn { background: #f1f5f9; border: none; padding: 0.8rem 1.3rem; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; }
         .day-btn.active { background: #1f6392; color: white; }
         .price-hint { margin-top: 1rem; font-size: 1rem; color: #2c7da0; background: #e6f4ff; display: inline-block; padding: 0.5rem 1.2rem; border-radius: 60px; font-weight: 600; }
-        .numbers-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 1rem; 
-        }
-        .number-wrapper {
-            /* обёртка не добавляет дополнительных стилей, просто элемент сетки */
-        }
+        .numbers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .number-wrapper { }
         .number-card { 
             border: 2px solid #e2e8f0; 
             border-radius: 1rem; 
@@ -82,6 +76,9 @@
             margin-bottom: 0.5rem;
         }
         .buy-btn:hover { background: #1f6392; }
+        .floating-buy-btn {
+            grid-column: 1 / -1;
+        }
         .show-more-numbers { background: none; border: 2px solid #9bb7d0; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem; cursor: pointer; font-weight: 500; }
         @media (max-width: 640px) { 
             .numbers-grid { grid-template-columns: 1fr; } 
@@ -120,7 +117,7 @@
     const priceMultipliers = { 7:1.0, 10:1.35, 15:1.85, 20:2.3, 30:3.2, 60:5.8, 90:8.0 };
     const daysOptions = [7,10,15,20,30,60,90];
 
-    // ==================== ПОЛНЫЙ СПИСОК СТРАН ====================
+    // ==================== ПОЛНЫЕ ДАННЫЕ СТРАН ====================
     const countriesData = {
         tr: { name:"Турция", flag:"tr", basePrice7:2050, callPrice:20, maxSpeed:300, countryCode:"90", mobilePrefixes:["505","506","507","530","531","532","533","534","535","536","537","538","539","540","541","542","543","544","545","546","547","548","549","551","552","553","554","555","556","557","558","559","561","562"], operators:{"505":"Türk Telekom","506":"Türk Telekom","507":"Türk Telekom","530":"Turkcell","531":"Turkcell","532":"Turkcell","533":"Turkcell","534":"Turkcell","535":"Vodafone","536":"Vodafone","537":"Vodafone","538":"Vodafone","539":"Vodafone","540":"Turkcell","541":"Turkcell","542":"Turkcell","543":"Turkcell","544":"Turkcell","545":"Turkcell","546":"Turkcell","547":"Turkcell","548":"Turkcell","549":"Turkcell","551":"Türk Telekom","552":"Türk Telekom","553":"Türk Telekom","554":"Türk Telekom","555":"Türk Telekom","556":"Türk Telekom","557":"Türk Telekom","558":"Türk Telekom","559":"Türk Telekom","561":"Vodafone","562":"Vodafone"}, phoneLength:10, cities:["Стамбул","Анкара","Измир","Анталья","Бурса"] },
         ae: { name:"ОАЭ", flag:"ae", basePrice7:2800, callPrice:40, maxSpeed:750, countryCode:"971", mobilePrefixes:["50","52","54","55","56","58"], operators:{"50":"Etisalat","52":"du","54":"Etisalat","55":"du","56":"Etisalat","58":"Virgin Mobile"}, phoneLength:9, cities:["Дубай","Абу-Даби","Шарджа","Аджман","Рас-эль-Хайма"] },
@@ -319,7 +316,7 @@
 
     function createFloatingButton() {
         const btn = document.createElement('button');
-        btn.className = 'buy-btn';
+        btn.className = 'buy-btn floating-buy-btn';
         btn.textContent = '💳 Купить сейчас';
         btn.addEventListener('click', () => {
             if (!selectedNumberId) {
