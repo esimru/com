@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title id="pageTitle">eSIM для страны — eSIMsale</title>
+    <title id="pageTitle">eSIM для страны — eSIMru</title>
     <meta name="description" id="pageDescription" content="Купить eSIM для страны с безлимитным интернетом. Выберите срок действия и номер. Мгновенная доставка.">
     <meta name="keywords" content="eSIM, купить eSIM, безлимитный интернет, eSIM для путешествий">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" id="canonicalLink" href="https://esimsale.com/country.html">
-    <meta property="og:title" id="ogTitle" content="eSIM для страны — eSIMsale">
+    <link rel="canonical" id="canonicalLink" href="https://esimru.github.io/com/country.html">
+    <meta property="og:title" id="ogTitle" content="eSIM для страны — eSIMru">
     <meta property="og:description" id="ogDescription" content="Безлимитный интернет для путешествий. Мгновенная установка.">
-    <meta property="og:image" content="https://esimsale.com/og-country.jpg">
-    <meta property="og:url" content="https://esimsale.com/country.html">
+    <meta property="og:image" content="https://esimru.github.io/com/og-country.jpg">
+    <meta property="og:url" content="https://esimru.github.io/com/country.html">
     <meta property="og:type" content="product">
     <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json" id="productSchema">
@@ -20,7 +20,7 @@
       "@type": "Product",
       "name": "eSIM для выбранной страны",
       "description": "Безлимитный интернет на 7-90 дней с возможностью звонков",
-      "brand": { "@type": "Brand", "name": "eSIMsale" },
+      "brand": { "@type": "Brand", "name": "eSIMru" },
       "offers": {
         "@type": "Offer",
         "price": "2050",
@@ -62,12 +62,13 @@
             border-radius: 60px;
             cursor: pointer;
             transition: 0.2s;
+            margin-top: 0.5rem;
             display: block;
         }
         .buy-btn:hover { background: #1f6392; }
         .show-more-numbers { background: none; border: 2px solid #9bb7d0; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem; cursor: pointer; font-weight: 500; }
         .floating-buy-btn {
-            margin-top: 0.5rem;
+            margin-top: 1rem;
             margin-bottom: 0.5rem;
         }
         @media (max-width: 640px) {
@@ -99,7 +100,7 @@
         <button class="show-more-numbers" id="showMoreNumbersBtn">Показать больше номеров</button>
     </div>
 
-    <!-- Оригинальная кнопка скрыта -->
+    <!-- Оригинальная кнопка внизу (будет скрыта) -->
     <button class="buy-btn" id="buyNowBtn" style="display:none;">💳 Купить сейчас</button>
 </div>
 
@@ -107,15 +108,127 @@
     const priceMultipliers = { 7:1.0, 10:1.35, 15:1.85, 20:2.3, 30:3.2, 60:5.8, 90:8.0 };
     const daysOptions = [7,10,15,20,30,60,90];
 
-    // ==================== ДАННЫЕ СТРАН (сокращены для читаемости, но полные) ====================
-    // Здесь должны быть все данные стран, как в предыдущих версиях.
-    // Для экономии места я приведу только часть, но в реальном коде они все есть.
-    // Полный список стран можно взять из предыдущего ответа.
+    // ==================== ДАННЫЕ СТРАН ====================
     const countriesData = {
         tr: { name:"Турция", flag:"tr", basePrice7:2050, callPrice:20, maxSpeed:300, countryCode:"90", mobilePrefixes:["505","506","507","530","531","532","533","534","535","536","537","538","539","540","541","542","543","544","545","546","547","548","549","551","552","553","554","555","556","557","558","559","561","562"], operators:{"505":"Türk Telekom","506":"Türk Telekom","507":"Türk Telekom","530":"Turkcell","531":"Turkcell","532":"Turkcell","533":"Turkcell","534":"Turkcell","535":"Vodafone","536":"Vodafone","537":"Vodafone","538":"Vodafone","539":"Vodafone","540":"Turkcell","541":"Turkcell","542":"Turkcell","543":"Turkcell","544":"Turkcell","545":"Turkcell","546":"Turkcell","547":"Turkcell","548":"Turkcell","549":"Turkcell","551":"Türk Telekom","552":"Türk Telekom","553":"Türk Telekom","554":"Türk Telekom","555":"Türk Telekom","556":"Türk Telekom","557":"Türk Telekom","558":"Türk Telekom","559":"Türk Telekom","561":"Vodafone","562":"Vodafone"}, phoneLength:10, cities:["Стамбул","Анкара","Измир","Анталья","Бурса"] },
         ae: { name:"ОАЭ", flag:"ae", basePrice7:2800, callPrice:40, maxSpeed:750, countryCode:"971", mobilePrefixes:["50","52","54","55","56","58"], operators:{"50":"Etisalat","52":"du","54":"Etisalat","55":"du","56":"Etisalat","58":"Virgin Mobile"}, phoneLength:9, cities:["Дубай","Абу-Даби","Шарджа","Аджман","Рас-эль-Хайма"] },
-        // ... остальные страны (полный список из предыдущего файла)
-        // Для краткости я оставлю только пару стран, но в финальном коде они все есть.
+        eg: { name:"Египет", flag:"eg", basePrice7:2050, callPrice:30, maxSpeed:20, countryCode:"20", mobilePrefixes:["10","11","12","15"], operators:{"10":"Vodafone","11":"Orange","12":"Orange","15":"WE"}, phoneLength:10, cities:["Каир","Александрия","Гиза","Луксор","Хургада"] },
+        th: { name:"Таиланд", flag:"th", basePrice7:2100, callPrice:20, maxSpeed:250, countryCode:"66", mobilePrefixes:["61","63","64","65","66","68","69","81","82","83","84","85","86","87","88","89","91","92","93","94","95","96","97","98","99"], operators:{"61":"AIS","63":"AIS","64":"TRUE","65":"TRUE","66":"TRUE","68":"TRUE","69":"TRUE","81":"AIS","82":"TRUE","83":"TRUE","84":"TRUE","85":"TRUE","86":"TRUE","87":"TRUE","88":"TRUE","89":"TRUE","91":"AIS","92":"TRUE","93":"TRUE","94":"TRUE","95":"TRUE","96":"TRUE","97":"TRUE","98":"TRUE","99":"TRUE"}, phoneLength:9, cities:["Бангкок","Пхукет","Патайя","Чиангмай","Самуи"] },
+        cn: { name:"Китай", flag:"cn", basePrice7:2050, callPrice:20, maxSpeed:700, countryCode:"86", mobilePrefixes:["130","131","132","133","134","135","136","137","138","139","145","146","147","148","149","150","151","152","153","155","156","157","158","159","166","172","173","174","175","176","177","178","180","181","182","183","184","185","186","187","188","189","191","193","195","197","198","199"], operators:{"130":"China Unicom","131":"China Unicom","132":"China Unicom","133":"China Telecom","134":"China Mobile","135":"China Mobile","136":"China Mobile","137":"China Mobile","138":"China Mobile","139":"China Mobile","145":"China Unicom","146":"China Unicom","147":"China Mobile","148":"China Mobile","149":"China Unicom","150":"China Mobile","151":"China Mobile","152":"China Mobile","153":"China Telecom","155":"China Unicom","156":"China Unicom","157":"China Mobile","158":"China Mobile","159":"China Mobile","166":"China Unicom","172":"China Mobile","173":"China Telecom","174":"China Telecom","175":"China Unicom","176":"China Unicom","177":"China Telecom","178":"China Mobile","180":"China Telecom","181":"China Telecom","182":"China Mobile","183":"China Mobile","184":"China Mobile","185":"China Unicom","186":"China Unicom","187":"China Mobile","188":"China Mobile","189":"China Telecom","191":"China Mobile","193":"China Telecom","195":"China Mobile","197":"China Mobile","198":"China Mobile","199":"China Telecom"}, phoneLength:11, cities:["Пекин","Шанхай","Гуанчжоу","Шэньчжэнь","Чэнду"] },
+        ge: { name:"Грузия", flag:"ge", basePrice7:2050, callPrice:20, maxSpeed:2000, countryCode:"995", mobilePrefixes:["555","557","558","559","568","571","574","577","578","579","591","592","593","595","596","597","598","599"], operators:{"555":"MagtiCom","557":"MagtiCom","558":"MagtiCom","559":"MagtiCom","568":"Silknet","571":"Silknet","574":"Silknet","577":"Silknet","578":"Silknet","579":"Silknet","591":"Beeline","592":"Beeline","593":"Beeline","595":"Beeline","596":"Beeline","597":"Beeline","598":"Beeline","599":"Beeline"}, phoneLength:9, cities:["Тбилиси","Батуми","Кутаиси","Гудаури","Боржоми"] },
+        am: { name:"Армения", flag:"am", basePrice7:2050, callPrice:20, maxSpeed:250, countryCode:"374", mobilePrefixes:["55","77","91","93","94","95","96","98","99"], operators:{"55":"Ucom","77":"Team","91":"Beeline","93":"Beeline","94":"Beeline","95":"MTS","96":"MTS","98":"Rostelecom","99":"Rostelecom"}, phoneLength:8, cities:["Ереван","Гюмри","Ванадзор","Раздан","Эчмиадзин"] },
+        by: { name:"Беларусь", flag:"by", basePrice7:2050, callPrice:20, maxSpeed:800, countryCode:"375", mobilePrefixes:["29","33","25","44"], operators:{"29":"A1","33":"MTS","25":"life","44":"life"}, phoneLength:9, cities:["Минск","Гомель","Брест","Витебск","Гродно"] },
+        kz: { name:"Казахстан", flag:"kz", basePrice7:2100, callPrice:20, maxSpeed:100, countryCode:"7", mobilePrefixes:["747","700","708","777","701","702","705","707"], operators:{"747":"Tele2","700":"Altel","708":"Altel","777":"Beeline","701":"Kcell","702":"Kcell","705":"Tele2","707":"Tele2"}, phoneLength:10, cities:["Алматы","Астана","Шымкент","Караганда","Актобе"] },
+        vn: { name:"Вьетнам", flag:"vn", basePrice7:2050, callPrice:20, maxSpeed:600, countryCode:"84", mobilePrefixes:["32","33","34","35","36","37","38","39","52","56","58","59","70","76","77","78","79","81","82","83","84","85","86","87","88","89","90","91","92","93","94","96","97","98","99"], operators:{"32":"Viettel","33":"Viettel","34":"Viettel","35":"Viettel","36":"Viettel","37":"Viettel","38":"Viettel","39":"Viettel","52":"Vietnamobile","56":"Vietnamobile","58":"Vietnamobile","59":"Vietnamobile","70":"Mobifone","76":"Mobifone","77":"Mobifone","78":"Mobifone","79":"Mobifone","81":"Vinaphone","82":"Vinaphone","83":"Vinaphone","84":"Vinaphone","85":"Vinaphone","86":"Vinaphone","87":"Vinaphone","88":"Vinaphone","89":"Vinaphone","90":"Mobifone","91":"Vinaphone","92":"Vinaphone","93":"Viettel","94":"Viettel","96":"Viettel","97":"Viettel","98":"Viettel","99":"Viettel"}, phoneLength:9, cities:["Ханой","Хошимин","Дананг","Нячанг","Хойан"] },
+        lk: { name:"Шри-Ланка", flag:"lk", basePrice7:2050, callPrice:20, maxSpeed:10000, countryCode:"94", mobilePrefixes:["70","71","72","74","75","76","77","78"], operators:{"70":"Mobitel","71":"Dialog","72":"Etisalat","74":"Dialog","75":"Airtel","76":"Dialog","77":"Hutch","78":"Mobitel"}, phoneLength:9, cities:["Коломбо","Канди","Галле","Негомбо","Бентота"] },
+        mv: { name:"Мальдивы", flag:"mv", basePrice7:3200, callPrice:60, maxSpeed:300, countryCode:"960", mobilePrefixes:["7","9"], operators:{"7":"Dhiraagu","9":"Ooredoo"}, phoneLength:7, cities:["Мале","Хулхумале","Ададу","Фувахмулах","Кулхудуффуши"] },
+        id: { name:"Индонезия", flag:"id", basePrice7:2050, callPrice:20, maxSpeed:750, countryCode:"62", mobilePrefixes:["811","812","813","814","815","816","817","818","819","821","822","823","852","853","878"], operators:{"811":"Telkomsel","812":"Telkomsel","813":"Telkomsel","814":"Telkomsel","815":"Telkomsel","816":"Telkomsel","817":"XL Axiata","818":"XL Axiata","819":"XL Axiata","821":"Telkomsel","822":"Telkomsel","823":"Telkomsel","852":"Telkomsel","853":"Telkomsel","878":"XL Axiata"}, phoneLength:10, cities:["Джакарта","Бали","Сурабая","Бандунг","Джокьякарта"] },
+        az: { name:"Азербайджан", flag:"az", basePrice7:2050, callPrice:20, maxSpeed:1000, countryCode:"994", mobilePrefixes:["50","51","55","60","70","77"], operators:{"50":"Azercell","51":"Azercell","55":"Bakcell","60":"Bakcell","70":"Nar","77":"Nar"}, phoneLength:9, cities:["Баку","Гянджа","Сумгаит","Шеки","Ленкорань"] },
+        uz: { name:"Узбекистан", flag:"uz", basePrice7:2050, callPrice:20, maxSpeed:10000, countryCode:"998", mobilePrefixes:["90","91","93","94","95","97","98","99"], operators:{"90":"Beeline","91":"Beeline","93":"Ucell","94":"Ucell","95":"Uzmobile","97":"Mobiuz","98":"Mobiuz","99":"Uzmobile"}, phoneLength:9, cities:["Ташкент","Самарканд","Бухара","Фергана","Андижан"] },
+        cu: { name:"Куба", flag:"cu", basePrice7:2600, callPrice:80, maxSpeed:4, countryCode:"53", mobilePrefixes:["5"], operators:{"5":"ETECSA"}, phoneLength:8, cities:["Гавана","Варадеро","Сантьяго","Камагуэй","Тринидад"] },
+        in: { name:"Индия", flag:"in", basePrice7:2050, callPrice:20, maxSpeed:333, countryCode:"91", mobilePrefixes:["6","7","8","9"], operators:{"6":"Reliance Jio","7":"Airtel","8":"BSNL","9":"Vi"}, phoneLength:10, cities:["Мумбаи","Дели","Бангалор","Гоа","Ченнаи"] },
+        rs: { name:"Сербия", flag:"rs", basePrice7:2100, callPrice:30, maxSpeed:1500, countryCode:"381", mobilePrefixes:["60","61","62","63","64","65","66","67","68","69"], operators:{"60":"VIP","61":"VIP","62":"Telenor","63":"Telenor","64":"MTS","65":"MTS","66":"MTS","67":"Telenor","68":"VIP","69":"MTS"}, phoneLength:9, cities:["Белград","Нови-Сад","Ниш","Крагуевац","Суботица"] },
+        it: { name:"Италия", flag:"it", basePrice7:2500, callPrice:40, maxSpeed:416, countryCode:"39", mobilePrefixes:["310","311","312","313","314","315","316","317","318","319","320","321","322","323","324","325","326","327","328","329","330","331","332","333","334","335","336","337","338","339","340","341","342","343","344","345","346","347","348","349","350","351","352","353","354","355","356","357","358","359","360","361","362","363","364","365","366","367","368","369","370","371","372","373","374","375","376","377","378","379","380","381","382","383","384","385","386","387","388","389","390","391","392","393","394","395","396","397","398","399"], operators:{"310":"Vodafone","311":"Vodafone","312":"Vodafone","313":"Vodafone","314":"Vodafone","315":"Vodafone","316":"Vodafone","317":"Vodafone","318":"Vodafone","319":"Vodafone","320":"WindTre","321":"WindTre","322":"WindTre","323":"WindTre","324":"WindTre","325":"WindTre","326":"WindTre","327":"WindTre","328":"TIM","329":"TIM","330":"TIM","331":"TIM","332":"TIM","333":"TIM","334":"TIM","335":"TIM","336":"TIM","337":"TIM","338":"TIM","339":"TIM","340":"TIM","341":"TIM","342":"TIM","343":"TIM","344":"TIM","345":"TIM","346":"TIM","347":"TIM","348":"TIM","349":"TIM","350":"WindTre","351":"WindTre","352":"WindTre","353":"WindTre","354":"WindTre","355":"WindTre","356":"WindTre","357":"WindTre","358":"WindTre","359":"WindTre"}, phoneLength:10, cities:["Рим","Милан","Венеция","Флоренция","Неаполь"] },
+        fr: { name:"Франция", flag:"fr", basePrice7:2600, callPrice:40, maxSpeed:2000, countryCode:"33", mobilePrefixes:["6","7"], operators:{"6":"Orange","7":"Bouygues"}, phoneLength:9, cities:["Париж","Марсель","Лион","Ницца","Бордо"] },
+        qa: { name:"Катар", flag:"qa", basePrice7:3000, callPrice:50, maxSpeed:900, countryCode:"974", mobilePrefixes:["3","5","6","7"], operators:{"3":"Ooredoo","5":"Ooredoo","6":"Vodafone","7":"Vodafone"}, phoneLength:8, cities:["Доха","Эр-Райян","Аль-Вакра","Хор","Умм-Салаль"] },
+        my: { name:"Малайзия", flag:"my", basePrice7:2100, callPrice:20, maxSpeed:750, countryCode:"60", mobilePrefixes:["10","11","12","13","14","15","16","17","18","19"], operators:{"10":"Maxis","11":"Maxis","12":"Maxis","13":"Celcom","14":"Celcom","15":"Celcom","16":"Digi","17":"Digi","18":"Digi","19":"Umobile"}, phoneLength:9, cities:["Куала-Лумпур","Джохор-Бару","Пенанг","Лангкави","Кота-Кинабалу"] },
+        sc: { name:"Сейшелы", flag:"sc", basePrice7:3100, callPrice:60, maxSpeed:150, countryCode:"248", mobilePrefixes:["2"], operators:{"2":"Airtel"}, phoneLength:7, cities:["Виктория","Бе-Валлон","Анс-Рояль","Гранд-Анс","Порт-Глод"] },
+        ve: { name:"Венесуэла", flag:"ve", basePrice7:2400, callPrice:40, maxSpeed:500, countryCode:"58", mobilePrefixes:["412","414","416","424","426"], operators:{"412":"Movistar","414":"Movistar","416":"Digitel","424":"Movilnet","426":"Digitel"}, phoneLength:10, cities:["Каракас","Маракайбо","Валенсия","Баркисимето","Маракай"] },
+        om: { name:"Оман", flag:"om", basePrice7:2900, callPrice:50, maxSpeed:320, countryCode:"968", mobilePrefixes:["1","2","9"], operators:{"1":"Omantel","2":"Ooredoo","9":"Ooredoo"}, phoneLength:8, cities:["Маскат","Салала","Сур","Низва","Сохар"] },
+        es: { name:"Испания", flag:"es", basePrice7:2500, callPrice:40, maxSpeed:500, countryCode:"34", mobilePrefixes:["6","7"], operators:{"6":"Movistar","7":"Vodafone"}, phoneLength:9, cities:["Мадрид","Барселона","Валенсия","Севилья","Малага"] },
+        gr: { name:"Греция", flag:"gr", basePrice7:2500, callPrice:40, maxSpeed:500, countryCode:"30", mobilePrefixes:["69"], operators:{"69":"Cosmote"}, phoneLength:10, cities:["Афины","Салоники","Ираклион","Патра","Лариса"] },
+        jp: { name:"Япония", flag:"jp", basePrice7:3200, callPrice:50, maxSpeed:1000, countryCode:"81", mobilePrefixes:["70","80","90","50","60"], operators:{"70":"SoftBank","80":"au","90":"docomo","50":"IP Phone","60":"SoftBank"}, phoneLength:10, cities:["Токио","Осака","Киото","Йокогама","Нагоя"] },
+        bh: { name:"Бахрейн", flag:"bh", basePrice7:2900, callPrice:50, maxSpeed:3200, countryCode:"973", mobilePrefixes:["3","6"], operators:{"3":"Batelco","6":"VIVA"}, phoneLength:8, cities:["Манама","Мухаррак","Риффа","Хаммад","Сальмабад"] },
+        me: { name:"Черногория", flag:"me", basePrice7:2200, callPrice:40, maxSpeed:1000, countryCode:"382", mobilePrefixes:["67","68","69"], operators:{"67":"Telenor","68":"Telenor","69":"MTS"}, phoneLength:8, cities:["Подгорица","Будва","Котор","Бар","Херцег-Нови"] },
+        cy: { name:"Кипр", flag:"cy", basePrice7:2400, callPrice:40, maxSpeed:400, countryCode:"357", mobilePrefixes:["95","96","97","99"], operators:{"95":"PrimeTel","96":"MTN","97":"Epic","99":"Cytamobile"}, phoneLength:8, cities:["Никосия","Лимасол","Ларнака","Пафос","Фамагуста"] },
+        hu: { name:"Венгрия", flag:"hu", basePrice7:2100, callPrice:30, maxSpeed:450, countryCode:"36", mobilePrefixes:["20","30","70"], operators:{"20":"Telekom","30":"Telekom","70":"Vodafone"}, phoneLength:9, cities:["Будапешт","Дебрецен","Сегед","Мишкольц","Печ"] },
+        mu: { name:"Маврикий", flag:"mu", basePrice7:2800, callPrice:50, maxSpeed:455, countryCode:"230", mobilePrefixes:["5"], operators:{"5":"MyT"}, phoneLength:8, cities:["Порт-Луи","Кьюрпайп","Катр-Борн","Вакоас","Феникс"] },
+        tz: { name:"Танзания", flag:"tz", basePrice7:2200, callPrice:40, maxSpeed:800, countryCode:"255", mobilePrefixes:["65","68","71","74","75","76","77","78"], operators:{"65":"Tigo","68":"Airtel","71":"Tigo","74":"Vodacom","75":"Vodacom","76":"Vodacom","77":"Zantel","78":"Airtel"}, phoneLength:9, cities:["Дар-эс-Салам","Аруша","Занзибар","Мванза","Килиманджаро"] },
+        ma: { name:"Марокко", flag:"ma", basePrice7:2200, callPrice:40, maxSpeed:2000, countryCode:"212", mobilePrefixes:["6","7"], operators:{"6":"Orange","7":"INWI"}, phoneLength:9, cities:["Касабланка","Марракеш","Рабат","Фес","Танжер"] },
+        tn: { name:"Тунис", flag:"tn", basePrice7:2200, callPrice:40, maxSpeed:2100, countryCode:"216", mobilePrefixes:["2","5","9"], operators:{"2":"Orange","5":"Ooredoo","9":"Tunisie Telecom"}, phoneLength:8, cities:["Тунис","Сфакс","Сус","Каруан","Бизерта"] },
+        kr: { name:"Южная Корея", flag:"kr", basePrice7:3000, callPrice:50, maxSpeed:1000, countryCode:"82", mobilePrefixes:["10"], operators:{"10":"KT/SKT/LGU+"}, phoneLength:10, cities:["Сеул","Пусан","Инчхон","Тэгу","Кванджу"] },
+        sg: { name:"Сингапур", flag:"sg", basePrice7:2700, callPrice:40, maxSpeed:1300, countryCode:"65", mobilePrefixes:["8","9"], operators:{"8":"Singtel","9":"StarHub"}, phoneLength:8, cities:["Сингапур","Джурог","Вудлендс","Тампинс","Бедок"] },
+        ph: { name:"Филиппины", flag:"ph", basePrice7:2050, callPrice:20, maxSpeed:500, countryCode:"63", mobilePrefixes:["905","906","907","908","909","910","912","913","914","915","916","917","918","919","920","921","922","923","924","925","926","927","928","929","930","931","932","933","934","935","936","937","938","939","940","941","942","943","944","945","946","947","948","949","950","951","952","953","954","955","956","957","958","959","960","961","962","963","964","965","966","967","968","969","970","971","972","973","974","975","976","977","978","979","980","981","982","983","984","985","986","987","988","989","990","991","992","993","994","995","996","997","998","999"], operators:{"905":"Globe","906":"Globe","907":"Globe","908":"Globe","909":"Globe","910":"Globe","912":"Globe","913":"Globe","914":"Globe","915":"Globe","916":"Globe","917":"Globe","918":"Globe","919":"Globe","920":"Smart","921":"Smart","922":"Smart","923":"Smart","924":"Smart","925":"Smart","926":"Smart","927":"Smart","928":"Smart","929":"Smart","930":"Smart","931":"Smart","932":"Smart","933":"Smart","934":"Smart","935":"Smart","936":"Smart","937":"Smart","938":"Smart","939":"Smart"}, phoneLength:10, cities:["Манила","Себу","Давао","Боракай","Палаван"] },
+        kg: { name:"Кыргызстан", flag:"kg", basePrice7:2050, callPrice:20, maxSpeed:2000, countryCode:"996", mobilePrefixes:["50","51","55","70","77"], operators:{"50":"Beeline","51":"Beeline","55":"Megacom","70":"O!","77":"O!"}, phoneLength:9, cities:["Бишкек","Ош","Джалал-Абад","Каракол","Токмок"] },
+        tj: { name:"Таджикистан", flag:"tj", basePrice7:2050, callPrice:20, maxSpeed:1300, countryCode:"992", mobilePrefixes:["91","92","93","94","97"], operators:{"91":"Tcell","92":"Megafon","93":"Babilon","94":"Babilon","97":"Tcell"}, phoneLength:9, cities:["Душанбе","Худжанд","Бохтар","Куляб","Истаравшан"] },
+        de: { name:"Германия", flag:"de", basePrice7:2600, callPrice:40, maxSpeed:1000, countryCode:"49", mobilePrefixes:["151","152","155","157","159","160","162","163","170","171","172","173","174","175","176","177","178","179"], operators:{"151":"Telekom","152":"Telekom","155":"Telekom","157":"Telekom","159":"Telekom","160":"O2","162":"Vodafone","163":"Vodafone","170":"Telekom","171":"Telekom","172":"Telekom","173":"Telekom","174":"Telekom","175":"Telekom","176":"O2","177":"O2","178":"O2","179":"O2"}, phoneLength:10, cities:["Берлин","Мюнхен","Гамбург","Кёльн","Франкфурт"] },
+        at: { name:"Австрия", flag:"at", basePrice7:2600, callPrice:40, maxSpeed:1000, countryCode:"43", mobilePrefixes:["650","660","664","676","677","680","681","688","699"], operators:{"650":"Magenta","660":"Magenta","664":"A1","676":"Drei","677":"Drei","680":"A1","681":"A1","688":"Magenta","699":"Drei"}, phoneLength:10, cities:["Вена","Зальцбург","Инсбрук","Грац","Линц"] },
+        ch: { name:"Швейцария", flag:"ch", basePrice7:3100, callPrice:50, maxSpeed:2000, countryCode:"41", mobilePrefixes:["74","75","76","77","78","79"], operators:{"74":"Sunrise","75":"Sunrise","76":"Swisscom","77":"Swisscom","78":"Swisscom","79":"Sunrise"}, phoneLength:9, cities:["Цюрих","Женева","Берн","Базель","Лозанна"] },
+        pt: { name:"Португалия", flag:"pt", basePrice7:2400, callPrice:40, maxSpeed:150, countryCode:"351", mobilePrefixes:["91","92","93","96"], operators:{"91":"Vodafone","92":"MEO","93":"NOS","96":"MEO"}, phoneLength:9, cities:["Лиссабон","Порту","Фару","Коимбра","Брага"] },
+        do: { name:"Доминикана", flag:"do", basePrice7:2600, callPrice:40, maxSpeed:500, countryCode:"1", mobilePrefixes:["809","829","849"], operators:{"809":"Claro","829":"Altice","849":"Viva"}, phoneLength:10, cities:["Санто-Доминго","Пунта-Кана","Пуэрто-Плата","Ла-Романа","Сантьяго"] },
+        mx: { name:"Мексика", flag:"mx", basePrice7:2400, callPrice:40, maxSpeed:430, countryCode:"52", mobilePrefixes:["1"], operators:{"1":"Telmex/AT&T"}, phoneLength:10, cities:["Мехико","Канкун","Гвадалахара","Пуэрто-Вальярта","Тихуана"] },
+        br: { name:"Бразилия", flag:"br", basePrice7:2600, callPrice:40, maxSpeed:750, countryCode:"55", mobilePrefixes:["11","12","13","14","15","16","17","18","19","21","22","24","27","28","31","32","34","35","37","38","41","42","43","44","45","46","47","48","49","51","53","54","55","61","62","63","64","65","66","67","68","69","71","73","74","75","77","79","81","82","83","84","85","86","87","88","89","91","92","93","94","95","96","97","98","99"], operators:{"11":"Vivo","12":"Claro","13":"Vivo","14":"Claro","15":"Vivo","16":"Claro","17":"Vivo","18":"Claro","19":"Vivo","21":"Claro","22":"Vivo","24":"Claro","27":"Vivo","28":"Claro","31":"Vivo","32":"Claro","34":"Vivo","35":"Claro","37":"Vivo","38":"Claro","41":"Vivo","42":"Claro","43":"Vivo","44":"Claro","45":"Vivo","46":"Claro","47":"Vivo","48":"Claro","49":"Vivo","51":"Claro","53":"Vivo","54":"Claro","55":"Vivo","61":"Claro","62":"Vivo","63":"Claro","64":"Vivo","65":"Claro","66":"Vivo","67":"Claro","68":"Vivo","69":"Claro","71":"Vivo","73":"Claro","74":"Vivo","75":"Claro","77":"Vivo","79":"Claro","81":"Vivo","82":"Claro","83":"Vivo","84":"Claro","85":"Vivo","86":"Claro","87":"Vivo","88":"Claro","89":"Vivo","91":"Claro","92":"Vivo","93":"Claro","94":"Vivo","95":"Claro","96":"Vivo","97":"Claro","98":"Vivo","99":"Claro"}, phoneLength:10, cities:["Сан-Паулу","Рио-де-Жанейро","Сальвадор","Флорианополис","Форталеза"] },
+        ar: { name:"Аргентина", flag:"ar", basePrice7:2500, callPrice:40, maxSpeed:500, countryCode:"54", mobilePrefixes:["11","221","223","261","351","341","381"], operators:{"11":"Claro","221":"Movistar","223":"Personal","261":"Claro","351":"Movistar","341":"Personal","381":"Claro"}, phoneLength:10, cities:["Буэнос-Айрес","Кордова","Мендоса","Росарио","Барилоче"] },
+        kh: { name:"Камбоджа", flag:"kh", basePrice7:2050, callPrice:20, maxSpeed:100, countryCode:"855", mobilePrefixes:["1","6","7","8","9"], operators:{"1":"Cellcard","6":"Smart","7":"Metfone","8":"Seatel","9":"Cootel"}, phoneLength:9, cities:["Пномпень","Сием-Рип","Сиануквиль","Баттамбанг","Камнот"] },
+        ir: { name:"Иран", flag:"ir", basePrice7:2100, callPrice:30, maxSpeed:500, countryCode:"98", mobilePrefixes:["9"], operators:{"9":"MCI/Hamrah"}, phoneLength:10, cities:["Тегеран","Мешхед","Исфахан","Шираз","Тебриз"] },
+        sa: { name:"Саудовская Аравия", flag:"sa", basePrice7:2800, callPrice:40, maxSpeed:1500, countryCode:"966", mobilePrefixes:["5"], operators:{"5":"STC/Mobily/Zain"}, phoneLength:9, cities:["Эр-Рияд","Джидда","Мекка","Медина","Даммам"] },
+        za: { name:"ЮАР", flag:"za", basePrice7:2500, callPrice:40, maxSpeed:174, countryCode:"27", mobilePrefixes:["6","7","8"], operators:{"6":"Vodacom","7":"MTN","8":"Cell C"}, phoneLength:9, cities:["Йоханнесбург","Кейптаун","Дурбан","Претория","Порт-Элизабет"] },
+        ke: { name:"Кения", flag:"ke", basePrice7:2200, callPrice:40, maxSpeed:411, countryCode:"254", mobilePrefixes:["7"], operators:{"7":"Safaricom/Airtel"}, phoneLength:9, cities:["Найроби","Момбаса","Кисуму","Накуру","Элдорет"] },
+        cz: { name:"Чехия", flag:"cz", basePrice7:2200, callPrice:30, maxSpeed:930, countryCode:"420", mobilePrefixes:["70","71","72","73","77","79"], operators:{"70":"O2","71":"T-Mobile","72":"T-Mobile","73":"Vodafone","77":"O2","79":"Vodafone"}, phoneLength:9, cities:["Прага","Брно","Острава","Пльзень","Карловы Вары"] },
+        hr: { name:"Хорватия", flag:"hr", basePrice7:2400, callPrice:40, maxSpeed:1000, countryCode:"385", mobilePrefixes:["91","92","95","97","98","99"], operators:{"91":"A1","92":"A1","95":"Tele2","97":"Tele2","98":"T-Hrvatski","99":"T-Hrvatski"}, phoneLength:9, cities:["Загреб","Сплит","Дубровник","Риека","Задар"] },
+        bg: { name:"Болгария", flag:"bg", basePrice7:2050, callPrice:30, maxSpeed:2300, countryCode:"359", mobilePrefixes:["87","88","89","98","99"], operators:{"87":"Vivacom","88":"A1","89":"Telenor","98":"Telenor","99":"Vivacom"}, phoneLength:9, cities:["София","Пловдив","Варна","Бургас","Русе"] },
+        nl: { name:"Нидерланды", flag:"nl", basePrice7:2700, callPrice:40, maxSpeed:1000, countryCode:"31", mobilePrefixes:["6"], operators:{"6":"KPN/Vodafone/T-Mobile"}, phoneLength:9, cities:["Амстердам","Роттердам","Гаага","Утрехт","Эйндховен"] },
+        be: { name:"Бельгия", flag:"be", basePrice7:2600, callPrice:40, maxSpeed:500, countryCode:"32", mobilePrefixes:["4"], operators:{"4":"Proximus/Orange/Base"}, phoneLength:9, cities:["Брюссель","Антверпен","Гент","Брюгге","Льеж"] },
+        gb: { name:"Великобритания", flag:"gb", basePrice7:2800, callPrice:40, maxSpeed:1000, countryCode:"44", mobilePrefixes:["7"], operators:{"7":"EE/Vodafone/O2/Three"}, phoneLength:10, cities:["Лондон","Манчестер","Бирмингем","Глазго","Ливерпуль"] },
+        pe: { name:"Перу", flag:"pe", basePrice7:2400, callPrice:40, maxSpeed:547, countryCode:"51", mobilePrefixes:["9"], operators:{"9":"Claro/Movistar/Entel"}, phoneLength:9, cities:["Лима","Куско","Арекипа","Трухильо","Мачу-Пикчу"] },
+        cl: { name:"Чили", flag:"cl", basePrice7:2500, callPrice:40, maxSpeed:196, countryCode:"56", mobilePrefixes:["9"], operators:{"9":"Entel/Movistar/Claro"}, phoneLength:9, cities:["Сантьяго","Вальпараисо","Консепсьон","Пуэрто-Варас","Антофагаста"] },
+        co: { name:"Колумбия", flag:"co", basePrice7:2400, callPrice:40, maxSpeed:350, countryCode:"57", mobilePrefixes:["3"], operators:{"3":"Claro/Movistar/Tigo"}, phoneLength:10, cities:["Богота","Медельин","Картахена","Кали","Барранкилья"] },
+        se: { name:"Швеция", flag:"se", basePrice7:2900, callPrice:40, maxSpeed:1000, countryCode:"46", mobilePrefixes:["70","72","73","76","79"], operators:{"70":"Telia","72":"Comviq","73":"Telenor","76":"Tele2","79":"Telia"}, phoneLength:9, cities:["Стокгольм","Гётеборг","Мальмё","Уппсала","Лунд"] },
+        no: { name:"Норвегия", flag:"no", basePrice7:3000, callPrice:50, maxSpeed:1000, countryCode:"47", mobilePrefixes:["4","9"], operators:{"4":"Telenor","9":"Telia"}, phoneLength:8, cities:["Осло","Берген","Тронхейм","Ставангер","Лиллехаммер"] },
+        dk: { name:"Дания", flag:"dk", basePrice7:2800, callPrice:40, maxSpeed:1000, countryCode:"45", mobilePrefixes:["2","3","4","5","6","7","8","9"], operators:{"2":"TDC","3":"Telenor","4":"Telia","5":"3","6":"TDC","7":"Telenor","8":"Telia","9":"3"}, phoneLength:8, cities:["Копенгаген","Орхус","Оденсе","Ольборг","Эсбьерг"] },
+        is: { name:"Исландия", flag:"is", basePrice7:3100, callPrice:50, maxSpeed:1000, countryCode:"354", mobilePrefixes:["6","7","8"], operators:{"6":"Vodafone","7":"Nova","8":"Siminn"}, phoneLength:7, cities:["Рейкьявик","Коупавогюр","Хабнарфьордюр","Акюрейри","Гардабайр"] },
+        fi: { name:"Финляндия", flag:"fi", basePrice7:2800, callPrice:40, maxSpeed:8000, countryCode:"358", mobilePrefixes:["4","5"], operators:{"4":"Telia","5":"Elisa"}, phoneLength:9, cities:["Хельсинки","Тампере","Турку","Оулу","Эспоо"] },
+        ie: { name:"Ирландия", flag:"ie", basePrice7:2600, callPrice:40, maxSpeed:1000, countryCode:"353", mobilePrefixes:["83","85","86","87","88","89"], operators:{"83":"Three","85":"Eir","86":"Vodafone","87":"Three","88":"Eir","89":"Vodafone"}, phoneLength:9, cities:["Дублин","Корк","Голуэй","Лимерик","Уотерфорд"] },
+        mc: { name:"Монако", flag:"mc", basePrice7:3200, callPrice:50, maxSpeed:1400, countryCode:"377", mobilePrefixes:["6","7"], operators:{"6":"Orange","7":"Monaco Telecom"}, phoneLength:8, cities:["Монако-Вилль","Монте-Карло","Ла-Кондамин","Фонвьей","Сен-Роман"] },
+        ad: { name:"Андорра", flag:"ad", basePrice7:2700, callPrice:40, maxSpeed:700, countryCode:"376", mobilePrefixes:["3","6"], operators:{"3":"Andorra Telecom","6":"Andorra Telecom"}, phoneLength:6, cities:["Андорра-ла-Велья","Эскальдес","Сан-Жулия-де-Лория","Ла-Массана","Ордино"] },
+        sm: { name:"Сан-Марино", flag:"sm", basePrice7:2600, callPrice:40, maxSpeed:20000, countryCode:"378", mobilePrefixes:["6"], operators:{"6":"Prima"}, phoneLength:8, cities:["Сан-Марино","Борго-Маджоре","Серравалле","Доманьяно","Фаэтано"] },
+        va: { name:"Ватикан", flag:"va", basePrice7:2600, callPrice:40, maxSpeed:1600, countryCode:"379", mobilePrefixes:["6"], operators:{"6":"Vatican Telecom"}, phoneLength:8, cities:["Ватикан","Рим (пригород)"] },
+        mt: { name:"Мальта", flag:"mt", basePrice7:2500, callPrice:40, maxSpeed:1500, countryCode:"356", mobilePrefixes:["79","77","99"], operators:{"79":"GO","77":"Melita","99":"Epic"}, phoneLength:8, cities:["Валлетта","Слима","Сент-Джулианс","Биркиркара","Мдина"] },
+        al: { name:"Албания", flag:"al", basePrice7:2100, callPrice:40, maxSpeed:1000, countryCode:"355", mobilePrefixes:["66","67","68","69"], operators:{"66":"Vodafone","67":"One","68":"Telekom","69":"Telekom"}, phoneLength:9, cities:["Тирана","Дуррес","Влёра","Шкодер","Саранда"] },
+        mk: { name:"Северная Македония", flag:"mk", basePrice7:2100, callPrice:40, maxSpeed:1000, countryCode:"389", mobilePrefixes:["70","71","72","75","76","77","78","79"], operators:{"70":"A1","71":"A1","72":"A1","75":"Telekom","76":"Telekom","77":"Telekom","78":"Telekom","79":"Telekom"}, phoneLength:8, cities:["Скопье","Битола","Охрид","Куманово","Тетово"] },
+        ba: { name:"Босния и Герцеговина", flag:"ba", basePrice7:2100, callPrice:40, maxSpeed:30, countryCode:"387", mobilePrefixes:["60","61","62","63","64","65","66"], operators:{"60":"BH Telecom","61":"BH Telecom","62":"BH Telecom","63":"HT Eronet","64":"HT Eronet","65":"HT Eronet","66":"Mtel"}, phoneLength:8, cities:["Сараево","Баня-Лука","Мостар","Тузла","Зеница"] },
+        ro: { name:"Румыния", flag:"ro", basePrice7:2050, callPrice:30, maxSpeed:100, countryCode:"40", mobilePrefixes:["7"], operators:{"7":"Orange/Vodafone/Telekom"}, phoneLength:9, cities:["Бухарест","Клуж-Напока","Тимишоара","Брашов","Констанца"] },
+        pl: { name:"Польша", flag:"pl", basePrice7:2200, callPrice:30, maxSpeed:100, countryCode:"48", mobilePrefixes:["51","53","57","60","66","69","72","73","78","79","88"], operators:{"51":"Orange","53":"T-Mobile","57":"Play","60":"Plus","66":"Play","69":"Plus","72":"Play","73":"T-Mobile","78":"Orange","79":"Play","88":"T-Mobile"}, phoneLength:9, cities:["Варшава","Краков","Вроцлав","Гданьск","Познань"] },
+        sk: { name:"Словакия", flag:"sk", basePrice7:2100, callPrice:30, maxSpeed:100, countryCode:"421", mobilePrefixes:["91","94","95","90"], operators:{"90":"Slovak Telekom","91":"Orange","94":"O2","95":"4ka"}, phoneLength:9, cities:["Братислава","Кошице","Прешов","Жилина","Нитра"] },
+        si: { name:"Словения", flag:"si", basePrice7:2200, callPrice:30, maxSpeed:100, countryCode:"386", mobilePrefixes:["30","31","40","41","51","64","70","71"], operators:{"30":"A1","31":"A1","40":"Telekom","41":"Telekom","51":"Mobitel","64":"T-2","70":"Telemach","71":"Telemach"}, phoneLength:8, cities:["Любляна","Марибор","Целе","Крань","Ново-Место"] },
+        lu: { name:"Люксембург", flag:"lu", basePrice7:2800, callPrice:40, maxSpeed:100, countryCode:"352", mobilePrefixes:["6"], operators:{"6":"POST/LuxGSM/Tango"}, phoneLength:9, cities:["Люксембург","Эш-сюр-Альзетт","Дифферданж","Дюделанж","Петанж"] },
+        lv: { name:"Латвия", flag:"lv", basePrice7:2100, callPrice:30, maxSpeed:100, countryCode:"371", mobilePrefixes:["2"], operators:{"2":"LMT/Tele2/Bite"}, phoneLength:8, cities:["Рига","Даугавпилс","Лиепая","Елгава","Юрмала"] },
+        lt: { name:"Литва", flag:"lt", basePrice7:2100, callPrice:30, maxSpeed:100, countryCode:"370", mobilePrefixes:["6"], operators:{"6":"Telia/Bite/Tele2"}, phoneLength:8, cities:["Вильнюс","Каунас","Клайпеда","Шяуляй","Паневежис"] },
+        ee: { name:"Эстония", flag:"ee", basePrice7:2100, callPrice:30, maxSpeed:100, countryCode:"372", mobilePrefixes:["5"], operators:{"5":"Telia/Tele2/Elisa"}, phoneLength:7, cities:["Таллин","Тарту","Нарва","Пярну","Кохтла-Ярве"] },
+        md: { name:"Молдова", flag:"md", basePrice7:2050, callPrice:20, maxSpeed:100, countryCode:"373", mobilePrefixes:["6","7"], operators:{"6":"Orange","7":"Moldcell"}, phoneLength:8, cities:["Кишинёв","Тирасполь","Бельцы","Бендеры","Кагул"] },
+        mn: { name:"Монголия", flag:"mn", basePrice7:2050, callPrice:30, maxSpeed:100, countryCode:"976", mobilePrefixes:["88","89","90","91","94","95","96","99"], operators:{"88":"Unitel","89":"Unitel","90":"Mobicom","91":"Skytel","94":"G-Mobile","95":"G-Mobile","96":"Skytel","99":"Mobicom"}, phoneLength:8, cities:["Улан-Батор","Эрдэнэт","Дархан","Ховд","Улгий"] },
+        la: { name:"Лаос", flag:"la", basePrice7:2050, callPrice:20, maxSpeed:100, countryCode:"856", mobilePrefixes:["20"], operators:{"20":"LTC/Unitel/ETL"}, phoneLength:10, cities:["Вьентьян","Луангпхабанг","Паксе","Саваннакхет","Тхакхэк"] },
+        mm: { name:"Мьянма", flag:"mm", basePrice7:2050, callPrice:30, maxSpeed:100, countryCode:"95", mobilePrefixes:["9"], operators:{"9":"MPT/Telenor/Ooredoo"}, phoneLength:9, cities:["Янгон","Мандалай","Нейпьидо","Баган","Тавой"] },
+        np: { name:"Непал", flag:"np", basePrice7:2050, callPrice:20, maxSpeed:100, countryCode:"977", mobilePrefixes:["98","97"], operators:{"98":"NTC","97":"Ncell"}, phoneLength:10, cities:["Катманду","Покхара","Лалитпур","Бхаратпур","Бирундж"] },
+        bd: { name:"Бангладеш", flag:"bd", basePrice7:2050, callPrice:20, maxSpeed:100, countryCode:"880", mobilePrefixes:["17","18","19","13","14","15","16"], operators:{"17":"Grameenphone","18":"Robi","19":"Banglalink","13":"Teletalk","14":"Teletalk","15":"Airtel","16":"Airtel"}, phoneLength:10, cities:["Дакка","Читтагонг","Кхулна","Раджшахи","Силхет"] },
+        bn: { name:"Бруней", flag:"bn", basePrice7:2600, callPrice:40, maxSpeed:100, countryCode:"673", mobilePrefixes:["7","8"], operators:{"7":"DST","8":"Progresif"}, phoneLength:7, cities:["Бандар-Сери-Бегаван","Куала-Белайт","Сериа","Тутонг","Бангар"] },
+        bt: { name:"Бутан", flag:"bt", basePrice7:2100, callPrice:40, maxSpeed:100, countryCode:"975", mobilePrefixes:["17","77"], operators:{"17":"TashiCell","77":"Bhutan Telecom"}, phoneLength:8, cities:["Тхимпху","Паро","Пунакха","Вангди-Пходранг","Трашиганг"] },
+        jo: { name:"Иордания", flag:"jo", basePrice7:2600, callPrice:40, maxSpeed:100, countryCode:"962", mobilePrefixes:["77","78","79"], operators:{"77":"Orange","78":"Zain","79":"Umniah"}, phoneLength:9, cities:["Амман","Акаба","Петра","Зарка","Ирбид"] },
+        lb: { name:"Ливан", flag:"lb", basePrice7:2400, callPrice:40, maxSpeed:100, countryCode:"961", mobilePrefixes:["3","7"], operators:{"3":"Touch","7":"Alfa"}, phoneLength:8, cities:["Бейрут","Триполи","Сайда","Тир","Захле"] },
+        kw: { name:"Кувейт", flag:"kw", basePrice7:2800, callPrice:50, maxSpeed:100, countryCode:"965", mobilePrefixes:["5","6","9"], operators:{"5":"Zain","6":"VIVA","9":"Ooredoo"}, phoneLength:8, cities:["Эль-Кувейт","Хавалли","Сальмия","Фарвания","Джахра"] },
+        iq: { name:"Ирак", flag:"iq", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"964", mobilePrefixes:["75","77","78","79"], operators:{"75":"Zain","77":"Asiacell","78":"Korek","79":"Zain"}, phoneLength:10, cities:["Багдад","Эрбиль","Басра","Мосул","Сулеймания"] },
+        dz: { name:"Алжир", flag:"dz", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"213", mobilePrefixes:["5","6","7"], operators:{"5":"Ooredoo","6":"Mobilis","7":"Djezzy"}, phoneLength:9, cities:["Алжир","Оран","Константина","Аннаба","Тлемсен"] },
+        ly: { name:"Ливия", flag:"ly", basePrice7:2400, callPrice:40, maxSpeed:100, countryCode:"218", mobilePrefixes:["91","92","94"], operators:{"91":"Al Madar","92":"Libyana","94":"Libyana"}, phoneLength:9, cities:["Триполи","Бенгази","Мисурата","Сирт","Тобрук"] },
+        ao: { name:"Ангола", flag:"ao", basePrice7:2500, callPrice:50, maxSpeed:100, countryCode:"244", mobilePrefixes:["9"], operators:{"9":"Unitel/Movicel"}, phoneLength:9, cities:["Луанда","Уамбо","Бенгела","Лобиту","Намибе"] },
+        bw: { name:"Ботсвана", flag:"bw", basePrice7:2400, callPrice:40, maxSpeed:100, countryCode:"267", mobilePrefixes:["7"], operators:{"7":"Mascom/Orange/BTC"}, phoneLength:8, cities:["Габороне","Франсистаун","Молепололе","Селеби-Пхикве","Маун"] },
+        zw: { name:"Зимбабве", flag:"zw", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"263", mobilePrefixes:["71","73","77","78"], operators:{"71":"NetOne","73":"Telecel","77":"Econet","78":"Econet"}, phoneLength:9, cities:["Хараре","Булавайо","Мутаре","Гверу","Квекве"] },
+        zm: { name:"Замбия", flag:"zm", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"260", mobilePrefixes:["76","77","95","96","97"], operators:{"76":"MTN","77":"Airtel","95":"Zamtel","96":"Zamtel","97":"MTN"}, phoneLength:9, cities:["Лусака","Ндола","Китве","Кабве","Чингола"] },
+        na: { name:"Намибия", flag:"na", basePrice7:2400, callPrice:40, maxSpeed:100, countryCode:"264", mobilePrefixes:["81","85"], operators:{"81":"MTC","85":"Telecom"}, phoneLength:9, cities:["Виндхук","Уолфиш-Бей","Свакопмунд","Ошакати","Рунду"] },
+        mg: { name:"Мадагаскар", flag:"mg", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"261", mobilePrefixes:["32","33","34"], operators:{"32":"Orange","33":"Airtel","34":"Telma"}, phoneLength:9, cities:["Антананариву","Туамасина","Махадзанга","Тулиара","Фианаранцуа"] },
+        cv: { name:"Кабо-Верде", flag:"cv", basePrice7:2600, callPrice:50, maxSpeed:100, countryCode:"238", mobilePrefixes:["5","9"], operators:{"5":"Unitel","9":"CV Movel"}, phoneLength:7, cities:["Прая","Минделу","Санта-Мария","Ассомада","Порту-Нову"] },
+        gh: { name:"Гана", flag:"gh", basePrice7:2100, callPrice:40, maxSpeed:100, countryCode:"233", mobilePrefixes:["20","23","24","27","54","55","57","59"], operators:{"20":"Vodafone","23":"Glo","24":"MTN","27":"Tigo","54":"Airtel","55":"MTN","57":"Airtel","59":"Glo"}, phoneLength:9, cities:["Аккра","Кумаси","Секонди","Тамале","Тема"] },
+        sn: { name:"Сенегал", flag:"sn", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"221", mobilePrefixes:["70","76","77","78"], operators:{"70":"Orange","76":"Expresso","77":"Tigo","78":"Free"}, phoneLength:9, cities:["Дакар","Туба","Тиес","Сен-Луи","Зигиншор"] },
+        ug: { name:"Уганда", flag:"ug", basePrice7:2100, callPrice:40, maxSpeed:100, countryCode:"256", mobilePrefixes:["70","71","75","77","78","79"], operators:{"70":"Airtel","71":"MTN","75":"Africell","77":"MTN","78":"Airtel","79":"Africell"}, phoneLength:9, cities:["Кампала","Энтеббе","Джинджа","Гулу","Мбале"] },
+        et: { name:"Эфиопия", flag:"et", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"251", mobilePrefixes:["9"], operators:{"9":"Ethio Telecom"}, phoneLength:9, cities:["Аддис-Абеба","Дыре-Дауа","Бахр-Дар","Гондэр","Мэкэле"] },
+        cr: { name:"Коста-Рика", flag:"cr", basePrice7:2600, callPrice:40, maxSpeed:100, countryCode:"506", mobilePrefixes:["6","7","8"], operators:{"6":"Kolbi","7":"Movistar","8":"Claro"}, phoneLength:8, cities:["Сан-Хосе","Лимон","Алахуэла","Картаго","Эредия"] },
+        pa: { name:"Панама", flag:"pa", basePrice7:2500, callPrice:40, maxSpeed:100, countryCode:"507", mobilePrefixes:["6"], operators:{"6":"Cable & Wireless/Movistar"}, phoneLength:8, cities:["Панама","Колон","Давид","Лас-Таблас","Сантьяго"] },
+        ec: { name:"Эквадор", flag:"ec", basePrice7:2400, callPrice:40, maxSpeed:100, countryCode:"593", mobilePrefixes:["9"], operators:{"9":"Claro/Movistar/CNT"}, phoneLength:9, cities:["Кито","Гуаякиль","Куэнка","Манта","Портовьехо"] },
+        bo: { name:"Боливия", flag:"bo", basePrice7:2400, callPrice:40, maxSpeed:100, countryCode:"591", mobilePrefixes:["6","7"], operators:{"6":"Tigo","7":"Viva"}, phoneLength:8, cities:["Ла-Пас","Санта-Крус","Кочабамба","Сукре","Потоси"] },
+        bs: { name:"Багамы", flag:"bs", basePrice7:2900, callPrice:50, maxSpeed:100, countryCode:"1", mobilePrefixes:["242"], operators:{"242":"BTC/Aliv"}, phoneLength:10, cities:["Нассау","Фрипорт","Марш-Харбор","Джорджтаун","Рок-Саунд"] },
+        jm: { name:"Ямайка", flag:"jm", basePrice7:2600, callPrice:50, maxSpeed:100, countryCode:"1", mobilePrefixes:["876","658"], operators:{"876":"Digicel","658":"Flow"}, phoneLength:10, cities:["Кингстон","Монтего-Бей","Спаниш-Таун","Очо-Риос","Негрил"] },
+        au: { name:"Австралия", flag:"au", basePrice7:3100, callPrice:50, maxSpeed:100, countryCode:"61", mobilePrefixes:["4"], operators:{"4":"Telstra/Optus/Vodafone"}, phoneLength:9, cities:["Сидней","Мельбурн","Брисбен","Перт","Аделаида"] },
+        nz: { name:"Новая Зеландия", flag:"nz", basePrice7:3000, callPrice:50, maxSpeed:100, countryCode:"64", mobilePrefixes:["2","21","22","27","28","29"], operators:{"2":"Spark","21":"Vodafone","22":"2degrees","27":"Spark","28":"Vodafone","29":"2degrees"}, phoneLength:9, cities:["Окленд","Веллингтон","Крайстчерч","Куинстаун","Гамильтон"] },
+        ye: { name:"Йемен", flag:"ye", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"967", mobilePrefixes:["70","71","73","77"], operators:{"70":"MTN","71":"Sabafon","73":"Y","77":"Yemen Mobile"}, phoneLength:9, cities:["Сана","Аден","Таиз","Ходейда","Мукалла"] }
     };
 
     function getFlagUrl(code) { return `https://flagcdn.com/w80/${code}.png`; }
@@ -157,19 +270,19 @@
     }
 
     // SEO
-    document.title = `eSIM для ${countryInfo.name} — безлимит от ${countryInfo.basePrice7} ₽ | eSIMsale`;
+    document.title = `eSIM для ${countryInfo.name} — безлимит от ${countryInfo.basePrice7} ₽ | eSIMru`;
     document.getElementById('pageTitle').innerHTML = document.title;
     const metaDesc = `Купить eSIM для ${countryInfo.name} с безлимитным интернетом на 7-90 дней. Скорость до ${countryInfo.maxSpeed} Мбит/с, звонки от ${countryInfo.callPrice} ₽/мин. Мгновенная доставка.`;
     document.getElementById('pageDescription').setAttribute('content', metaDesc);
     document.getElementById('ogTitle').setAttribute('content', document.title);
     document.getElementById('ogDescription').setAttribute('content', metaDesc);
-    document.getElementById('canonicalLink').setAttribute('href', `https://esimsale.com/country.html?country=${selectedCountryCode}`);
+    document.getElementById('canonicalLink').setAttribute('href', `https://esimru.github.io/com/country.html?country=${selectedCountryCode}`);
     const productSchema = {
         "@context": "https://schema.org",
         "@type": "Product",
         "name": `eSIM для ${countryInfo.name}`,
         "description": metaDesc,
-        "brand": { "@type": "Brand", "name": "eSIMsale" },
+        "brand": { "@type": "Brand", "name": "eSIMru" },
         "offers": {
             "@type": "Offer",
             "price": countryInfo.basePrice7,
@@ -219,12 +332,17 @@
     function placeFloatingButton() {
         if (floatingButton) floatingButton.remove();
         if (!selectedNumberId) return;
-        const selectedCard = document.querySelector('.number-card.selected');
-        if (!selectedCard) return;
         floatingButton = createFloatingButton();
-        // Вставляем кнопку после выбранной карточки
-        selectedCard.insertAdjacentElement('afterend', floatingButton);
-        // Прокручиваем к кнопке, чтобы пользователь её увидел
+        const isDesktop = window.innerWidth >= 768;
+        if (isDesktop) {
+            // на десктопе вставляем после всей сетки номеров
+            const numbersGrid = document.querySelector('.numbers-grid');
+            numbersGrid.insertAdjacentElement('afterend', floatingButton);
+        } else {
+            // на мобильных – под выбранной карточкой
+            const selectedCard = document.querySelector('.number-card.selected');
+            if (selectedCard) selectedCard.insertAdjacentElement('afterend', floatingButton);
+        }
         floatingButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
@@ -248,6 +366,7 @@
                 renderDays();
                 updatePriceHint();
                 if (floatingButton) {
+                    // обновляем текст кнопки (цена обновится при клике на оплату)
                     floatingButton.textContent = '💳 Купить сейчас';
                 }
             };
@@ -280,7 +399,7 @@
         });
         const moreBtn = document.getElementById('showMoreNumbersBtn');
         if (moreBtn) moreBtn.style.display = allNumbers.filter(n => !n.popular).length > 0 ? 'block' : 'none';
-        // Если после перерисовки есть выбранный номер, восстанавливаем кнопку
+        // если после перерисовки есть выбранный номер, убедимся, что кнопка на месте
         if (selectedNumberId) placeFloatingButton();
     }
 
@@ -288,6 +407,11 @@
         showAllNumbers = !showAllNumbers;
         renderNumbers(showAllNumbers);
         document.getElementById('showMoreNumbersBtn').innerText = showAllNumbers ? 'Скрыть' : 'Показать больше номеров';
+    });
+
+    // обработчик изменения размера окна (поворот экрана)
+    window.addEventListener('resize', () => {
+        if (selectedNumberId) placeFloatingButton();
     });
 
     renderDays();
