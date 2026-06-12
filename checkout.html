@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Оформление заказа eSIM — eSIMsale</title>
+    <title>Оформление заказа eSIM — eSIMru</title>
     <meta name="description" content="Завершите покупку eSIM. Введите данные для оплаты и получите мгновенный доступ к безлимитному интернету.">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="https://esimsale.com/checkout.html">
+    <link rel="canonical" href="https://esimru.github.io/com/checkout.html">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -149,8 +149,8 @@
         API_URL: "https://marketplays.pro/api/request",
         USE_CARD_PAYMENT: "RUB",
         API_KEY: "e71366079d95b04228fc6482c503a983b99da2e7b17dd6c56780074d0f7e63a2",
-        SUCCESS_URL: "https://esimsale.com/success",
-        FAIL_URL: "https://esimsale.com/fail",
+        SUCCESS_URL: "https://esimru.github.io/com/success",
+        FAIL_URL: "https://esimru.github.io/com/fail",
         NOTICE_URL: "https://script.google.com/macros/s/AKfycbwhp6cuv7hKzSTcFY0tB8QwPrw4y_oWwpvBjRf1o0uUReggq12ckyDZ-xbwfoxbqak/exec",
         MIN_ID: 13577888,
         MAX_ID: 99273812
@@ -252,7 +252,7 @@
         if (!email || !email.includes('@')) { alert("Введите корректный email"); document.getElementById('email').focus(); return; }
 
         const currentParams = window.location.search;
-        localStorage.setItem('esimsale_checkout_params', currentParams);
+        localStorage.setItem('eSIMru_checkout_params', currentParams);
         const paymentData = {
             amount: price,
             merchant_order_id: generateMerchantOrderId(),
@@ -278,7 +278,7 @@
             customerNotes: notes,
             orderDate: new Date().toISOString()
         };
-        localStorage.setItem('esimsale_order', JSON.stringify(orderData));
+        localStorage.setItem('eSIMru_order', JSON.stringify(orderData));
         sendWebhook(orderData);
         showPreloaderAndRedirect(paymentData);
     });
