@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ошибка оплаты — eSIMsale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #f5f7fb 0%, #eef2f6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 1rem;
+        }
+        .fail-card {
+            max-width: 450px;
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .fail-icon { font-size: 4rem; margin-bottom: 1rem; }
+        h2 { color: #dc2626; margin-bottom: 0.8rem; font-size: 1.6rem; font-weight: 700; }
+        p { color: #4a627a; margin-bottom: 1.5rem; line-height: 1.5; }
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            color: #dc2626;
+            font-size: 0.9rem;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c7da0, #1f6392);
+            color: white;
+            padding: 0.9rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover { transform: scale(1.02); background: linear-gradient(135deg, #1f6392, #1a4a6e); box-shadow: 0 8px 20px rgba(31,99,146,0.25); }
+        .btn:active { transform: scale(0.98); }
+        .countdown { margin-top: 1rem; font-size: 0.85rem; color: #7a8e9e; }
+        .countdown span { color: #1f6392; font-weight: 700; }
+        .info-note { font-size: 0.7rem; color: #7a8e9e; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+<div class="fail-card">
+    <div class="fail-icon">⚠️</div>
+    <h2>Ошибка оплаты</h2>
+    <p>К сожалению, произошла ошибка при обработке платежа.</p>
+    <div class="error-message" id="errorMessage">Пожалуйста, проверьте данные карты или попробуйте другой способ оплаты.</div>
+    <button class="btn" id="returnBtn">↻ Вернуться к оплате</button>
+    <div class="countdown">Автоматический переход через <span id="counter">5</span> секунд</div>
+    <div class="info-note">💡 Если ошибка повторяется, обратитесь в поддержку 24/7</div>
+</div>
+<script>
+    const savedOrder = localStorage.getItem('esimsale_order');
+    const savedParams = localStorage.getItem('esimsale_checkout_params');
+    function returnToCheckout() {
+        if (savedOrder && savedParams) window.location.href = `checkout.html${savedParams}`;
+        else window.location.href = 'index.html';
+    }
+    document.getElementById('returnBtn').addEventListener('click', returnToCheckout);
+    let seconds = 5;
+    const counter = document.getElementById('counter');
+    const timer = setInterval(() => {
+        seconds--;
+        if (counter) counter.textContent = seconds;
+        if (seconds <= 0) { clearInterval(timer); returnToCheckout(); }
+    }, 1000);
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorMsg = urlParams.get('message');
+    if (errorMsg) document.getElementById('errorMessage').innerHTML = `Ошибка: ${decodeURIComponent(errorMsg)}`;
+    if (!savedOrder || !savedParams) document.querySelector('.countdown').innerHTML = 'Через <span id="counter">5</span> секунд вы будете перенаправлены на главную';
+</script>
+</body>
+</html>

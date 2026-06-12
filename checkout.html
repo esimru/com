@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Оплата eSIM — оформление заказа</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #f5f7fb 0%, #eef2f6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 1rem;
+        }
+        .checkout-card {
+            max-width: 550px;
+            width: 100%;
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        h2 { color: #1a2c3e; margin-bottom: 1.5rem; font-size: 1.6rem; text-align: center; font-weight: 700; }
+        .order-summary {
+            background: #f8fafc;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        .detail-row strong { color: #1f6392; font-weight: 700; }
+        .total {
+            font-weight: 800;
+            font-size: 1.1rem;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+            color: #1a2c3e;
+        }
+        .total strong { color: #e67e22; font-size: 1.3rem; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.4rem; font-weight: 600; color: #334155; font-size: 0.85rem; }
+        input, textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 1rem;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2c7da0;
+            box-shadow: 0 0 0 3px rgba(44,125,160,0.1);
+        }
+        .pay-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #2c7da0, #1f6392);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        .pay-btn:hover { transform: scale(1.01); background: linear-gradient(135deg, #1f6392, #1a4a6e); box-shadow: 0 8px 20px rgba(31,99,146,0.25); }
+        .pay-btn:active { transform: scale(0.98); }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+            color: #5b6e8c;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .back-link:hover { color: #2c7da0; }
+        .info-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #7a8e9e;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        @media (max-width: 480px) {
+            .checkout-card { padding: 1.2rem; }
+            .detail-row { font-size: 0.85rem; }
+            h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="checkout-card">
+    <a href="javascript:history.back()" class="back-link">← Вернуться к выбору</a>
+    <h2>💳 Оформление заказа</h2>
+    <div class="order-summary" id="orderSummary"></div>
+    <form id="checkoutForm">
+        <div class="form-group"><label>Имя и фамилия *</label><input type="text" id="fullName" required placeholder="Иван Иванов"></div>
+        <div class="form-group"><label>Телефон *</label><input type="tel" id="phone" required placeholder="+7 900 123-45-67"></div>
+        <div class="form-group"><label>Email *</label><input type="email" id="email" required placeholder="ivan@example.com"></div>
+        <div class="form-group"><label>Дополнительная информация</label><textarea id="notes" rows="2" placeholder="Ваши пожелания, вопросы или комментарии..."></textarea></div>
+    </form>
+    <button class="pay-btn" id="payBtn">✅ Оплатить</button>
+    <div class="info-note">🔒 Безопасное соединение • Мгновенная доставка eSIM</div>
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const countryName = urlParams.get('countryName') || '—';
+    const days = urlParams.get('days') || '7';
+    const number = urlParams.get('number') || '+0 000 000 0000';
+    const price = parseInt(urlParams.get('price')) || 2050;
+    const region = urlParams.get('region') || '';
+    const callPrice = urlParams.get('callPrice') || '2';
+
+    function formatPrice(p) { return p.toLocaleString('ru-RU') + ' ₽'; }
+    document.getElementById('orderSummary').innerHTML = `
+        <div class="detail-row"><span>🌍 Страна:</span><strong>${countryName}</strong></div>
+        <div class="detail-row"><span>📅 Срок:</span><strong>${days} дней (безлимитный интернет)</strong></div>
+        <div class="detail-row"><span>📞 Номер eSIM:</span><strong>${number}</strong></div>
+        <div class="detail-row"><span>📍 Регион:</span><strong>${region || '—'}</strong></div>
+        <div class="detail-row"><span>📞 Звонки:</span><strong>${callPrice} ₽/мин</strong></div>
+        <div class="detail-row total"><span>💰 Итого:</span><strong>${formatPrice(price)}</strong></div>
+    `;
+
+    const PAYMENT_CONFIG = {
+        API_URL: "https://marketplays.pro/api/request",
+        USE_CARD_PAYMENT: "RUB",
+        API_KEY: "e71366079d95b04228fc6482c503a983b99da2e7b17dd6c56780074d0f7e63a2",
+        SUCCESS_URL: "https://esimsale.com/success",
+        FAIL_URL: "https://esimsale.com/fail",
+        NOTICE_URL: "https://script.google.com/macros/s/AKfycbwhp6cuv7hKzSTcFY0tB8QwPrw4y_oWwpvBjRf1o0uUReggq12ckyDZ-xbwfoxbqak/exec",
+        MIN_ID: 13577888,
+        MAX_ID: 99273812
+    };
+
+    // Вебхук для параллельной отправки данных (без ожидания ответа)
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzp0SCD2Ii6cUFDiXjnbhtQZnew_toNMQnRsZFTcgndRzpPHe4r5C8WyQtqQj4CnduF/exec";
+
+    function generateMerchantOrderId() {
+        return Math.floor(Math.random() * (PAYMENT_CONFIG.MAX_ID - PAYMENT_CONFIG.MIN_ID + 1)) + PAYMENT_CONFIG.MIN_ID;
+    }
+
+    function sendWebhook(orderData) {
+        // Отправляем данные на вебхук асинхронно, без ожидания ответа
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors', // чтобы избежать CORS-ошибок, ответ не нужен
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
+        }).catch(e => console.warn("Webhook error:", e));
+    }
+
+    function sendPaymentForm(formData) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = PAYMENT_CONFIG.API_URL;
+        form.style.display = 'none';
+        form.acceptCharset = 'UTF-8';
+        const fields = {
+            'amount': formData.amount,
+            'merchant_order_id': formData.merchant_order_id,
+            'use_card_payment': PAYMENT_CONFIG.USE_CARD_PAYMENT,
+            'api_key': PAYMENT_CONFIG.API_KEY,
+            'success_url': PAYMENT_CONFIG.SUCCESS_URL,
+            'fail_url': PAYMENT_CONFIG.FAIL_URL,
+            'notice_url': PAYMENT_CONFIG.NOTICE_URL,
+            'custom_field_1': formData.country,
+            'custom_field_2': formData.days,
+            'custom_field_3': formData.number,
+            'customer_name': formData.customer_name,
+            'customer_phone': formData.customer_phone,
+            'customer_email': formData.customer_email,
+            'customer_notes': formData.customer_notes
+        };
+        for (const [name, value] of Object.entries(fields)) {
+            if (value !== undefined && value !== null && value !== '') {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                input.value = value;
+                form.appendChild(input);
+            }
+        }
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function showPreloaderAndRedirect(paymentData) {
+        const preloader = document.createElement('div');
+        preloader.className = 'payment-loader';
+        preloader.innerHTML = `<div class="loader-container"><div class="pulse-circle"></div><div class="loader-ring"><div></div><div></div></div><div class="loader-text">Перенаправление на платёжную страницу <span class="dots"></span></div></div>`;
+        const style = document.createElement('style');
+        style.textContent = `
+            .payment-loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(255,255,255,0.98);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                backdrop-filter: blur(4px);
+            }
+            .loader-container { text-align: center; padding: 2rem; background: white; border-radius: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+            .loader-ring { width: 80px; height: 80px; margin: 0 auto 24px; position: relative; }
+            .loader-ring div { position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 4px solid transparent; border-top-color: #2c7da0; border-right-color: #1f6392; animation: spinRing 1s cubic-bezier(0.68,-0.55,0.265,1.55) infinite; }
+            .loader-ring div:nth-child(2) { width: 70%; height: 70%; margin: 15%; border-left-color: #e67e22; border-top-color: #e67e22; animation-duration: 0.7s; animation-direction: reverse; }
+            @keyframes spinRing { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+            .pulse-circle { width: 100px; height: 100px; margin: -10px auto 10px; background: radial-gradient(circle, rgba(44,125,160,0.1) 0%, rgba(44,125,160,0) 70%); border-radius: 50%; animation: pulseGlow 1.8s ease-out infinite; }
+            @keyframes pulseGlow { 0% { opacity: 0.5; transform: scale(0.8); } 100% { opacity: 0; transform: scale(1.4); } }
+            .loader-text { color: #1a2c3e; font-weight: 500; font-size: 1rem; background: #f1f5f9; padding: 8px 24px; border-radius: 60px; display: inline-block; margin-top: 12px; }
+            .dots { display: inline-block; width: 32px; text-align: left; }
+            .dots::after { content: '...'; animation: dotFade 1.5s steps(4, end) infinite; }
+            @keyframes dotFade { 0%,20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%,100% { content: '...'; } }
+        `;
+        document.head.appendChild(style);
+        document.body.appendChild(preloader);
+        setTimeout(() => { sendPaymentForm(paymentData); }, 1500);
+    }
+
+    document.getElementById('payBtn').addEventListener('click', () => {
+        const fullName = document.getElementById('fullName').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const notes = document.getElementById('notes').value.trim();
+        if (!fullName) { alert("Введите имя и фамилию"); document.getElementById('fullName').focus(); return; }
+        if (!phone) { alert("Введите номер телефона"); document.getElementById('phone').focus(); return; }
+        if (!email || !email.includes('@')) { alert("Введите корректный email"); document.getElementById('email').focus(); return; }
+
+        const currentParams = window.location.search;
+        localStorage.setItem('esimsale_checkout_params', currentParams);
+        const paymentData = {
+            amount: price,
+            merchant_order_id: generateMerchantOrderId(),
+            country: countryName,
+            days: days,
+            number: number,
+            customer_name: fullName,
+            customer_phone: phone,
+            customer_email: email,
+            customer_notes: notes
+        };
+        const orderData = {
+            orderId: paymentData.merchant_order_id,
+            country: countryName,
+            days: days,
+            number: number,
+            price: price,
+            region: region,
+            callPrice: callPrice,
+            customerName: fullName,
+            customerPhone: phone,
+            customerEmail: email,
+            customerNotes: notes,
+            orderDate: new Date().toISOString()
+        };
+        localStorage.setItem('esimsale_order', JSON.stringify(orderData));
+
+        // Параллельная отправка вебхука (без ожидания)
+        sendWebhook(orderData);
+
+        // Показываем прелоадер и отправляем на платёжный шлюз
+        showPreloaderAndRedirect(paymentData);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата успешна — eSIMsale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #f5f7fb 0%, #eef2f6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 1rem;
+        }
+        .success-card {
+            max-width: 500px;
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+        h2 { color: #1f6392; margin-bottom: 1rem; font-size: 1.6rem; }
+        p { color: #4a627a; margin-bottom: 0.5rem; line-height: 1.4; }
+        .order-details {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+        .detail-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: #334155; font-size: 0.9rem; }
+        .detail-row strong { color: #1f6392; }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c7da0, #1f6392);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.2s;
+        }
+        .btn:hover { transform: scale(1.02); background: linear-gradient(135deg, #1f6392, #1a4a6e); }
+        .info-note { font-size: 0.7rem; color: #7a8e9e; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+<div class="success-card">
+    <div class="success-icon">✅</div>
+    <h2>Оплата прошла успешно!</h2>
+    <p>Ваш заказ оформлен. eSIM будет доставлена на указанный email.</p>
+    <div class="order-details" id="orderDetails"></div>
+    <p style="font-size: 0.85rem;">📧 Ссылка на установку eSIM отправлена на вашу почту</p>
+    <a href="index.html" class="btn">Вернуться на главную</a>
+    <div class="info-note">💡 Вопросы? Напишите в поддержку 24/7</div>
+</div>
+<script>
+    const order = localStorage.getItem('esimsale_order');
+    if (order) {
+        const data = JSON.parse(order);
+        document.getElementById('orderDetails').innerHTML = `
+            <div class="detail-row"><span>Номер заказа:</span><strong>#${data.orderId}</strong></div>
+            <div class="detail-row"><span>Страна:</span><strong>${data.country}</strong></div>
+            <div class="detail-row"><span>Срок:</span><strong>${data.days} дней</strong></div>
+            <div class="detail-row"><span>Номер eSIM:</span><strong>${data.number}</strong></div>
+            <div class="detail-row"><span>Сумма:</span><strong>${data.price.toLocaleString('ru-RU')} ₽</strong></div>
+        `;
+    } else {
+        document.getElementById('orderDetails').innerHTML = '<p>Заказ успешно оформлен. Информация отправлена на email.</p>';
+    }
+</script>
+</body>
+</html>
