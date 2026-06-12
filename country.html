@@ -63,15 +63,19 @@
             cursor: pointer;
             transition: 0.2s;
             margin-top: 0.5rem;
+            display: block;
         }
         .buy-btn:hover { background: #1f6392; }
         .show-more-numbers { background: none; border: 2px solid #9bb7d0; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem; cursor: pointer; font-weight: 500; }
         .floating-buy-btn {
-            position: relative;
             margin-top: 1rem;
             margin-bottom: 0.5rem;
         }
-        @media (max-width: 640px) { .numbers-grid { grid-template-columns: 1fr; } .country-name { font-size: 1.5rem; } .country-flag { width: 60px; height: 45px; } }
+        @media (max-width: 640px) {
+            .numbers-grid { grid-template-columns: 1fr; }
+            .country-name { font-size: 1.5rem; }
+            .country-flag { width: 60px; height: 45px; }
+        }
     </style>
 </head>
 <body>
@@ -96,8 +100,8 @@
         <button class="show-more-numbers" id="showMoreNumbersBtn">Показать больше номеров</button>
     </div>
 
-    <!-- Оригинальная кнопка внизу (будет скрыта после выбора номера) -->
-    <button class="buy-btn" id="buyNowBtn">💳 Купить сейчас</button>
+    <!-- Оригинальная кнопка внизу (будет скрыта) -->
+    <button class="buy-btn" id="buyNowBtn" style="display:none;">💳 Купить сейчас</button>
 </div>
 
 <script>
@@ -296,11 +300,11 @@
     const allNumbers = generateNumbersForCountry(selectedCountryCode, countryInfo);
     let selectedNumberId = null;
     let showAllNumbers = false;
-
-    // Хранение текущей плавающей кнопки
     let floatingButton = null;
 
-    // Функция создания кнопки (можно клонировать оригинальную, но проще создать новую)
+    function getPriceForDays(days) { return Math.round(countryInfo.basePrice7 * (priceMultipliers[days] || 1.0)); }
+    function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
+
     function createFloatingButton() {
         const btn = document.createElement('button');
         btn.className = 'buy-btn floating-buy-btn';
@@ -325,42 +329,30 @@
         return btn;
     }
 
-    function placeFloatingButtonAfterCard(cardElement) {
-        // Удаляем старую плавающую кнопку, если есть
+    function placeFloatingButton() {
         if (floatingButton) floatingButton.remove();
-        // Создаём новую и вставляем после выбранной карточки
+        if (!selectedNumberId) return;
         floatingButton = createFloatingButton();
-        cardElement.insertAdjacentElement('afterend', floatingButton);
-        // Прокручиваем к кнопке, чтобы она оказалась в поле зрения
+        const isDesktop = window.innerWidth >= 768;
+        if (isDesktop) {
+            // на десктопе вставляем после всей сетки номеров
+            const numbersGrid = document.querySelector('.numbers-grid');
+            numbersGrid.insertAdjacentElement('afterend', floatingButton);
+        } else {
+            // на мобильных – под выбранной карточкой
+            const selectedCard = document.querySelector('.number-card.selected');
+            if (selectedCard) selectedCard.insertAdjacentElement('afterend', floatingButton);
+        }
         floatingButton.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // Функция для очистки плавающей кнопки (если выбор сброшен, но у нас сброса нет)
-    function removeFloatingButton() {
-        if (floatingButton) {
-            floatingButton.remove();
-            floatingButton = null;
-        }
-    }
-
-    // Обработка выбора номера
-    function setSelectedNumber(id, cardElement) {
+    function setSelectedNumber(id) {
         selectedNumberId = id;
-        // Перерисовываем сетку, чтобы обновить класс selected
         renderNumbers(showAllNumbers);
-        // После перерисовки находим новую карточку с выбранным номером
-        const selectedCard = document.querySelector(`.number-card.selected`);
-        if (selectedCard) {
-            placeFloatingButtonAfterCard(selectedCard);
-        } else {
-            // На всякий случай, если не нашли
-            removeFloatingButton();
-        }
+        placeFloatingButton();
     }
 
     let selectedDays = 7;
-    function getPriceForDays(days) { return Math.round(countryInfo.basePrice7 * (priceMultipliers[days] || 1.0)); }
-    function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
 
     function renderDays() {
         const container = document.getElementById('daysContainer');
@@ -369,14 +361,12 @@
             const btn = document.createElement('button');
             btn.innerText = `${day} дней — ${formatPrice(getPriceForDays(day))}`;
             btn.className = `day-btn ${day === selectedDays ? 'active' : ''}`;
-            btn.onclick = () => { 
-                selectedDays = day; 
-                renderDays(); 
+            btn.onclick = () => {
+                selectedDays = day;
+                renderDays();
                 updatePriceHint();
-                // Если есть выбранный номер, обновляем кнопку (цена изменилась, но сама кнопка остаётся)
-                // Можно обновить текст кнопки, но она пересоздаётся при выборе номера.
-                // При смене срока кнопка остаётся, поэтому обновим её текст, если она существует
-                if (floatingButton && selectedNumberId) {
+                if (floatingButton) {
+                    // обновляем текст кнопки (цена обновится при клике на оплату)
                     floatingButton.textContent = '💳 Купить сейчас';
                 }
             };
@@ -403,19 +393,14 @@
             `;
             card.addEventListener('click', (e) => {
                 e.stopPropagation();
-                setSelectedNumber(num.id, card);
+                setSelectedNumber(num.id);
             });
             grid.appendChild(card);
         });
         const moreBtn = document.getElementById('showMoreNumbersBtn');
         if (moreBtn) moreBtn.style.display = allNumbers.filter(n => !n.popular).length > 0 ? 'block' : 'none';
-        // Если после перерисовки сетки был выбран номер, но кнопка не появилась (например, при showAll), восстановим её
-        if (selectedNumberId) {
-            const selectedCard = document.querySelector(`.number-card.selected`);
-            if (selectedCard && !floatingButton) {
-                placeFloatingButtonAfterCard(selectedCard);
-            }
-        }
+        // если после перерисовки есть выбранный номер, убедимся, что кнопка на месте
+        if (selectedNumberId) placeFloatingButton();
     }
 
     document.getElementById('showMoreNumbersBtn')?.addEventListener('click', () => {
@@ -424,9 +409,10 @@
         document.getElementById('showMoreNumbersBtn').innerText = showAllNumbers ? 'Скрыть' : 'Показать больше номеров';
     });
 
-    // Скрываем оригинальную нижнюю кнопку (она больше не нужна, так как есть плавающая)
-    const originalBuyBtn = document.getElementById('buyNowBtn');
-    if (originalBuyBtn) originalBuyBtn.style.display = 'none';
+    // обработчик изменения размера окна (поворот экрана)
+    window.addEventListener('resize', () => {
+        if (selectedNumberId) placeFloatingButton();
+    });
 
     renderDays();
     renderNumbers(false);
