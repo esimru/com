@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Ошибка оплаты — eSIMsale</title>
+    <title>Ошибка оплаты — eSIMru</title>
     <meta name="description" content="Произошла ошибка при оплате. Попробуйте ещё раз или обратитесь в поддержку.">
     <meta name="robots" content="noindex, nofollow">
     <style>
@@ -69,8 +69,8 @@
     <div class="info-note">💡 Если ошибка повторяется, обратитесь в поддержку 24/7</div>
 </div>
 <script>
-    const savedOrder = localStorage.getItem('esimsale_order');
-    const savedParams = localStorage.getItem('esimsale_checkout_params');
+    const savedOrder = localStorage.getItem('eSIMru_order');
+    const savedParams = localStorage.getItem('eSIMru_checkout_params');
     function returnToCheckout() {
         if (savedOrder && savedParams) window.location.href = `checkout.html${savedParams}`;
         else window.location.href = 'index.html';
