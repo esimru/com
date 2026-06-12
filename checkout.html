@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Оплата eSIM — оформление заказа</title>
+    <title>Оформление заказа eSIM — eSIMsale</title>
+    <meta name="description" content="Завершите покупку eSIM. Введите данные для оплаты и получите мгновенный доступ к безлимитному интернету.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://esimsale.com/checkout.html">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -153,18 +156,16 @@
         MAX_ID: 99273812
     };
 
-    // Вебхук для параллельной отправки данных (без ожидания ответа)
-    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzp0SCD2Ii6cUFDiXjnbhtQZnew_toNMQnRsZFTcgndRzpPHe4r5C8WyQtqQj4CnduF/exec";
+    const WEBHOOK_URL = "https://script.google.com/55555555555555555";
 
     function generateMerchantOrderId() {
         return Math.floor(Math.random() * (PAYMENT_CONFIG.MAX_ID - PAYMENT_CONFIG.MIN_ID + 1)) + PAYMENT_CONFIG.MIN_ID;
     }
 
     function sendWebhook(orderData) {
-        // Отправляем данные на вебхук асинхронно, без ожидания ответа
         fetch(WEBHOOK_URL, {
             method: 'POST',
-            mode: 'no-cors', // чтобы избежать CORS-ошибок, ответ не нужен
+            mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
         }).catch(e => console.warn("Webhook error:", e));
@@ -278,11 +279,7 @@
             orderDate: new Date().toISOString()
         };
         localStorage.setItem('esimsale_order', JSON.stringify(orderData));
-
-        // Параллельная отправка вебхука (без ожидания)
         sendWebhook(orderData);
-
-        // Показываем прелоадер и отправляем на платёжный шлюз
         showPreloaderAndRedirect(paymentData);
     });
 </script>
