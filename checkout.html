@@ -139,7 +139,7 @@
     document.getElementById('orderSummary').innerHTML = `
         <div class="detail-row"><span>🌍 Страна:</span><strong>${countryName}</strong></div>
         <div class="detail-row"><span>📅 Срок:</span><strong>${days} дней (безлимитный интернет)</strong></div>
-        <div class="detail-row"><span>📞 Номер eSIM:</span><strong>${number}</strong></div>
+        <div class="detail-row"><span>📞 Номер eSIM:</span><strong>+${number}</strong></div>
         <div class="detail-row"><span>📍 Регион:</span><strong>${region || '—'}</strong></div>
         <div class="detail-row"><span>📞 Звонки:</span><strong>${callPrice} ₽/мин</strong></div>
         <div class="detail-row total"><span>💰 Итого:</span><strong>${formatPrice(price)}</strong></div>
