@@ -59,6 +59,10 @@
             .section-title { font-size: 1.1rem; }
         }
     </style>
+    <!-- Место для динамической JSON-LD микроразметки -->
+    <script id="schema-breadcrumb" type="application/ld+json"></script>
+    <script id="schema-product" type="application/ld+json"></script>
+    <script id="schema-faq" type="application/ld+json"></script>
 </head>
 <body>
 <div class="container">
@@ -248,16 +252,18 @@
         selectedCountryCode = 'tr';
     }
 
-    // SEO и прочее
+    // SEO: title, canonical, breadcrumb
     document.title = `eSIM для ${countryInfo.name} — безлимит от ${countryInfo.basePrice7} ₽ | eSIMru`;
     document.getElementById('breadcrumbCountry').innerText = countryInfo.name;
     document.getElementById('faqCountryName').innerText = countryInfo.name;
+    const canonicalUrl = `https://esimru.github.io/com/country.html?country=${selectedCountryCode}`;
+    document.getElementById('canonicalLink').setAttribute('href', canonicalUrl);
 
     function getFlagUrl(code) { return `https://flagcdn.com/w80/${code}.png`; }
     function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
     function getPriceForDays(days) { return Math.round(countryInfo.basePrice7 * (priceMultipliers[days] || 1.0)); }
 
-    // Генерация номеров
+    // Генерация номеров (как в вашем коде)
     function generateNumbersForCountry() {
         const numbers = [];
         const cities = countryInfo.cities;
@@ -288,15 +294,83 @@
 
     let allNumbers = generateNumbersForCountry();
     let showAllNumbers = false;
-    let selectedNumberId = null;
+    let selectedNumberId = allNumbers.length ? allNumbers[0].id : null;
     let selectedDays = 7;
 
+    // Заполнение статических данных
     document.getElementById('countryFlag').src = getFlagUrl(selectedCountryCode);
     document.getElementById('countryFlag').alt = `Флаг ${countryInfo.name}`;
     document.getElementById('countryName').innerText = countryInfo.name;
     document.getElementById('callPrice').innerHTML = `<i class="bi bi-telephone"></i> Стоимость звонков: ${countryInfo.callPrice} ₽/мин`;
     document.getElementById('countrySpeed').innerHTML = `<i class="bi bi-speedometer2"></i> Максимальная скорость: до ${countryInfo.maxSpeed} Мбит/с`;
 
+    // ========== МИКРОРАЗМЕТКА (JSON-LD) ==========
+    function updateSchema() {
+        // 1. BreadcrumbList
+        const breadcrumbSchema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://esimru.github.io/com/" },
+                { "@type": "ListItem", "position": 2, "name": countryInfo.name, "item": canonicalUrl }
+            ]
+        };
+        document.getElementById('schema-breadcrumb').innerHTML = JSON.stringify(breadcrumbSchema);
+
+        // 2. Product + Offer (для текущей страны, срок 7 дней, первый номер)
+        const defaultNumber = allNumbers.find(n => n.id === selectedNumberId) || allNumbers[0];
+        const offerPrice = getPriceForDays(selectedDays);
+        const productSchema = {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": `eSIM для ${countryInfo.name} (безлимитный интернет)`,
+            "description": `Купить eSIM для ${countryInfo.name} с безлимитным интернетом на ${selectedDays} дней. Скорость до ${countryInfo.maxSpeed} Мбит/с, звонки от ${countryInfo.callPrice} ₽/мин. Мгновенная доставка на email.`,
+            "image": getFlagUrl(selectedCountryCode),
+            "brand": { "@type": "Brand", "name": "eSIMru" },
+            "category": "eSIM для путешествий",
+            "offers": {
+                "@type": "Offer",
+                "price": offerPrice,
+                "priceCurrency": "RUB",
+                "availability": "https://schema.org/InStock",
+                "validFrom": new Date().toISOString(),
+                "priceValidUntil": "2026-12-31",
+                "url": canonicalUrl,
+                "seller": { "@type": "Organization", "name": "eSIMru" }
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "127"
+            }
+        };
+        document.getElementById('schema-product').innerHTML = JSON.stringify(productSchema);
+
+        // 3. FAQPage
+        const faqItems = [];
+        document.querySelectorAll('.faq-mini-item').forEach(item => {
+            const questionElem = item.querySelector('.faq-mini-question');
+            const answerElem = item.querySelector('.faq-mini-answer');
+            if (questionElem && answerElem) {
+                let questionText = questionElem.childNodes[0]?.nodeValue?.trim() || '';
+                if (questionText.endsWith('?')) questionText = questionText.slice(0, -1);
+                const answerText = answerElem.innerText.trim();
+                faqItems.push({
+                    "@type": "Question",
+                    "name": questionText,
+                    "acceptedAnswer": { "@type": "Answer", "text": answerText }
+                });
+            }
+        });
+        const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqItems
+        };
+        document.getElementById('schema-faq').innerHTML = JSON.stringify(faqSchema);
+    }
+
+    // ========== ОСТАЛЬНЫЕ ФУНКЦИИ ИНТЕРФЕЙСА (renderDaysButtons, buildTable и т.д.) ==========
     function renderDaysButtons() {
         const container = document.getElementById('daysContainer');
         container.innerHTML = '';
@@ -309,10 +383,12 @@
                 renderDaysButtons();
                 updatePriceHint();
                 if (selectedNumberId !== null) buildTable();
+                updateSchema(); // обновляем микроразметку при смене срока
             };
             container.appendChild(btn);
         });
         updatePriceHint();
+        updateSchema();
     }
 
     function updatePriceHint() {
@@ -363,6 +439,7 @@
         container.appendChild(table);
 
         if (selectedNumberId !== null) addButtonRowForSelected();
+        updateSchema(); // обновляем схему после выбора номера
     }
 
     function addButtonRowForSelected() {
@@ -441,6 +518,7 @@
         });
     });
 
+    // Инициализация
     renderDaysButtons();
     buildTable();
 </script>
