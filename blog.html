@@ -12,127 +12,26 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #f5f7fb;
-            color: #1a2c3e;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.4;
-        }
-        .header {
-            background: linear-gradient(135deg, #0a2a3b 0%, #1a4a6e 100%);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+        body { background: #f5f7fb; color: #1a2c3e; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.4; }
+        .header { background: linear-gradient(135deg, #0a2a3b 0%, #1a4a6e 100%); color: white; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 100; }
         .header a { color: white; text-decoration: none; }
         .logo { font-size: 1.5rem; font-weight: bold; }
-        .back-home {
-            display: inline-block;
-            margin-top: 0.5rem;
-            background: rgba(255,255,255,0.2);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #1f3b4c;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            justify-content: center;
-        }
-        .subhead {
-            color: #4a627a;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.8rem;
-        }
-        .article-card {
-            background: white;
-            border-radius: 1.2rem;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s;
-            cursor: pointer;
-        }
-        .article-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.12);
-        }
-        .article-image {
-            width: 100%;
-            height: 180px;
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-        .article-content {
-            padding: 1.2rem;
-        }
-        .article-tag {
-            display: inline-block;
-            background: #e8f4f8;
-            color: #1f6392;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
-            margin-bottom: 0.6rem;
-        }
-        .article-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #0a2a3b;
-        }
-        .article-excerpt {
-            font-size: 0.85rem;
-            color: #4a627a;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-        }
-        .read-more {
-            color: #2c7da0;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        .loading-trigger {
-            height: 80px;
-            margin: 2rem 0;
-            text-align: center;
-            color: #94a3b8;
-        }
-        .footer {
-            background: #0a2a3b;
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            font-size: 0.8rem;
-        }
-        .footer a {
-            color: #8bb9d0;
-            text-decoration: none;
-        }
+        .back-home { display: inline-block; margin-top: 0.5rem; background: rgba(255,255,255,0.2); padding: 0.3rem 1rem; border-radius: 40px; font-size: 0.85rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #1f3b4c; display: flex; align-items: center; gap: 0.5rem; justify-content: center; }
+        .subhead { color: #4a627a; margin-bottom: 2rem; text-align: center; }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
+        .article-card { background: white; border-radius: 1.2rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+        .article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.12); }
+        .article-image { width: 100%; height: 180px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .article-content { padding: 1.2rem; }
+        .article-tag { display: inline-block; background: #e8f4f8; color: #1f6392; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 30px; margin-bottom: 0.6rem; }
+        .article-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: #0a2a3b; }
+        .article-excerpt { font-size: 0.85rem; color: #4a627a; margin-bottom: 0.8rem; line-height: 1.4; }
+        .read-more { color: #2c7da0; font-weight: 600; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .loading-trigger { height: 80px; margin: 2rem 0; text-align: center; color: #94a3b8; }
+        .footer { background: #0a2a3b; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.8rem; }
+        .footer a { color: #8bb9d0; text-decoration: none; }
         @media (max-width: 640px) {
             .articles-grid { grid-template-columns: 1fr; gap: 1rem; }
             h1 { font-size: 1.5rem; }
@@ -140,22 +39,19 @@
     </style>
 </head>
 <body>
-
 <div class="header">
     <div class="logo"><i class="bi bi-globe2"></i> eSIMru</div>
     <a href="index.html" class="back-home"><i class="bi bi-house"></i> На главную</a>
 </div>
-
 <div class="container">
     <h1><i class="bi bi-journal-bookmark-fill"></i> Блог о eSIM и путешествиях</h1>
     <div class="subhead">Полезные статьи, лайфхаки, сравнения тарифов и новости роуминга</div>
     <div id="articlesGrid" class="articles-grid"></div>
     <div id="loadingTrigger" class="loading-trigger"><i class="bi bi-arrow-down-circle"></i> Прокрутите вниз, чтобы загрузить ещё статьи...</div>
 </div>
-
 <div class="footer">
     <p><a href="index.html"><i class="bi bi-house"></i> Главная</a> | <a href="blog.html"><i class="bi bi-journal-bookmark-fill"></i> Блог</a> | <a href="/oferta.html">Оферта</a> | <a href="/privacy.html">Политика</a></p>
-    <p><i class="bi bi-envelope"></i> support@esimru.online | <i class="bi bi-telegram"></i> Telegram: @esimru_support</p>
+    <p><i class="bi bi-envelope"></i> support@esimru.online | <i class="bi bi-telegram"></i> @esimru_support</p>
 </div>
 
 <script>
@@ -191,7 +87,7 @@
             const card = document.createElement('div');
             card.className = 'article-card';
             card.onclick = () => {
-                window.location.href = `article.html?id=${article.id}`;
+                window.location.href = article.url;
             };
             card.innerHTML = `
                 <div class="article-image">${article.image}</div>
@@ -204,8 +100,6 @@
             `;
             grid.appendChild(card);
         });
-
-        // Проверка, есть ли ещё статьи
         if (loadedCount >= allArticles.length) {
             hasMore = false;
             trigger.innerHTML = '<i class="bi bi-check-circle"></i> Вы прочитали все статьи. Заходите за новыми!';
