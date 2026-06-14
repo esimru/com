@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title id="pageTitle">Статья | eSIMru</title>
+    <meta name="description" id="pageDescription" content="Читайте полезные статьи о eSIM, путешествиях и роуминге на блоге eSIMru.">
+    <link rel="canonical" id="canonicalUrl" href="https://esimru.github.io/com/article.html">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f5f7fb;
+            color: #1a2c3e;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+        }
+        .article-header {
+            background: linear-gradient(135deg, #0a2a3b 0%, #1a4a6e 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .article-header a {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 0.5rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .full-article {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .full-article h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #0a2a3b;
+        }
+        .full-article h2 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem;
+            color: #1f6392;
+            border-left: 4px solid #1f6392;
+            padding-left: 1rem;
+        }
+        .full-article p {
+            margin-bottom: 1rem;
+            color: #2d3e50;
+        }
+        .full-article ul, .full-article ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        .full-article li {
+            margin-bottom: 0.5rem;
+        }
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: #5b6e8c;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.8rem;
+        }
+        .cta-box {
+            background: #e8f4f8;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .cta-box a {
+            display: inline-block;
+            margin-top: 0.8rem;
+            background: #1f6392;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer {
+            background: #0a2a3b;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 640px) {
+            .full-article { padding: 1rem; }
+            .full-article h1 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="article-header">
+    <a href="blog.html"><i class="bi bi-arrow-left"></i> Назад к списку статей</a>
+    <div><i class="bi bi-globe2"></i> eSIMru — блог о путешествиях</div>
+</div>
+<div class="container">
+    <div id="articleContent" class="full-article">
+        <!-- сюда загрузится содержимое статьи -->
+        <p>Загрузка статьи...</p>
+    </div>
+</div>
+<div class="footer">
+    <p><a href="index.html" style="color:#8bb9d0;">Главная</a> | <a href="blog.html" style="color:#8bb9d0;">Блог</a></p>
+    <p><i class="bi bi-envelope"></i> support@esimru.online | <i class="bi bi-telegram"></i> @esimru_support</p>
+</div>
+
+<script>
+    // --------------------------------------------------------------
+    // БАЗА СТАТЕЙ (замените на свой полный массив из 119 статей)
+    // --------------------------------------------------------------
+    const articlesData = {
+        "uae": {
+            title: "ОАЭ: инструкция по применению. Как не утонуть в роскоши и не остаться без связи в пустыне",
+            description: "Как не попасть в ловушки роуминга в Дубае, использовать eSIM и сэкономить. Полный гайд по ОАЭ.",
+            content: `<!-- ВСТАВЬТЕ СЮДА HTML-КОД СТАТЬИ, КОТОРЫЙ Я ПРИВЁЛ ВЫШЕ -->`
+        },
+        // добавьте остальные статьи по аналогии
+    };
+
+    // Получаем ID из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    let articleId = urlParams.get('id');
+    if (!articleId || !articlesData[articleId]) {
+        articleId = "uae"; // fallback
+    }
+    const article = articlesData[articleId];
+
+    // Устанавливаем мета-теги
+    document.title = `${article.title} | eSIMru блог`;
+    document.getElementById('pageTitle').innerHTML = document.title;
+    document.getElementById('pageDescription').setAttribute('content', article.description);
+    document.getElementById('canonicalUrl').setAttribute('href', `https://esimru.github.io/com/article.html?id=${articleId}`);
+
+    // Вставляем содержимое
+    document.getElementById('articleContent').innerHTML = article.content;
+</script>
+</body>
+</html>
