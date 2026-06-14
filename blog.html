@@ -3,321 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Блог eSIMru — Полезные статьи о eSIM и путешествиях</title>
-    <meta name="description" content="Статьи о eSIM, роуминге, безлимитном интернете и лайфхаках для путешественников. Читайте полезные советы от eSIMru.">
+    <title>Блог eSIMru — полезные статьи о eSIM, роуминге и путешествиях</title>
+    <meta name="description" content="Статьи о eSIM, безлимитном интернете в поездках, сравнения тарифов, лайфхаки для туристов. Читайте блог eSIMru.">
+    <meta name="keywords" content="eSIM блог, статьи eSIM, интернет в роуминге, eSIM для туристов, как выбрать eSIM">
+    <meta name="author" content="eSIMru">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://esimru.github.io/com/blog.html">
+    <meta property="og:title" content="Блог eSIMru — полезные статьи о eSIM">
+    <meta property="og:description" content="Полезные статьи о eSIM и путешествиях. Советы, сравнения, новости.">
+    <meta property="og:image" content="https://esimru.github.io/com/og-blog.jpg">
+    <meta property="og:url" content="https://esimru.github.io/com/blog.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:card" content="summary_large_image">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #f5f7fb;
-            color: #1a2c3e;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.4;
-        }
-        /* Шапка как на главной */
-        .header {
-            background: linear-gradient(135deg, #0a2a3b 0%, #1a4a6e 100%);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header a {
-            color: white;
-            text-decoration: none;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .back-home {
-            display: inline-block;
-            margin-top: 0.5rem;
-            background: rgba(255,255,255,0.2);
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: #1f3b4c;
-        }
-        .subhead {
-            color: #4a627a;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        /* Плитка статей */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.8rem;
-        }
-        .article-card {
-            background: white;
-            border-radius: 1.2rem;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.2s ease, box-shadow 0.2s;
-            cursor: pointer;
-        }
-        .article-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.12);
-        }
-        .article-image {
-            width: 100%;
-            height: 180px;
-            background: #cbd5e1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            background-size: cover;
-            background-position: center;
-        }
-        .article-content {
-            padding: 1.2rem;
-        }
-        .article-tag {
-            display: inline-block;
-            background: #e8f4f8;
-            color: #1f6392;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 30px;
-            margin-bottom: 0.6rem;
-        }
-        .article-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #0a2a3b;
-        }
-        .article-excerpt {
-            font-size: 0.85rem;
-            color: #4a627a;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-        }
-        .read-more {
-            color: #2c7da0;
-            font-weight: 600;
-            font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        .loading-trigger {
-            height: 80px;
-            margin: 2rem 0;
-            text-align: center;
-            color: #94a3b8;
-        }
-        .footer {
-            background: #0a2a3b;
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            font-size: 0.8rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f5f7fb; color: #1a2c3e; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.4; }
+        .header { background: linear-gradient(135deg, #0a2a3b 0%, #1a4a6e 100%); color: white; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 100; }
+        .header a { color: white; text-decoration: none; }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        .back-home { display: inline-block; margin-top: 0.5rem; background: rgba(255,255,255,0.2); padding: 0.3rem 1rem; border-radius: 40px; font-size: 0.85rem; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #1f3b4c; }
+        .subhead { color: #4a627a; margin-bottom: 2rem; text-align: center; }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
+        .article-card { background: white; border-radius: 1.2rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+        .article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.12); }
+        .article-image { width: 100%; height: 180px; background: #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .article-content { padding: 1.2rem; }
+        .article-tag { display: inline-block; background: #e8f4f8; color: #1f6392; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 30px; margin-bottom: 0.6rem; }
+        .article-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: #0a2a3b; }
+        .article-excerpt { font-size: 0.85rem; color: #4a627a; margin-bottom: 0.8rem; line-height: 1.4; }
+        .read-more { color: #2c7da0; font-weight: 600; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .loading-trigger { height: 80px; margin: 2rem 0; text-align: center; color: #94a3b8; }
+        .footer { background: #0a2a3b; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.8rem; }
+        .footer a { color: #8bb9d0; text-decoration: none; }
         @media (max-width: 640px) {
-            .articles-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
+            .articles-grid { grid-template-columns: 1fr; gap: 1rem; }
+            h1 { font-size: 1.5rem; }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Блог eSIMru",
+      "url": "https://esimru.github.io/com/blog.html",
+      "description": "Полезные статьи о eSIM, роуминге и путешествиях",
+      "author": { "@type": "Organization", "name": "eSIMru" }
+    }
+    </script>
 </head>
 <body>
-
 <div class="header">
     <div class="logo">🌍 eSIMru</div>
     <a href="index.html" class="back-home">← На главную</a>
 </div>
-
 <div class="container">
     <h1>📖 Блог о eSIM и путешествиях</h1>
     <div class="subhead">Полезные статьи, лайфхаки, сравнения тарифов и новости роуминга</div>
-
     <div id="articlesGrid" class="articles-grid"></div>
     <div id="loadingTrigger" class="loading-trigger">📱 Прокрутите вниз, чтобы загрузить ещё статьи...</div>
 </div>
-
 <div class="footer">
-    <p>eSIMru — магазин электронных eSIM карт. Будьте на связи в любой точке мира!</p>
-    <p>📧 support@esimru.online | 📱 Telegram: @esimru_support</p>
+    <p><a href="index.html">Главная</a> | <a href="blog.html">Блог</a> | <a href="/oferta.html">Оферта</a> | <a href="/privacy.html">Политика</a></p>
+    <p>📧 support@esimru.online | Telegram: @esimru_support</p>
 </div>
-
 <script>
-    // БАЗА СТАТЕЙ (добавляйте свои реальные статьи сюда)
     const allArticles = [
-        {
-            id: 1,
-            title: "Что такое eSIM и как её использовать в поездках?",
-            excerpt: "Полное руководство для начинающих: установка, активация, совместимые телефоны.",
-            tag: "Руководство",
-            image: "📱",
-            date: "2025-03-10",
-            url: "article.html?id=1" // можно потом сделать отдельные страницы
-        },
-        {
-            id: 2,
-            title: "Топ-10 стран, где eSIM сэкономит вам до 90% на роуминге",
-            excerpt: "Сравнение цен операторов и наших тарифов в Турции, Таиланде, ОАЭ и других странах.",
-            tag: "Сравнение",
-            image: "🌍",
-            date: "2025-03-05"
-        },
-        {
-            id: 3,
-            title: "Как не остаться без интернета в Китае? Работают ли WhatsApp и Instagram?",
-            excerpt: "Особенности интернета в Китае, обход блокировок, лучшие eSIM для Китая.",
-            tag: "Лайфхак",
-            image: "🇨🇳",
-            date: "2025-02-28"
-        },
-        {
-            id: 4,
-            title: "eSIM для США: какой тариф выбрать для Нью-Йорка и Калифорнии",
-            excerpt: "Скорость, покрытие, цены – обзор лучших предложений.",
-            tag: "Страны",
-            image: "🇺🇸",
-            date: "2025-02-20"
-        },
-        {
-            id: 5,
-            title: "Звонки через eSIM: дешево или дорого? Сравнение с WhatsApp и Skype",
-            excerpt: "Когда выгодно звонить через сотовую сеть, а когда – через мессенджеры.",
-            tag: "Звонки",
-            image: "📞",
-            date: "2025-02-15"
-        },
-        {
-            id: 6,
-            title: "Как проверить, поддерживает ли ваш смартфон eSIM?",
-            excerpt: "Список моделей iPhone, Samsung, Google Pixel, Huawei и других.",
-            tag: "Совместимость",
-            image: "📲",
-            date: "2025-02-10"
-        },
-        {
-            id: 7,
-            title: "eSIM в Европе: один тариф для 30+ стран без роуминга",
-            excerpt: "Путешествие на поезде через Германию, Францию, Италию – интернет всегда с вами.",
-            tag: "Европа",
-            image: "🇪🇺",
-            date: "2025-02-01"
-        },
-        {
-            id: 8,
-            title: "Безлимитный интернет на Мальдивах: реальность или маркетинг?",
-            excerpt: "Тест скорости, отзывы туристов, какой eSIM выбрать для островов.",
-            tag: "Отдых",
-            image: "🏝️",
-            date: "2025-01-25"
-        },
-        {
-            id: 9,
-            title: "Как установить eSIM без QR-кода? Инструкция для iOS и Android",
-            excerpt: "Ручной ввод данных активации, когда нет возможности отсканировать код.",
-            tag: "Инструкция",
-            image: "⚙️",
-            date: "2025-01-20"
-        },
-        {
-            id: 10,
-            title: "Отзывы реальных путешественников: eSIMru против Airalo и Drimsim",
-            excerpt: "Сравнение цен, скорости и удобства. Что выбрать?",
-            tag: "Обзор",
-            image: "⭐",
-            date: "2025-01-15"
-        }
+        { id: 1, title: "Что такое eSIM и как её использовать в поездках?", excerpt: "Полное руководство для начинающих: установка, активация, совместимые телефоны.", tag: "Руководство", image: "📱", date: "2025-03-10" },
+        { id: 2, title: "Топ-10 стран, где eSIM сэкономит вам до 90% на роуминге", excerpt: "Сравнение цен операторов и наших тарифов в Турции, Таиланде, ОАЭ и других странах.", tag: "Сравнение", image: "🌍", date: "2025-03-05" },
+        { id: 3, title: "Как не остаться без интернета в Китае? Работают ли WhatsApp и Instagram?", excerpt: "Особенности интернета в Китае, обход блокировок, лучшие eSIM для Китая.", tag: "Лайфхак", image: "🇨🇳", date: "2025-02-28" },
+        { id: 4, title: "eSIM для США: какой тариф выбрать для Нью-Йорка и Калифорнии", excerpt: "Скорость, покрытие, цены – обзор лучших предложений.", tag: "Страны", image: "🇺🇸", date: "2025-02-20" },
+        { id: 5, title: "Звонки через eSIM: дешево или дорого? Сравнение с WhatsApp и Skype", excerpt: "Когда выгодно звонить через сотовую сеть, а когда – через мессенджеры.", tag: "Звонки", image: "📞", date: "2025-02-15" },
+        { id: 6, title: "Как проверить, поддерживает ли ваш смартфон eSIM?", excerpt: "Список моделей iPhone, Samsung, Google Pixel, Huawei и других.", tag: "Совместимость", image: "📲", date: "2025-02-10" },
+        { id: 7, title: "eSIM в Европе: один тариф для 30+ стран без роуминга", excerpt: "Путешествие на поезде через Германию, Францию, Италию – интернет всегда с вами.", tag: "Европа", image: "🇪🇺", date: "2025-02-01" },
+        { id: 8, title: "Безлимитный интернет на Мальдивах: реальность или маркетинг?", excerpt: "Тест скорости, отзывы туристов, какой eSIM выбрать для островов.", tag: "Отдых", image: "🏝️", date: "2025-01-25" },
+        { id: 9, title: "Как установить eSIM без QR-кода? Инструкция для iOS и Android", excerpt: "Ручной ввод данных активации, когда нет возможности отсканировать код.", tag: "Инструкция", image: "⚙️", date: "2025-01-20" },
+        { id: 10, title: "Отзывы реальных путешественников: eSIMru против Airalo и Drimsim", excerpt: "Сравнение цен, скорости и удобства. Что выбрать?", tag: "Обзор", image: "⭐", date: "2025-01-15" }
     ];
-
-    let loadedCount = 6;       // сначала показываем 6 статей
-    const step = 4;            // подгружаем по 4
-    let isLoading = false;
-    let hasMore = true;
-
+    let loadedCount = 6, isLoading = false, hasMore = true;
     const grid = document.getElementById('articlesGrid');
     const trigger = document.getElementById('loadingTrigger');
-
     function renderArticles(limit) {
         const articlesToShow = allArticles.slice(0, limit);
         grid.innerHTML = '';
         articlesToShow.forEach(article => {
             const card = document.createElement('div');
             card.className = 'article-card';
-            card.onclick = () => {
-                // Если есть реальная ссылка – переходим, иначе показываем сообщение
-                if (article.url) {
-                    window.location.href = article.url;
-                } else {
-                    alert(`Статья "${article.title}" будет доступна скоро. Следите за обновлениями!`);
-                }
-            };
-            card.innerHTML = `
-                <div class="article-image" style="background: #e2e8f0;">${article.image}</div>
-                <div class="article-content">
-                    <span class="article-tag">${article.tag}</span>
-                    <div class="article-title">${article.title}</div>
-                    <div class="article-excerpt">${article.excerpt}</div>
-                    <div class="read-more">Читать далее →</div>
-                </div>
-            `;
+            card.onclick = () => alert(`Статья "${article.title}" будет доступна скоро. Следите за обновлениями!`);
+            card.innerHTML = `<div class="article-image">${article.image}</div><div class="article-content"><span class="article-tag">${article.tag}</span><div class="article-title">${article.title}</div><div class="article-excerpt">${article.excerpt}</div><div class="read-more">Читать далее →</div></div>`;
             grid.appendChild(card);
         });
     }
-
     function loadMore() {
         if (isLoading || !hasMore) return;
         isLoading = true;
         trigger.textContent = '⏳ Загрузка новых статей...';
         setTimeout(() => {
-            const newLimit = loadedCount + step;
-            if (newLimit >= allArticles.length) {
-                hasMore = false;
-                trigger.textContent = '✨ Вы прочитали все статьи. Заходите за новыми! ✨';
-            } else {
-                trigger.textContent = '📱 Прокрутите вниз, чтобы загрузить ещё статьи...';
-            }
+            const newLimit = loadedCount + 4;
+            if (newLimit >= allArticles.length) { hasMore = false; trigger.textContent = '✨ Вы прочитали все статьи. Заходите за новыми! ✨'; }
+            else { trigger.textContent = '📱 Прокрутите вниз, чтобы загрузить ещё статьи...'; }
             loadedCount = Math.min(newLimit, allArticles.length);
             renderArticles(loadedCount);
             isLoading = false;
-        }, 500); // искусственная задержка для эффекта загрузки
+        }, 500);
     }
-
-    // Бесконечная прокрутка
-    function handleScroll() {
-        if (!hasMore || isLoading) return;
-        const scrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight;
-        if (scrollY + windowHeight >= documentHeight - 200) {
-            loadMore();
-        }
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    // Инициализация
+    window.addEventListener('scroll', () => { if (hasMore && !isLoading && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 200) loadMore(); });
     renderArticles(loadedCount);
 </script>
 </body>
