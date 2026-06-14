@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Оформление заказа eSIM — eSIMru</title>
-    <meta name="description" content="Завершите покупку eSIM. Введите данные для оплаты и получите мгновенный доступ к безлимитному интернету.">
+    <meta name="description" content="Завершите покупку eSIM. Выберите срок действия, введите данные для оплаты. Мгновенная доставка.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="canonical" href="https://esimru.github.io/com/checkout.html">
     <style>
@@ -19,7 +19,7 @@
             padding: 1rem;
         }
         .checkout-card {
-            max-width: 550px;
+            max-width: 600px;
             width: 100%;
             background: white;
             border-radius: 2rem;
@@ -54,6 +54,37 @@
             color: #1a2c3e;
         }
         .total strong { color: #e67e22; font-size: 1.3rem; }
+        .days-selector {
+            margin-bottom: 1.5rem;
+            background: white;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+        }
+        .days-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f3b4c;
+        }
+        .days-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .day-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+        .day-btn.active {
+            background: #1f6392;
+            color: white;
+        }
         .form-group { margin-bottom: 1rem; }
         label { display: block; margin-bottom: 0.4rem; font-weight: 600; color: #334155; font-size: 0.85rem; }
         input, textarea {
@@ -113,9 +144,17 @@
 </head>
 <body>
 <div class="checkout-card">
-    <a href="javascript:history.back()" class="back-link">← Вернуться к выбору</a>
+    <a href="javascript:history.back()" class="back-link">← Вернуться к выбору номера</a>
     <h2>💳 Оформление заказа</h2>
+
     <div class="order-summary" id="orderSummary"></div>
+
+    <!-- Блок выбора срока -->
+    <div class="days-selector">
+        <div class="days-label">📅 Изменить срок действия (безлимитный интернет)</div>
+        <div class="days-buttons" id="daysButtonsContainer"></div>
+    </div>
+
     <form id="checkoutForm">
         <div class="form-group"><label>Имя и фамилия *</label><input type="text" id="fullName" required placeholder="Иван Иванов"></div>
         <div class="form-group"><label>Телефон *</label><input type="tel" id="phone" required placeholder="+7 900 123-45-67"></div>
@@ -127,24 +166,62 @@
 </div>
 
 <script>
+    // Множители для разных дней (те же, что в country.html)
+    const priceMultipliers = { 7:1.0, 10:1.35, 15:1.85, 20:2.3, 30:3.2, 60:5.8, 90:8.0 };
+    const daysOptions = [7,10,15,20,30,60,90];
+
+    // Получаем параметры из URL
     const urlParams = new URLSearchParams(window.location.search);
     const countryName = urlParams.get('countryName') || '—';
-    const days = urlParams.get('days') || '7';
+    const initialDays = parseInt(urlParams.get('days')) || 7;
     const number = urlParams.get('number') || '+0 000 000 0000';
-    const price = parseInt(urlParams.get('price')) || 2050;
     const region = urlParams.get('region') || '';
-    const callPrice = urlParams.get('callPrice') || '2';
+    const callPrice = urlParams.get('callPrice') || '20';
+    const basePrice7 = parseInt(urlParams.get('basePrice7')) || 2050; // базовая цена за 7 дней
 
-    function formatPrice(p) { return p.toLocaleString('ru-RU') + ' ₽'; }
-    document.getElementById('orderSummary').innerHTML = `
-        <div class="detail-row"><span>🌍 Страна:</span><strong>${countryName}</strong></div>
-        <div class="detail-row"><span>📅 Срок:</span><strong>${days} дней (безлимитный интернет)</strong></div>
-        <div class="detail-row"><span>📞 Номер eSIM:</span><strong>+${number}</strong></div>
-        <div class="detail-row"><span>📍 Регион:</span><strong>${region || '—'}</strong></div>
-        <div class="detail-row"><span>📞 Звонки:</span><strong>${callPrice} ₽/мин</strong></div>
-        <div class="detail-row total"><span>💰 Итого:</span><strong>${formatPrice(price)}</strong></div>
-    `;
+    // Функция получения цены для любого количества дней
+    function getPriceForDays(days) {
+        const multiplier = priceMultipliers[days] || 1.0;
+        return Math.round(basePrice7 * multiplier);
+    }
 
+    let currentDays = initialDays;
+    let currentPrice = getPriceForDays(currentDays);
+
+    function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
+
+    // Обновление отображения заказа
+    function updateOrderSummary() {
+        const summaryDiv = document.getElementById('orderSummary');
+        summaryDiv.innerHTML = `
+            <div class="detail-row"><span>🌍 Страна:</span><strong>${countryName}</strong></div>
+            <div class="detail-row"><span>📅 Срок:</span><strong>${currentDays} дней (безлимитный интернет)</strong></div>
+            <div class="detail-row"><span>📞 Номер eSIM:</span><strong>${number}</strong></div>
+            <div class="detail-row"><span>📍 Регион:</span><strong>${region || '—'}</strong></div>
+            <div class="detail-row"><span>📞 Звонки:</span><strong>${callPrice} ₽/мин</strong></div>
+            <div class="detail-row total"><span>💰 Итого:</span><strong>${formatPrice(currentPrice)}</strong></div>
+        `;
+    }
+
+    // Создание кнопок выбора срока
+    function renderDaysButtons() {
+        const container = document.getElementById('daysButtonsContainer');
+        container.innerHTML = '';
+        daysOptions.forEach(days => {
+            const btn = document.createElement('button');
+            btn.textContent = `${days} дней — ${formatPrice(getPriceForDays(days))}`;
+            btn.className = `day-btn ${days === currentDays ? 'active' : ''}`;
+            btn.addEventListener('click', () => {
+                currentDays = days;
+                currentPrice = getPriceForDays(days);
+                updateOrderSummary();
+                renderDaysButtons(); // перерисовка для обновления активного состояния
+            });
+            container.appendChild(btn);
+        });
+    }
+
+    // Платёжная логика (копия из вашего checkout.html, адаптирована под новые переменные)
     const PAYMENT_CONFIG = {
         API_URL: "https://marketplays.pro/api/request",
         USE_CARD_PAYMENT: "RUB",
@@ -155,7 +232,6 @@
         MIN_ID: 13577888,
         MAX_ID: 99273812
     };
-
     const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwHD5T5-f7cq9MBELGmGAsKkuqxMkUJlMkq5wlbLtk9XjDy3OF_wgB-vUJNOhEwMGX5/exec";
 
     function generateMerchantOrderId() {
@@ -251,13 +327,11 @@
         if (!phone) { alert("Введите номер телефона"); document.getElementById('phone').focus(); return; }
         if (!email || !email.includes('@')) { alert("Введите корректный email"); document.getElementById('email').focus(); return; }
 
-        const currentParams = window.location.search;
-        localStorage.setItem('eSIMru_checkout_params', currentParams);
         const paymentData = {
-            amount: price,
+            amount: currentPrice,
             merchant_order_id: generateMerchantOrderId(),
             country: countryName,
-            days: days,
+            days: currentDays,
             number: number,
             customer_name: fullName,
             customer_phone: phone,
@@ -267,9 +341,9 @@
         const orderData = {
             orderId: paymentData.merchant_order_id,
             country: countryName,
-            days: days,
+            days: currentDays,
             number: number,
-            price: price,
+            price: currentPrice,
             region: region,
             callPrice: callPrice,
             customerName: fullName,
@@ -279,9 +353,24 @@
             orderDate: new Date().toISOString()
         };
         localStorage.setItem('eSIMru_order', JSON.stringify(orderData));
+        // Сохраним также параметры для возможного возврата на fail.html
+        const currentParams = new URLSearchParams({
+            country: countryName,
+            days: currentDays,
+            number: number,
+            price: currentPrice,
+            region: region,
+            callPrice: callPrice,
+            basePrice7: basePrice7
+        }).toString();
+        localStorage.setItem('eSIMru_checkout_params', '?' + currentParams);
         sendWebhook(orderData);
         showPreloaderAndRedirect(paymentData);
     });
+
+    // Инициализация
+    renderDaysButtons();
+    updateOrderSummary();
 </script>
 </body>
 </html>
