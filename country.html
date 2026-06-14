@@ -4,162 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>eSIM для страны — eSIMru</title>
-    <meta name="description" content="Купить eSIM для путешествий с безлимитным интернетом. Выберите срок и номер. Мгновенная доставка.">
-    <meta name="keywords" content="eSIM, купить eSIM, безлимитный интернет, eSIM для туристов">
+    <meta name="description" content="Купить eSIM для страны с безлимитным интернетом. Выберите срок действия и номер. Мгновенная доставка.">
+    <meta name="keywords" content="eSIM, купить eSIM, безлимитный интернет, eSIM для путешествий">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://esimru.github.io/com/country.html">
+    <link rel="canonical" id="canonicalLink" href="https://esimru.github.io/com/country.html">
     <link rel="preconnect" href="https://flagcdn.com">
-    <meta property="og:title" content="eSIM для страны — eSIMru">
-    <meta property="og:description" content="Безлимитный интернет для путешествий. Мгновенная установка.">
-    <meta property="og:image" content="https://esimru.github.io/com/og-country.jpg">
-    <meta property="og:url" content="https://esimru.github.io/com/country.html">
-    <meta property="og:type" content="product">
-    <meta property="og:locale" content="ru_RU">
-    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #f0f2f6;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            padding: 20px;
-            line-height: 1.4;
-        }
+        body { background: #f0f2f6; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 20px; line-height: 1.4; }
         .container { max-width: 1200px; margin: 0 auto; }
         .top-nav { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 1rem; gap: 0.8rem; }
-        .back-link, .blog-link { color: #2c7da0; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+        .back-link, .blog-link { color: #2c7da0; text-decoration: none; font-weight: 500; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.3rem; }
         .back-link:hover, .blog-link:hover { text-decoration: underline; }
         .breadcrumbs { font-size: 0.8rem; margin-bottom: 1rem; color: #5b6e8c; }
         .breadcrumbs a { color: #2c7da0; text-decoration: none; }
-        .country-header {
-            background: white;
-            border-radius: 28px;
-            padding: 1.5rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
+        .country-header { background: white; border-radius: 28px; padding: 1.5rem; text-align: center; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .country-flag { width: 80px; height: 60px; display: block; margin: 0 auto 0.5rem; border-radius: 8px; object-fit: cover; }
         .country-name { font-size: 2rem; font-weight: bold; color: #1a2c3e; }
         .country-call-price { color: #e67e22; margin-top: 0.3rem; font-weight: 500; }
         .country-speed { font-size: 0.8rem; color: #16a34a; margin-top: 0.3rem; }
-        .days-section {
-            background: white;
-            border-radius: 28px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1.2rem;
-            border-left: 5px solid #2c7da0;
-            padding-left: 1rem;
-            color: #1f3b4c;
-        }
+        .days-section { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .section-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 1.2rem; border-left: 5px solid #2c7da0; padding-left: 1rem; color: #1f3b4c; display: flex; align-items: center; gap: 0.5rem; }
+        .section-title i { color: #2c7da0; font-size: 1.3rem; }
         .days-buttons { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-        .day-btn {
-            background: #f1f5f9;
-            border: none;
-            padding: 0.7rem 1.2rem;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-        .day-btn.active {
-            background: #1f6392;
-            color: white;
-        }
-        .price-hint {
-            margin-top: 1rem;
-            font-size: 1rem;
-            color: #2c7da0;
-            background: #e6f4ff;
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            border-radius: 60px;
-            font-weight: 600;
-        }
-        .numbers-section {
-            background: white;
-            border-radius: 28px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            overflow-x: auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
+        .day-btn { background: #f1f5f9; border: none; padding: 0.7rem 1.2rem; border-radius: 40px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .day-btn.active { background: #1f6392; color: white; }
+        .price-hint { margin-top: 1rem; font-size: 1rem; color: #2c7da0; background: #e6f4ff; display: inline-block; padding: 0.5rem 1.2rem; border-radius: 60px; font-weight: 600; }
+        .numbers-section { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 1.5rem; overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
         .numbers-table { width: 100%; border-collapse: collapse; }
         .numbers-table td { padding: 8px; vertical-align: top; }
-        .number-card {
-            border: 2px solid #e2e8f0;
-            border-radius: 1rem;
-            padding: 0.8rem;
-            cursor: pointer;
-            transition: 0.1s;
-            background: white;
-            text-align: center;
-        }
-        .number-card.selected {
-            border-color: #2c7da0;
-            background: #f0f9ff;
-        }
-        .number-value {
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: monospace;
-            letter-spacing: 0.5px;
-            word-break: break-word;
-        }
+        .number-card { border: 2px solid #e2e8f0; border-radius: 1rem; padding: 0.8rem; cursor: pointer; transition: 0.1s; background: white; text-align: center; }
+        .number-card.selected { border-color: #2c7da0; background: #f0f9ff; }
+        .number-value { font-size: 1rem; font-weight: 700; font-family: monospace; letter-spacing: 0.5px; word-break: break-word; }
         .number-region { font-size: 0.7rem; color: #5b6e8c; margin-top: 0.3rem; }
         .operator-name { font-size: 0.65rem; color: #2c7da0; margin-top: 0.2rem; }
-        .buy-btn {
-            background: #0f3b4f;
-            color: white;
-            border: none;
-            padding: 0.8rem;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 60px;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.2s;
-        }
+        .buy-btn { background: #0f3b4f; color: white; border: none; padding: 0.8rem; font-size: 1rem; font-weight: bold; border-radius: 60px; cursor: pointer; width: 100%; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
         .buy-btn:hover { background: #1f6392; }
-        .show-more-numbers {
-            background: none;
-            border: 2px solid #9bb7d0;
-            padding: 0.6rem 1.5rem;
-            border-radius: 40px;
-            margin-top: 1.5rem;
-            cursor: pointer;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 500;
-        }
-        .faq-mini {
-            background: white;
-            border-radius: 28px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .faq-mini h3 { margin-bottom: 1rem; color: #1f3b4c; }
+        .show-more-numbers { background: none; border: 2px solid #9bb7d0; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem; cursor: pointer; display: block; margin-left: auto; margin-right: auto; font-weight: 500; }
+        .faq-mini { background: white; border-radius: 28px; padding: 1.5rem; margin-top: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .faq-mini h3 { margin-bottom: 1rem; color: #1f3b4c; display: flex; align-items: center; gap: 0.5rem; }
         .faq-mini-item { margin-bottom: 0.8rem; border-bottom: 1px solid #eef2f6; padding-bottom: 0.5rem; }
-        .faq-mini-question { font-weight: 600; cursor: pointer; color: #1f6392; display: flex; justify-content: space-between; }
+        .faq-mini-question { font-weight: 600; cursor: pointer; color: #1f6392; display: flex; justify-content: space-between; align-items: center; }
         .faq-mini-answer { display: none; margin-top: 0.3rem; font-size: 0.85rem; color: #4a627a; line-height: 1.4; }
         .faq-mini-answer.show { display: block; }
-        .footer {
-            background: #0a2a3b;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-            font-size: 0.75rem;
-            border-radius: 1rem;
-        }
+        .footer { background: #0a2a3b; color: white; text-align: center; padding: 1rem; margin-top: 2rem; font-size: 0.75rem; border-radius: 1rem; }
         .footer a { color: #8bb9d0; text-decoration: none; margin: 0 0.5rem; }
         @media (max-width: 640px) {
             body { padding: 10px; }
@@ -177,8 +66,8 @@
         <a href="index.html">Главная</a> / <span id="breadcrumbCountry">Страна</span>
     </div>
     <div class="top-nav">
-        <a href="index.html" class="back-link">← На главную</a>
-        <a href="blog.html" class="blog-link">📖 Блог о eSIM</a>
+        <a href="index.html" class="back-link"><i class="bi bi-arrow-left"></i> На главную</a>
+        <a href="blog.html" class="blog-link"><i class="bi bi-journal-bookmark-fill"></i> Блог о eSIM</a>
     </div>
 
     <div class="country-header">
@@ -189,37 +78,37 @@
     </div>
 
     <div class="days-section">
-        <div class="section-title">📅 Выберите срок (безлимитный интернет)</div>
+        <div class="section-title"><i class="bi bi-calendar-week"></i> Выберите срок (безлимитный интернет)</div>
         <div class="days-buttons" id="daysContainer"></div>
-        <div class="price-hint" id="priceHint">💰 Цена: -- ₽</div>
+        <div class="price-hint" id="priceHint"><i class="bi bi-currency-ruble"></i> Цена: -- ₽</div>
     </div>
 
     <div class="numbers-section">
-        <div class="section-title">📞 Доступные номера в этой стране — выберите номер</div>
+        <div class="section-title"><i class="bi bi-sim"></i> Доступные номера в этой стране — выберите номер</div>
         <div id="tableContainer"></div>
-        <button class="show-more-numbers" id="showMoreNumbersBtn">Показать больше номеров</button>
+        <button class="show-more-numbers" id="showMoreNumbersBtn"><i class="bi bi-chevron-down"></i> Показать больше номеров</button>
     </div>
 
     <div class="faq-mini">
-        <h3>❓ Часто спрашивают о eSIM в <span id="faqCountryName"></span></h3>
+        <h3><i class="bi bi-question-circle"></i> Часто спрашивают о eSIM в <span id="faqCountryName"></span></h3>
         <div class="faq-mini-item">
-            <div class="faq-mini-question">Как установить eSIM после покупки? <span>+</span></div>
+            <div class="faq-mini-question">Как установить eSIM после покупки? <i class="bi bi-plus-circle"></i></div>
             <div class="faq-mini-answer">Вы получите QR-код на email. Отсканируйте его в настройках сотовой связи вашего телефона – интернет заработает автоматически.</div>
         </div>
         <div class="faq-mini-item">
-            <div class="faq-mini-question">Можно ли использовать eSIM вместе с обычной SIM-картой? <span>+</span></div>
+            <div class="faq-mini-question">Можно ли использовать eSIM вместе с обычной SIM-картой? <i class="bi bi-plus-circle"></i></div>
             <div class="faq-mini-answer">Да, большинство телефонов поддерживают Dual SIM: основная физическая SIM + eSIM. Вы сможете принимать звонки на оба номера.</div>
         </div>
         <div class="faq-mini-item">
-            <div class="faq-mini-question">Что делать, если eSIM не активируется? <span>+</span></div>
+            <div class="faq-mini-question">Что делать, если eSIM не активируется? <i class="bi bi-plus-circle"></i></div>
             <div class="faq-mini-answer">Напишите в нашу поддержку Telegram @esimru_support – поможем в течение 5 минут.</div>
         </div>
     </div>
 </div>
 
 <div class="footer">
-    <p><a href="index.html">Главная</a> | <a href="blog.html">Блог</a> | <a href="/oferta.html">Оферта</a> | <a href="/privacy.html">Политика</a></p>
-    <p>📧 support@esimru.online | Telegram: @esimru_support</p>
+    <p><a href="index.html"><i class="bi bi-house"></i> Главная</a> | <a href="blog.html"><i class="bi bi-journal-bookmark-fill"></i> Блог</a> | <a href="/oferta.html">Оферта</a> | <a href="/privacy.html">Политика</a></p>
+    <p><i class="bi bi-envelope"></i> support@esimru.online | <i class="bi bi-telegram"></i> Telegram: @esimru_support</p>
 </div>
 
 <script>
@@ -346,7 +235,7 @@
         ye: { name:"Йемен", flag:"ye", basePrice7:2200, callPrice:40, maxSpeed:100, countryCode:"967", mobilePrefixes:["70","71","73","77"], operators:{"70":"MTN","71":"Sabafon","73":"Y","77":"Yemen Mobile"}, phoneLength:9, cities:["Сана","Аден","Таиз","Ходейда","Мукалла"] }
     };
 
-    // Множители цены для разных дней
+    // Множители цены
     const priceMultipliers = { 7:1.0, 10:1.35, 15:1.85, 20:2.3, 30:3.2, 60:5.8, 90:8.0 };
     const daysOptions = [7,10,15,20,30,60,90];
 
@@ -359,7 +248,7 @@
         selectedCountryCode = 'tr';
     }
 
-    // SEO-динамика
+    // SEO и прочее
     document.title = `eSIM для ${countryInfo.name} — безлимит от ${countryInfo.basePrice7} ₽ | eSIMru`;
     document.getElementById('breadcrumbCountry').innerText = countryInfo.name;
     document.getElementById('faqCountryName').innerText = countryInfo.name;
@@ -368,7 +257,7 @@
     function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
     function getPriceForDays(days) { return Math.round(countryInfo.basePrice7 * (priceMultipliers[days] || 1.0)); }
 
-    // Генерация 20 номеров (первые 10 — популярные)
+    // Генерация номеров
     function generateNumbersForCountry() {
         const numbers = [];
         const cities = countryInfo.cities;
@@ -402,19 +291,18 @@
     let selectedNumberId = null;
     let selectedDays = 7;
 
-    // Шапка
     document.getElementById('countryFlag').src = getFlagUrl(selectedCountryCode);
     document.getElementById('countryFlag').alt = `Флаг ${countryInfo.name}`;
     document.getElementById('countryName').innerText = countryInfo.name;
-    document.getElementById('callPrice').innerHTML = `📞 Стоимость звонков: ${countryInfo.callPrice} ₽/мин`;
-    document.getElementById('countrySpeed').innerHTML = `⚡ Максимальная скорость: до ${countryInfo.maxSpeed} Мбит/с`;
+    document.getElementById('callPrice').innerHTML = `<i class="bi bi-telephone"></i> Стоимость звонков: ${countryInfo.callPrice} ₽/мин`;
+    document.getElementById('countrySpeed').innerHTML = `<i class="bi bi-speedometer2"></i> Максимальная скорость: до ${countryInfo.maxSpeed} Мбит/с`;
 
     function renderDaysButtons() {
         const container = document.getElementById('daysContainer');
         container.innerHTML = '';
         daysOptions.forEach(days => {
             const btn = document.createElement('button');
-            btn.innerText = `${days} дней — ${formatPrice(getPriceForDays(days))}`;
+            btn.innerHTML = `<i class="bi bi-calendar"></i> ${days} дней — ${formatPrice(getPriceForDays(days))}`;
             btn.className = `day-btn ${days === selectedDays ? 'active' : ''}`;
             btn.onclick = () => {
                 selectedDays = days;
@@ -428,7 +316,7 @@
     }
 
     function updatePriceHint() {
-        document.getElementById('priceHint').innerHTML = `💰 Стоимость безлимита на ${selectedDays} дней: ${formatPrice(getPriceForDays(selectedDays))}`;
+        document.getElementById('priceHint').innerHTML = `<i class="bi bi-currency-ruble"></i> Стоимость безлимита на ${selectedDays} дней: ${formatPrice(getPriceForDays(selectedDays))}`;
     }
 
     function buildTable() {
@@ -456,8 +344,8 @@
                     card.className = `number-card ${selectedNumberId === num.id ? 'selected' : ''}`;
                     card.innerHTML = `
                         <div class="number-value">${num.displayNumber}</div>
-                        <div class="number-region">📍 ${num.region}</div>
-                        <div class="operator-name">📡 ${num.operator}</div>
+                        <div class="number-region"><i class="bi bi-geo-alt"></i> ${num.region}</div>
+                        <div class="operator-name"><i class="bi bi-tower"></i> ${num.operator}</div>
                     `;
                     card.addEventListener('click', (e) => {
                         e.stopPropagation();
@@ -496,7 +384,6 @@
             if (rowIndex !== -1) break;
         }
         if (rowIndex === -1) return;
-        // Удаляем предыдущую строку-кнопку
         for (let i = 0; i < tbody.rows.length; i++) {
             if (tbody.rows[i].getAttribute('data-button-row') === 'true') {
                 tbody.deleteRow(i);
@@ -510,7 +397,7 @@
         cell.colSpan = colSpan;
         const btn = document.createElement('button');
         btn.className = 'buy-btn';
-        btn.textContent = '💳 Купить сейчас';
+        btn.innerHTML = '<i class="bi bi-cart-check"></i> Купить сейчас';
         const selectedNumber = allNumbers.find(n => n.id === selectedNumberId);
         btn.addEventListener('click', () => {
             if (!selectedNumberId) { alert("Выберите номер eSIM"); return; }
@@ -539,7 +426,7 @@
     document.getElementById('showMoreNumbersBtn').addEventListener('click', () => {
         showAllNumbers = !showAllNumbers;
         buildTable();
-        document.getElementById('showMoreNumbersBtn').innerText = showAllNumbers ? 'Скрыть' : 'Показать больше номеров';
+        document.getElementById('showMoreNumbersBtn').innerHTML = showAllNumbers ? '<i class="bi bi-chevron-up"></i> Скрыть' : '<i class="bi bi-chevron-down"></i> Показать больше номеров';
     });
 
     const resizeObserver = new ResizeObserver(() => {
@@ -548,7 +435,6 @@
     resizeObserver.observe(document.getElementById('tableContainer'));
     window.addEventListener('resize', () => buildTable());
 
-    // FAQ аккордеон
     document.querySelectorAll('.faq-mini-question').forEach(q => {
         q.addEventListener('click', () => {
             q.nextElementSibling.classList.toggle('show');
