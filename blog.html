@@ -63,13 +63,11 @@
     const grid = document.getElementById('articlesGrid');
     const trigger = document.getElementById('loadingTrigger');
 
-    // Загрузка списка статей из JSON
     async function loadArticlesList() {
         try {
             const response = await fetch('articles-list.json');
             if (!response.ok) throw new Error('Не удалось загрузить список статей');
             allArticles = await response.json();
-            // Сортируем по дате (новые сверху)
             allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
             loadedCount = Math.min(6, allArticles.length);
             renderArticles(loadedCount);
@@ -86,9 +84,9 @@
         articlesToShow.forEach(article => {
             const card = document.createElement('div');
             card.className = 'article-card';
-            card.onclick = () => {
-                window.location.href = article.url;
-            };
+            // ФОРМИРУЕМ ССЫЛКУ ИЗ ID СТАТЬИ
+            const articleUrl = `articles/${article.id}.html`;
+            card.onclick = () => { window.location.href = articleUrl; };
             card.innerHTML = `
                 <div class="article-image">${article.image}</div>
                 <div class="article-content">
