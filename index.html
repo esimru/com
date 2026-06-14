@@ -10,11 +10,13 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://esimru.github.io/com/">
     <link rel="preconnect" href="https://flagcdn.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <meta property="og:title" content="eSIMru — Безлимитный интернет и eSIM для путешествий">
     <meta property="og:description" content="Самый выгодный мобильный интернет в роуминге. Безлимит на 7-90 дней, звонки от 20 ₽/мин. Мгновенная активация.">
     <meta property="og:image" content="https://esimru.github.io/com/og-image.jpg">
     <meta property="og:url" content="https://esimru.github.io/com/">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="eSIMru — Безлимитный интернет в роуминге">
     <meta name="twitter:description" content="Экономьте на роуминге с eSIMru. Безлимитный интернет в 200+ странах.">
@@ -25,40 +27,29 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
             background: #f5f7fb;
             color: #1a2c3e;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.4;
         }
-
         .hero {
             background: linear-gradient(135deg, #0a2a3b 0%, #1a4a6e 100%);
             color: white;
             padding: 2.5rem 1rem;
             text-align: center;
         }
-
         .hero h1 {
             font-size: 1.8rem;
             margin-bottom: 0.75rem;
             font-weight: 700;
         }
-
         .hero p {
             font-size: 1rem;
             opacity: 0.9;
             max-width: 800px;
             margin: 0 auto;
         }
-
-        .hero p:last-of-type {
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            opacity: 0.8;
-        }
-
         .hero-buttons {
             margin-top: 1.5rem;
             display: flex;
@@ -66,7 +57,6 @@
             justify-content: center;
             flex-wrap: wrap;
         }
-
         .hero-btn {
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(4px);
@@ -77,27 +67,28 @@
             font-weight: 500;
             text-decoration: none;
             transition: 0.2s;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-
+        .hero-btn i {
+            font-size: 1.1rem;
+        }
         .hero-btn:hover {
             background: white;
             color: #1a4a6e;
         }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 1.5rem 1rem;
         }
-
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.2rem;
             margin-bottom: 2rem;
         }
-
         .feature-card {
             background: white;
             border-radius: 1.2rem;
@@ -106,27 +97,23 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: transform 0.2s ease, box-shadow 0.2s;
         }
-
         .feature-card:active {
             transform: scale(0.98);
         }
-
         .feature-icon {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
+            color: #1f6392;
         }
-
         .feature-card h3 {
             font-size: 1.1rem;
             margin-bottom: 0.4rem;
             color: #1f6392;
         }
-
         .feature-card p {
             font-size: 0.85rem;
             color: #4a627a;
         }
-
         .info-banner {
             background: #e8f4f8;
             border-radius: 1.2rem;
@@ -134,42 +121,35 @@
             margin-bottom: 2rem;
             text-align: center;
         }
-
         .info-banner p:first-child {
             font-size: 1rem;
             font-weight: 500;
             margin-bottom: 0.4rem;
         }
-
         .info-banner p:last-child {
             font-size: 0.85rem;
             color: #2c7da0;
         }
-
         .how-it-works {
             background: white;
             border-radius: 1.5rem;
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
-
         .how-it-works h2 {
             text-align: center;
             margin-bottom: 1.5rem;
             color: #1f3b4c;
             font-size: 1.5rem;
         }
-
         .steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
         }
-
         .step {
             text-align: center;
         }
-
         .step-number {
             width: 44px;
             height: 44px;
@@ -183,17 +163,14 @@
             font-weight: bold;
             margin: 0 auto 0.7rem;
         }
-
         .step h4 {
             font-size: 0.95rem;
             margin-bottom: 0.3rem;
         }
-
         .step p {
             font-size: 0.8rem;
             color: #5b6e8c;
         }
-
         .search-section {
             display: flex;
             flex-wrap: wrap;
@@ -202,13 +179,11 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .search-wrapper {
             flex: 1;
             min-width: 180px;
             position: relative;
         }
-
         .search-input {
             width: 100%;
             padding: 0.8rem 1rem;
@@ -219,13 +194,11 @@
             transition: all 0.2s;
             padding-right: 2.5rem;
         }
-
         .search-input:focus {
             outline: none;
             border-color: #2c7da0;
             box-shadow: 0 0 0 3px rgba(44,125,160,0.1);
         }
-
         .search-clear {
             position: absolute;
             right: 12px;
@@ -237,9 +210,7 @@
             cursor: pointer;
             color: #94a3b8;
             display: none;
-            padding: 4px;
         }
-
         .search-reset-btn {
             background: #f1f5f9;
             border: 1.5px solid #e2e8f0;
@@ -250,12 +221,10 @@
             cursor: pointer;
             transition: 0.2s;
             color: #1f3b4c;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
         }
-
-        .search-reset-btn:active {
-            transform: scale(0.96);
-        }
-
         .no-results {
             text-align: center;
             padding: 2rem;
@@ -264,20 +233,24 @@
             color: #5b6e8c;
             font-size: 0.9rem;
         }
-
         .section-title {
             font-size: 1.6rem;
             margin-bottom: 1rem;
             color: #1f3b4c;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-
+        .section-title i {
+            font-size: 1.6rem;
+            color: #2c7da0;
+        }
         .countries-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-
         .country-card {
             background: white;
             border-radius: 1rem;
@@ -288,12 +261,10 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #eef2f6;
         }
-
         .country-card:active {
             transform: scale(0.97);
             background: #f8fafc;
         }
-
         .flag-icon {
             width: 44px;
             height: 33px;
@@ -303,7 +274,6 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.15);
             object-fit: cover;
         }
-
         .country-name {
             font-size: 0.85rem;
             font-weight: 600;
@@ -312,25 +282,21 @@
             overflow-x: hidden;
             text-overflow: ellipsis;
         }
-
         .country-price {
             font-size: 0.7rem;
             color: #2c7da0;
             font-weight: 500;
         }
-
         .call-price {
             font-size: 0.65rem;
             color: #e67e22;
             margin-top: 0.2rem;
         }
-
         .speed-info {
             font-size: 0.65rem;
             color: #16a34a;
             margin-top: 0.2rem;
         }
-
         .show-more-btn {
             display: block;
             width: fit-content;
@@ -345,12 +311,6 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-
-        .show-more-btn:active {
-            transform: scale(0.96);
-            background: #eef2f6;
-        }
-
         .footer {
             background: #0a2a3b;
             color: white;
@@ -359,16 +319,10 @@
             margin-top: 2rem;
             font-size: 0.8rem;
         }
-
         .footer a {
             color: #8bb9d0;
             text-decoration: none;
         }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
         .faq {
             background: white;
             border-radius: 1.5rem;
@@ -380,6 +334,10 @@
             color: #1f3b4c;
             font-size: 1.5rem;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
         .faq-item {
             margin-bottom: 1rem;
@@ -391,53 +349,22 @@
             cursor: pointer;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
         .faq-answer {
             display: none;
             margin-top: 0.5rem;
             color: #4a627a;
-            line-height: 1.4;
         }
         .faq-answer.show {
             display: block;
         }
-
         @media (max-width: 640px) {
             .hero { padding: 1.8rem 0.8rem; }
             .hero h1 { font-size: 1.4rem; }
-            .hero p { font-size: 0.85rem; }
-            .container { padding: 1rem 0.8rem; }
-            .features { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            .feature-card { padding: 0.8rem; }
-            .feature-icon { font-size: 2rem; }
-            .feature-card h3 { font-size: 0.9rem; }
-            .feature-card p { font-size: 0.75rem; }
-            .info-banner { padding: 0.8rem; margin-bottom: 1.5rem; }
-            .info-banner p:first-child { font-size: 0.9rem; }
-            .how-it-works { padding: 1rem; margin-bottom: 1.5rem; }
-            .how-it-works h2 { font-size: 1.3rem; margin-bottom: 1rem; }
-            .steps { gap: 0.8rem; }
-            .step-number { width: 38px; height: 38px; font-size: 1.1rem; }
-            .step h4 { font-size: 0.85rem; }
-            .step p { font-size: 0.7rem; }
-            .search-section { flex-direction: column; align-items: stretch; gap: 0.6rem; }
-            .search-reset-btn { align-self: flex-end; }
-            .section-title { font-size: 1.3rem; margin-bottom: 1rem; }
             .countries-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.8rem; }
             .flag-icon { width: 36px; height: 27px; }
-            .country-name { font-size: 0.75rem; }
-            .country-price { font-size: 0.65rem; }
-            .call-price { font-size: 0.6rem; }
-            .speed-info { font-size: 0.6rem; }
-            .show-more-btn { padding: 0.6rem 1.5rem; font-size: 0.85rem; }
-            .footer { padding: 1rem; font-size: 0.7rem; }
-        }
-
-        @media (max-width: 380px) {
-            .countries-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 0.6rem; }
-            .country-card { padding: 0.6rem 0.2rem; }
-            .flag-icon { width: 32px; height: 24px; }
-            .country-name { font-size: 0.7rem; }
+            .section-title { font-size: 1.3rem; }
         }
     </style>
     <script type="application/ld+json">
@@ -457,34 +384,34 @@
 </head>
 <body>
     <div class="hero">
-        <h1>🌍 eSIMru — Связь без границ</h1>
+        <h1><i class="bi bi-globe-americas"></i> eSIMru — Связь без границ</h1>
         <p>Самый выгодный мобильный интернет в роуминге • Безлимит на 7–90 дней • Звонки от 20 ₽/мин</p>
         <p>Один вызов такси через Uber, Grab, Max и т.п. в незнакомой стране может окупить все ваши затраты на eSIM 😄</p>
         <div class="hero-buttons">
-            <a href="blog.html" class="hero-btn">📖 Наш блог</a>
-            <a href="#countries" class="hero-btn">🌍 Выбрать страну</a>
+            <a href="blog.html" class="hero-btn"><i class="bi bi-journal-bookmark-fill"></i> Наш блог</a>
+            <a href="#countries" class="hero-btn"><i class="bi bi-search"></i> Выбрать страну</a>
         </div>
     </div>
 
     <div class="container">
         <div class="features">
             <div class="feature-card">
-                <div class="feature-icon">📱</div>
+                <div class="feature-icon"><i class="bi bi-phone"></i></div>
                 <h3>Легкая покупка онлайн</h3>
                 <p>Мгновенная доставка eSIM, простота установки за пару минут</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">💬</div>
+                <div class="feature-icon"><i class="bi bi-chat-dots"></i></div>
                 <h3>Поддержка 24/7</h3>
                 <p>Наша служба поддержки доступна по всему миру круглосуточно!</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🌍</div>
+                <div class="feature-icon"><i class="bi bi-globe2"></i></div>
                 <h3>Более 200 стран</h3>
                 <p>Наши eSIM работают более чем в 200 странах и регионах!</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">💰</div>
+                <div class="feature-icon"><i class="bi bi-piggy-bank"></i></div>
                 <h3>Экономия до 10 раз</h3>
                 <p>Тарифы до 10 раз ниже, чем у вашего мобильного оператора в роуминге</p>
             </div>
@@ -496,7 +423,7 @@
         </div>
 
         <div class="how-it-works">
-            <h2>Как работает eSIMru</h2>
+            <h2><i class="bi bi-gear-wide-connected"></i> Как работает eSIMru</h2>
             <div class="steps">
                 <div class="step"><div class="step-number">1</div><h4>Выберите тарифный план</h4><p>Выберите нужную страну и тариф</p></div>
                 <div class="step"><div class="step-number">2</div><h4>Произведите оплату</h4><p>Удобным вам способом</p></div>
@@ -505,48 +432,48 @@
             </div>
         </div>
 
-        <h2 class="section-title" id="countries">🌏 Популярные направления</h2>
+        <h2 class="section-title" id="countries"><i class="bi bi-star-fill"></i> Популярные направления</h2>
 
         <div class="search-section">
             <div class="search-wrapper">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск страны (русский или английский)">
-                <button id="clearSearchBtn" class="search-clear" aria-label="Очистить">✕</button>
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск страны (русский или английский)" aria-label="Поиск страны">
+                <button id="clearSearchBtn" class="search-clear" aria-label="Очистить"><i class="bi bi-x-lg"></i></button>
             </div>
-            <button id="resetSearchBtn" class="search-reset-btn">Сбросить поиск</button>
+            <button id="resetSearchBtn" class="search-reset-btn"><i class="bi bi-arrow-repeat"></i> Сбросить поиск</button>
         </div>
 
         <div class="countries-grid" id="countriesGrid"></div>
         <button class="show-more-btn" id="toggleCountriesBtn">Показать все страны →</button>
 
-        <!-- SEO-блок преимуществ -->
         <div style="background: white; border-radius: 1.5rem; padding: 1.5rem; margin-top: 2rem;">
-            <h2 style="text-align: center; margin-bottom: 1rem;">Почему выбирают eSIMru?</h2>
+            <h2 style="text-align: center; margin-bottom: 1rem;"><i class="bi bi-check-circle-fill"></i> Почему выбирают eSIMru?</h2>
             <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;">
-                <div style="flex:1; min-width: 200px;"><strong>✅ Мгновенная активация</strong><br>Получите eSIM на email сразу после оплаты.</div>
-                <div style="flex:1; min-width: 200px;"><strong>✅ Безлимитный интернет</strong><br>Никаких скрытых лимитов и дневных списаний.</div>
-                <div style="flex:1; min-width: 200px;"><strong>✅ Работает с любым смартфоном</strong><br>Поддержка iPhone, Samsung, Google Pixel и других моделей с eSIM.</div>
+                <div style="flex:1; min-width: 200px;"><i class="bi bi-envelope-paper"></i> <strong>Мгновенная активация</strong><br>Получите eSIM на email сразу после оплаты.</div>
+                <div style="flex:1; min-width: 200px;"><i class="bi bi-infinity"></i> <strong>Безлимитный интернет</strong><br>Никаких скрытых лимитов и дневных списаний.</div>
+                <div style="flex:1; min-width: 200px;"><i class="bi bi-phone"></i> <strong>Работает с любым смартфоном</strong><br>Поддержка iPhone, Samsung, Google Pixel и других моделей с eSIM.</div>
             </div>
         </div>
 
-        <!-- FAQ с микроразметкой -->
         <div class="faq">
-            <h2>❓ Часто задаваемые вопросы</h2>
-            <div class="faq-item"><div class="faq-question">Что такое eSIM и подойдет ли мне? <span>+</span></div><div class="faq-answer">eSIM — это встроенная SIM-карта, которая есть в большинстве современных смартфонов (iPhone XS и новее, Pixel 3 и новее, Samsung S20 и новее). Вы активируете тариф без физической SIM.</div></div>
-            <div class="faq-item"><div class="faq-question">Как получить eSIM после оплаты? <span>+</span></div><div class="faq-answer">Сразу после оплаты мы вышлем QR-код и инструкцию на вашу почту. Сканируете код — и интернет работает.</div></div>
-            <div class="faq-item"><div class="faq-question">Можно ли звонить через eSIMru? <span>+</span></div><div class="faq-answer">Да, у нас есть тарифы со звонками от 20 ₽/мин в любую страну. Но мы рекомендуем использовать мессенджеры (WhatsApp, Telegram) для бесплатных звонков по Wi-Fi/eSIM.</div></div>
-            <div class="faq-item"><div class="faq-question">Нужно ли регистрироваться? <span>+</span></div><div class="faq-answer">Нет, просто выберите страну, тариф и оплатите — никакой регистрации.</div></div>
+            <h2><i class="bi bi-question-circle"></i> Часто задаваемые вопросы</h2>
+            <div class="faq-item"><div class="faq-question">Что такое eSIM и подойдет ли мне? <i class="bi bi-plus-circle"></i></div><div class="faq-answer">eSIM — это встроенная SIM-карта, которая есть в большинстве современных смартфонов (iPhone XS и новее, Pixel 3 и новее, Samsung S20 и новее). Вы активируете тариф без физической SIM.</div></div>
+            <div class="faq-item"><div class="faq-question">Как получить eSIM после оплаты? <i class="bi bi-plus-circle"></i></div><div class="faq-answer">Сразу после оплаты мы вышлем QR-код и инструкцию на вашу почту. Сканируете код — и интернет работает.</div></div>
+            <div class="faq-item"><div class="faq-question">Можно ли звонить через eSIMru? <i class="bi bi-plus-circle"></i></div><div class="faq-answer">Да, у нас есть тарифы со звонками от 20 ₽/мин в любую страну. Но мы рекомендуем использовать мессенджеры (WhatsApp, Telegram) для бесплатных звонков по Wi-Fi/eSIM.</div></div>
+            <div class="faq-item"><div class="faq-question">Нужно ли регистрироваться? <i class="bi bi-plus-circle"></i></div><div class="faq-answer">Нет, просто выберите страну, тариф и оплатите — никакой регистрации.</div></div>
         </div>
     </div>
 
     <div class="footer">
         <p>eSIMru — магазин электронных eSIM карт. Избавьтесь от высоких тарифов в роуминге!</p>
         <p>Связь с друзьями и родственниками из любой точки земного шара становится доступной с eSIMru!</p>
-        <p><a href="blog.html">📖 Блог о eSIM и путешествиях</a> | <a href="/oferta.html">Договор оферты</a> | <a href="/privacy.html">Политика конфиденциальности</a></p>
-        <p>📧 support@esimru.online | Telegram: @esimru_support</p>
+        <p><a href="blog.html"><i class="bi bi-journal-bookmark-fill"></i> Блог о eSIM и путешествиях</a> | <a href="/oferta.html">Договор оферты</a> | <a href="/privacy.html">Политика конфиденциальности</a></p>
+        <p><i class="bi bi-envelope"></i> support@esimru.online | <i class="bi bi-telegram"></i> Telegram: @esimru_support</p>
     </div>
 
     <script>
-        // ПОЛНЫЙ МАССИВ СТРАН (ВАШ ИСХОДНЫЙ СПИСОК, ДОПОЛНЕННЫЙ ЦЕНАМИ НА 14 И 30 ДНЕЙ)
+        // --------------------------------------------------------------
+        // ПОЛНЫЙ МАССИВ СТРАН (все 100+ стран из вашего исходного кода)
+        // --------------------------------------------------------------
         const allCountries = [
             { code: "tr", name: "Турция", flag: "tr", basePrice7: 2050, callPrice: 20, maxSpeed: 300 },
             { code: "ae", name: "ОАЭ", flag: "ae", basePrice7: 2800, callPrice: 40, maxSpeed: 750 },
@@ -725,8 +652,8 @@
                     <img class="flag-icon" src="${getFlagUrl(country.flag)}" alt="${country.name}" loading="lazy">
                     <div class="country-name">${country.name}</div>
                     <div class="country-price">Безлимит от ${formatPrice(country.basePrice7)} / 7 дней</div>
-                    <div class="call-price">📞 звонки от ${country.callPrice} ₽/мин</div>
-                    <div class="speed-info">⚡ до ${country.maxSpeed} Мбит/с</div>
+                    <div class="call-price"><i class="bi bi-telephone"></i> звонки от ${country.callPrice} ₽/мин</div>
+                    <div class="speed-info"><i class="bi bi-speedometer2"></i> до ${country.maxSpeed} Мбит/с</div>
                 `;
                 card.addEventListener('click', () => window.location.href = `country.html?country=${country.code}`);
                 grid.appendChild(card);
@@ -741,7 +668,7 @@
                 renderCountries(currentFilteredList);
                 if (toggleBtn) toggleBtn.style.display = 'none';
                 if (clearBtn) clearBtn.style.display = 'block';
-                if (resetBtn) resetBtn.style.display = 'inline-block';
+                if (resetBtn) resetBtn.style.display = 'inline-flex';
             } else {
                 let countriesToShow = (currentMode === 'popular') ? popularCountries : allCountries;
                 renderCountries(countriesToShow);
