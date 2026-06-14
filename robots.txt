@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://esimru.github.io/com/sitemap.xml
