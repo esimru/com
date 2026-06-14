@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>eSIMru | Безлимитный интернет и eSIM по всему миру</title>
+    <title>eSIMru — Безлимитный интернет и eSIM для путешествий по всему миру</title>
     <meta name="description" content="Купить eSIM для путешествий с безлимитным интернетом в 200+ странах. Мгновенная доставка, поддержка 24/7. Экономьте до 10 раз на роуминге!">
-    <meta name="keywords" content="eSIM, купить eSIM, безлимитный интернет, eSIM для туристов, интернет в роуминге, eSIM Турция, eSIM Таиланд">
+    <meta name="keywords" content="eSIM, купить eSIM, безлимитный интернет, eSIM для туристов, интернет в роуминге, eSIM Турция, eSIM Таиланд, eSIM ОАЭ">
     <meta name="author" content="eSIMru">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://esimru.github.io/com/">
-    <meta property="og:title" content="eSIMru | Безлимитный интернет и eSIM по всему миру">
+    <meta property="og:title" content="eSIMru — Безлимитный интернет и eSIM для путешествий">
     <meta property="og:description" content="Самый выгодный мобильный интернет в роуминге. Безлимит на 7-90 дней, звонки от 20 ₽/мин. Мгновенная активация.">
     <meta property="og:image" content="https://esimru.github.io/com/og-image.jpg">
     <meta property="og:url" content="https://esimru.github.io/com/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="eSIMru | Безлимитный интернет и eSIM">
-    <meta name="twitter:description" content="Экономьте на роуминге с eSIMru. Безлимитный интернет в 200+ странах.">
     <style>
         * {
             margin: 0;
@@ -24,82 +22,75 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-
         body {
             background: #f5f7fb;
             color: #1a2c3e;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.4;
         }
-
         .hero {
             background: linear-gradient(135deg, #0a2a3b 0%, #1a4a6e 100%);
             color: white;
             padding: 2.5rem 1rem;
             text-align: center;
         }
-
         .hero h1 {
             font-size: 1.8rem;
             margin-bottom: 0.75rem;
             font-weight: 700;
         }
-
         .hero p {
             font-size: 1rem;
             opacity: 0.9;
             max-width: 800px;
             margin: 0 auto;
         }
-
-        .hero p:last-of-type {
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            opacity: 0.8;
+        .hero-buttons {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-
+        .hero-btn {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.6rem 1.3rem;
+            border-radius: 60px;
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .hero-btn:hover {
+            background: white;
+            color: #1a4a6e;
+        }
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 1.5rem 1rem;
         }
-
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.2rem;
             margin-bottom: 2rem;
         }
-
         .feature-card {
             background: white;
             border-radius: 1.2rem;
             padding: 1.2rem;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s;
+            transition: transform 0.2s ease;
         }
-
-        .feature-card:active {
-            transform: scale(0.98);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.4rem;
-            color: #1f6392;
-        }
-
-        .feature-card p {
-            font-size: 0.85rem;
-            color: #4a627a;
-        }
-
+        .feature-card:active { transform: scale(0.98); }
+        .feature-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .feature-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; color: #1f6392; }
+        .feature-card p { font-size: 0.85rem; color: #4a627a; }
         .info-banner {
             background: #e8f4f8;
             border-radius: 1.2rem;
@@ -107,42 +98,26 @@
             margin-bottom: 2rem;
             text-align: center;
         }
-
-        .info-banner p:first-child {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 0.4rem;
-        }
-
-        .info-banner p:last-child {
-            font-size: 0.85rem;
-            color: #2c7da0;
-        }
-
         .how-it-works {
             background: white;
             border-radius: 1.5rem;
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
-
         .how-it-works h2 {
             text-align: center;
             margin-bottom: 1.5rem;
             color: #1f3b4c;
             font-size: 1.5rem;
         }
-
         .steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
         }
-
         .step {
             text-align: center;
         }
-
         .step-number {
             width: 44px;
             height: 44px;
@@ -156,17 +131,8 @@
             font-weight: bold;
             margin: 0 auto 0.7rem;
         }
-
-        .step h4 {
-            font-size: 0.95rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .step p {
-            font-size: 0.8rem;
-            color: #5b6e8c;
-        }
-
+        .step h4 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+        .step p { font-size: 0.8rem; color: #5b6e8c; }
         .search-section {
             display: flex;
             flex-wrap: wrap;
@@ -175,13 +141,11 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .search-wrapper {
             flex: 1;
             min-width: 180px;
             position: relative;
         }
-
         .search-input {
             width: 100%;
             padding: 0.8rem 1rem;
@@ -192,13 +156,11 @@
             transition: all 0.2s;
             padding-right: 2.5rem;
         }
-
         .search-input:focus {
             outline: none;
             border-color: #2c7da0;
             box-shadow: 0 0 0 3px rgba(44,125,160,0.1);
         }
-
         .search-clear {
             position: absolute;
             right: 12px;
@@ -212,7 +174,6 @@
             display: none;
             padding: 4px;
         }
-
         .search-reset-btn {
             background: #f1f5f9;
             border: 1.5px solid #e2e8f0;
@@ -224,11 +185,7 @@
             transition: 0.2s;
             color: #1f3b4c;
         }
-
-        .search-reset-btn:active {
-            transform: scale(0.96);
-        }
-
+        .search-reset-btn:active { transform: scale(0.96); }
         .no-results {
             text-align: center;
             padding: 2rem;
@@ -237,20 +194,17 @@
             color: #5b6e8c;
             font-size: 0.9rem;
         }
-
         .section-title {
             font-size: 1.6rem;
             margin-bottom: 1rem;
             color: #1f3b4c;
         }
-
         .countries-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
-
         .country-card {
             background: white;
             border-radius: 1rem;
@@ -261,12 +215,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #eef2f6;
         }
-
-        .country-card:active {
-            transform: scale(0.97);
-            background: #f8fafc;
-        }
-
+        .country-card:active { transform: scale(0.97); background: #f8fafc; }
         .flag-icon {
             width: 44px;
             height: 33px;
@@ -276,34 +225,29 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.15);
             object-fit: cover;
         }
-
         .country-name {
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 0.2rem;
             white-space: nowrap;
-            overflow-x: hidden;
+            overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .country-price {
             font-size: 0.7rem;
             color: #2c7da0;
             font-weight: 500;
         }
-
         .call-price {
             font-size: 0.65rem;
             color: #e67e22;
             margin-top: 0.2rem;
         }
-
         .speed-info {
             font-size: 0.65rem;
             color: #16a34a;
             margin-top: 0.2rem;
         }
-
         .show-more-btn {
             display: block;
             width: fit-content;
@@ -318,12 +262,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-
-        .show-more-btn:active {
-            transform: scale(0.96);
-            background: #eef2f6;
-        }
-
+        .show-more-btn:active { transform: scale(0.96); background: #eef2f6; }
         .footer {
             background: #0a2a3b;
             color: white;
@@ -332,47 +271,120 @@
             margin-top: 2rem;
             font-size: 0.8rem;
         }
-
-        .footer p:first-child {
-            margin-bottom: 0.5rem;
+        .footer a {
+            color: #8bb9d0;
+            text-decoration: none;
         }
-
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .faq {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .faq h2 {
+            margin-bottom: 1rem;
+            color: #1f3b4c;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eef2f6;
+            padding-bottom: 1rem;
+        }
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        .faq-answer {
+            display: none;
+            margin-top: 0.5rem;
+            color: #4a627a;
+            line-height: 1.4;
+        }
+        .faq-answer.show { display: block; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            padding: 1.5rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .close-modal {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .tariff-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tariff-option.selected {
+            border-color: #2c7da0;
+            background: #e8f4f8;
+        }
+        .tariff-price {
+            font-weight: bold;
+            color: #1a4a6e;
+        }
+        .buy-btn {
+            background: #2c7da0;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .order-form {
+            display: none;
+            margin-top: 1rem;
+        }
+        .order-form input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 60px;
+            margin-bottom: 0.8rem;
+        }
         @media (max-width: 640px) {
             .hero { padding: 1.8rem 0.8rem; }
             .hero h1 { font-size: 1.4rem; }
-            .hero p { font-size: 0.85rem; }
-            .container { padding: 1rem 0.8rem; }
-            .features { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            .feature-card { padding: 0.8rem; }
-            .feature-icon { font-size: 2rem; }
-            .feature-card h3 { font-size: 0.9rem; }
-            .feature-card p { font-size: 0.75rem; }
-            .info-banner { padding: 0.8rem; margin-bottom: 1.5rem; }
-            .info-banner p:first-child { font-size: 0.9rem; }
-            .how-it-works { padding: 1rem; margin-bottom: 1.5rem; }
-            .how-it-works h2 { font-size: 1.3rem; margin-bottom: 1rem; }
-            .steps { gap: 0.8rem; }
-            .step-number { width: 38px; height: 38px; font-size: 1.1rem; }
-            .step h4 { font-size: 0.85rem; }
-            .step p { font-size: 0.7rem; }
-            .search-section { flex-direction: column; align-items: stretch; gap: 0.6rem; }
-            .search-reset-btn { align-self: flex-end; }
-            .section-title { font-size: 1.3rem; margin-bottom: 1rem; }
-            .countries-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.8rem; }
+            .countries-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.8rem; }
             .flag-icon { width: 36px; height: 27px; }
             .country-name { font-size: 0.75rem; }
-            .country-price { font-size: 0.65rem; }
-            .call-price { font-size: 0.6rem; }
-            .speed-info { font-size: 0.6rem; }
-            .show-more-btn { padding: 0.6rem 1.5rem; font-size: 0.85rem; }
-            .footer { padding: 1rem; font-size: 0.7rem; }
-        }
-
-        @media (max-width: 380px) {
-            .countries-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 0.6rem; }
-            .country-card { padding: 0.6rem 0.2rem; }
-            .flag-icon { width: 32px; height: 24px; }
-            .country-name { font-size: 0.7rem; }
         }
     </style>
     <script type="application/ld+json">
@@ -381,325 +393,369 @@
       "@type": "WebSite",
       "name": "eSIMru",
       "url": "https://esimru.github.io/com/",
-      "description": "Магазин eSIM для путешествий с безлимитным интернетом по всему миру",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://esimru.github.io/com/?search={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "description": "Магазин eSIM для путешествий с безлимитным интернетом по всему миру"
     }
     </script>
 </head>
 <body>
-    <div class="hero">
-        <h1>🌍 eSIMru — Связь без границ</h1>
-        <p>Самый выгодный мобильный интернет в роуминге • Безлимит на 7–90 дней • Звонки от 20 ₽/мин</p>
-        <p>Один вызов такси через Uber, Grab, Max и т.п. в незнакомой стране может окупить все ваши затраты на eSIM 😄</p>
+
+<div class="hero">
+    <h1>🌍 eSIMru — Связь без границ</h1>
+    <p>Самый выгодный мобильный интернет в роуминге • Безлимит на 7–90 дней • Звонки от 20 ₽/мин</p>
+    <p>Один вызов такси через Uber, Grab, Max в незнакомой стране может окупить все ваши затраты на eSIM 😄</p>
+    <div class="hero-buttons">
+        <a href="blog.html" class="hero-btn">📖 Наш блог</a>
+        <a href="#countries" class="hero-btn">🌍 Выбрать страну</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="features">
+        <div class="feature-card"><div class="feature-icon">📱</div><h3>Легкая покупка онлайн</h3><p>Мгновенная доставка eSIM, простота установки за пару минут</p></div>
+        <div class="feature-card"><div class="feature-icon">💬</div><h3>Поддержка 24/7</h3><p>Наша служба поддержки доступна по всему миру круглосуточно!</p></div>
+        <div class="feature-card"><div class="feature-icon">🌍</div><h3>Более 200 стран</h3><p>Наши eSIM работают более чем в 200 странах и регионах!</p></div>
+        <div class="feature-card"><div class="feature-icon">💰</div><h3>Экономия до 10 раз</h3><p>Тарифы до 10 раз ниже, чем у вашего мобильного оператора в роуминге</p></div>
     </div>
 
-    <div class="container">
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Легкая покупка онлайн</h3>
-                <p>Мгновенная доставка eSIM, простота установки за пару минут</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3>Поддержка 24/7</h3>
-                <p>Наша служба поддержки доступна по всему миру круглосуточно!</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌍</div>
-                <h3>Более 200 стран</h3>
-                <p>Наши eSIM работают более чем в 200 странах и регионах!</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <h3>Экономия до 10 раз</h3>
-                <p>Тарифы до 10 раз ниже, чем у вашего мобильного оператора в роуминге</p>
-            </div>
-        </div>
-
-        <div class="info-banner">
-            <p>📢 С нашей eSIM оставайтесь на связи где бы вы не находились без огромных счетов за роуминг!</p>
-            <p>Наши тарифы позволят вам остаться на связи даже за 1000 километров от дома и не ограничивать себя в общении с друзьями и близкими!</p>
-        </div>
-
-        <div class="how-it-works">
-            <h2>Как работает eSIMru</h2>
-            <div class="steps">
-                <div class="step"><div class="step-number">1</div><h4>Выберите тарифный план</h4><p>Выберите нужную страну и тариф</p></div>
-                <div class="step"><div class="step-number">2</div><h4>Произведите оплату</h4><p>Удобным вам способом</p></div>
-                <div class="step"><div class="step-number">3</div><h4>Установите eSIM</h4><p>По QR-коду или ссылке</p></div>
-                <div class="step"><div class="step-number">4</div><h4>Активируйте eSIM</h4><p>И пользуйтесь связью!</p></div>
-            </div>
-        </div>
-
-        <h2 class="section-title">🌏 Популярные направления</h2>
-
-        <div class="search-section">
-            <div class="search-wrapper">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск страны (русский или английский)">
-                <button id="clearSearchBtn" class="search-clear" aria-label="Очистить">✕</button>
-            </div>
-            <button id="resetSearchBtn" class="search-reset-btn">Сбросить поиск</button>
-        </div>
-
-        <div class="countries-grid" id="countriesGrid"></div>
-        <button class="show-more-btn" id="toggleCountriesBtn">Показать все страны →</button>
+    <div class="info-banner">
+        <p>📢 С нашей eSIM оставайтесь на связи где бы вы не находились без огромных счетов за роуминг!</p>
+        <p>Наши тарифы позволят вам остаться на связи даже за 1000 километров от дома и не ограничивать себя в общении с друзьями и близкими!</p>
     </div>
 
-    <div class="footer">
-        <p>eSIMru — магазин электронных eSIM карт. Избавьтесь от высоких тарифов в роуминге!</p>
-        <p>Связь с друзьями и родственниками из любой точки земного шара становится доступной с eSIMru!</p>
+    <div class="how-it-works">
+        <h2>Как работает eSIMru</h2>
+        <div class="steps">
+            <div class="step"><div class="step-number">1</div><h4>Выберите тарифный план</h4><p>Выберите нужную страну и тариф</p></div>
+            <div class="step"><div class="step-number">2</div><h4>Произведите оплату</h4><p>Удобным вам способом</p></div>
+            <div class="step"><div class="step-number">3</div><h4>Установите eSIM</h4><p>По QR-коду или ссылке</p></div>
+            <div class="step"><div class="step-number">4</div><h4>Активируйте eSIM</h4><p>И пользуйтесь связью!</p></div>
+        </div>
     </div>
 
-    <script>
-        const allCountries = [
-            { code: "tr", name: "Турция", flag: "tr", basePrice7: 2050, callPrice: 20, maxSpeed: 300 },
-            { code: "ae", name: "ОАЭ", flag: "ae", basePrice7: 2800, callPrice: 40, maxSpeed: 750 },
-            { code: "eg", name: "Египет", flag: "eg", basePrice7: 2050, callPrice: 30, maxSpeed: 20 },
-            { code: "th", name: "Таиланд", flag: "th", basePrice7: 2100, callPrice: 20, maxSpeed: 250 },
-            { code: "cn", name: "Китай", flag: "cn", basePrice7: 2050, callPrice: 20, maxSpeed: 700 },
-            { code: "ge", name: "Грузия", flag: "ge", basePrice7: 2050, callPrice: 20, maxSpeed: 2000 },
-            { code: "am", name: "Армения", flag: "am", basePrice7: 2050, callPrice: 20, maxSpeed: 250 },
-            { code: "by", name: "Беларусь", flag: "by", basePrice7: 2050, callPrice: 20, maxSpeed: 800 },
-            { code: "kz", name: "Казахстан", flag: "kz", basePrice7: 2100, callPrice: 20, maxSpeed: 100 },
-            { code: "vn", name: "Вьетнам", flag: "vn", basePrice7: 2050, callPrice: 20, maxSpeed: 600 },
-            { code: "lk", name: "Шри-Ланка", flag: "lk", basePrice7: 2050, callPrice: 20, maxSpeed: 10000 },
-            { code: "mv", name: "Мальдивы", flag: "mv", basePrice7: 3200, callPrice: 60, maxSpeed: 300 },
-            { code: "id", name: "Индонезия", flag: "id", basePrice7: 2050, callPrice: 20, maxSpeed: 750 },
-            { code: "az", name: "Азербайджан", flag: "az", basePrice7: 2050, callPrice: 20, maxSpeed: 1000 },
-            { code: "uz", name: "Узбекистан", flag: "uz", basePrice7: 2050, callPrice: 20, maxSpeed: 10000 },
-            { code: "cu", name: "Куба", flag: "cu", basePrice7: 2600, callPrice: 80, maxSpeed: 4 },
-            { code: "in", name: "Индия", flag: "in", basePrice7: 2050, callPrice: 20, maxSpeed: 333 },
-            { code: "rs", name: "Сербия", flag: "rs", basePrice7: 2100, callPrice: 30, maxSpeed: 1500 },
-            { code: "it", name: "Италия", flag: "it", basePrice7: 2500, callPrice: 40, maxSpeed: 416 },
-            { code: "fr", name: "Франция", flag: "fr", basePrice7: 2600, callPrice: 40, maxSpeed: 2000 },
-            { code: "qa", name: "Катар", flag: "qa", basePrice7: 3000, callPrice: 50, maxSpeed: 900 },
-            { code: "my", name: "Малайзия", flag: "my", basePrice7: 2100, callPrice: 20, maxSpeed: 750 },
-            { code: "sc", name: "Сейшелы", flag: "sc", basePrice7: 3100, callPrice: 60, maxSpeed: 150 },
-            { code: "ve", name: "Венесуэла", flag: "ve", basePrice7: 2400, callPrice: 40, maxSpeed: 500 },
-            { code: "om", name: "Оман", flag: "om", basePrice7: 2900, callPrice: 50, maxSpeed: 320 },
-            { code: "es", name: "Испания", flag: "es", basePrice7: 2500, callPrice: 40, maxSpeed: 500 },
-            { code: "gr", name: "Греция", flag: "gr", basePrice7: 2500, callPrice: 40, maxSpeed: 500 },
-            { code: "jp", name: "Япония", flag: "jp", basePrice7: 3200, callPrice: 50, maxSpeed: 1000 },
-            { code: "bh", name: "Бахрейн", flag: "bh", basePrice7: 2900, callPrice: 50, maxSpeed: 3200 },
-            { code: "me", name: "Черногория", flag: "me", basePrice7: 2200, callPrice: 40, maxSpeed: 1000 },
-            { code: "cy", name: "Кипр", flag: "cy", basePrice7: 2400, callPrice: 40, maxSpeed: 400 },
-            { code: "hu", name: "Венгрия", flag: "hu", basePrice7: 2100, callPrice: 30, maxSpeed: 450 },
-            { code: "mu", name: "Маврикий", flag: "mu", basePrice7: 2800, callPrice: 50, maxSpeed: 455 },
-            { code: "tz", name: "Танзания", flag: "tz", basePrice7: 2200, callPrice: 40, maxSpeed: 800 },
-            { code: "ma", name: "Марокко", flag: "ma", basePrice7: 2200, callPrice: 40, maxSpeed: 2000 },
-            { code: "tn", name: "Тунис", flag: "tn", basePrice7: 2200, callPrice: 40, maxSpeed: 2100 },
-            { code: "kr", name: "Южная Корея", flag: "kr", basePrice7: 3000, callPrice: 50, maxSpeed: 1000 },
-            { code: "sg", name: "Сингапур", flag: "sg", basePrice7: 2700, callPrice: 40, maxSpeed: 1300 },
-            { code: "ph", name: "Филиппины", flag: "ph", basePrice7: 2050, callPrice: 20, maxSpeed: 500 },
-            { code: "kg", name: "Кыргызстан", flag: "kg", basePrice7: 2050, callPrice: 20, maxSpeed: 2000 },
-            { code: "tj", name: "Таджикистан", flag: "tj", basePrice7: 2050, callPrice: 20, maxSpeed: 1300 },
-            { code: "de", name: "Германия", flag: "de", basePrice7: 2600, callPrice: 40, maxSpeed: 1000 },
-            { code: "at", name: "Австрия", flag: "at", basePrice7: 2600, callPrice: 40, maxSpeed: 1000 },
-            { code: "ch", name: "Швейцария", flag: "ch", basePrice7: 3100, callPrice: 50, maxSpeed: 2000 },
-            { code: "pt", name: "Португалия", flag: "pt", basePrice7: 2400, callPrice: 40, maxSpeed: 150 },
-            { code: "do", name: "Доминикана", flag: "do", basePrice7: 2600, callPrice: 40, maxSpeed: 500 },
-            { code: "mx", name: "Мексика", flag: "mx", basePrice7: 2400, callPrice: 40, maxSpeed: 430 },
-            { code: "br", name: "Бразилия", flag: "br", basePrice7: 2600, callPrice: 40, maxSpeed: 750 },
-            { code: "ar", name: "Аргентина", flag: "ar", basePrice7: 2500, callPrice: 40, maxSpeed: 500 },
-            { code: "kh", name: "Камбоджа", flag: "kh", basePrice7: 2050, callPrice: 20, maxSpeed: 100 },
-            { code: "ir", name: "Иран", flag: "ir", basePrice7: 2100, callPrice: 30, maxSpeed: 500 },
-            { code: "sa", name: "Саудовская Аравия", flag: "sa", basePrice7: 2800, callPrice: 40, maxSpeed: 1500 },
-            { code: "za", name: "ЮАР", flag: "za", basePrice7: 2500, callPrice: 40, maxSpeed: 174 },
-            { code: "ke", name: "Кения", flag: "ke", basePrice7: 2200, callPrice: 40, maxSpeed: 411 },
-            { code: "cz", name: "Чехия", flag: "cz", basePrice7: 2200, callPrice: 30, maxSpeed: 930 },
-            { code: "hr", name: "Хорватия", flag: "hr", basePrice7: 2400, callPrice: 40, maxSpeed: 1000 },
-            { code: "bg", name: "Болгария", flag: "bg", basePrice7: 2050, callPrice: 30, maxSpeed: 2300 },
-            { code: "nl", name: "Нидерланды", flag: "nl", basePrice7: 2700, callPrice: 40, maxSpeed: 1000 },
-            { code: "be", name: "Бельгия", flag: "be", basePrice7: 2600, callPrice: 40, maxSpeed: 500 },
-            { code: "gb", name: "Великобритания", flag: "gb", basePrice7: 2800, callPrice: 40, maxSpeed: 1000 },
-            { code: "pe", name: "Перу", flag: "pe", basePrice7: 2400, callPrice: 40, maxSpeed: 547 },
-            { code: "cl", name: "Чили", flag: "cl", basePrice7: 2500, callPrice: 40, maxSpeed: 196 },
-            { code: "co", name: "Колумбия", flag: "co", basePrice7: 2400, callPrice: 40, maxSpeed: 350 },
-            { code: "se", name: "Швеция", flag: "se", basePrice7: 2900, callPrice: 40, maxSpeed: 1000 },
-            { code: "no", name: "Норвегия", flag: "no", basePrice7: 3000, callPrice: 50, maxSpeed: 1000 },
-            { code: "dk", name: "Дания", flag: "dk", basePrice7: 2800, callPrice: 40, maxSpeed: 1000 },
-            { code: "is", name: "Исландия", flag: "is", basePrice7: 3100, callPrice: 50, maxSpeed: 1000 },
-            { code: "fi", name: "Финляндия", flag: "fi", basePrice7: 2800, callPrice: 40, maxSpeed: 8000 },
-            { code: "ie", name: "Ирландия", flag: "ie", basePrice7: 2600, callPrice: 40, maxSpeed: 1000 },
-            { code: "mc", name: "Монако", flag: "mc", basePrice7: 3200, callPrice: 50, maxSpeed: 1400 },
-            { code: "ad", name: "Андорра", flag: "ad", basePrice7: 2700, callPrice: 40, maxSpeed: 700 },
-            { code: "sm", name: "Сан-Марино", flag: "sm", basePrice7: 2600, callPrice: 40, maxSpeed: 20000 },
-            { code: "va", name: "Ватикан", flag: "va", basePrice7: 2600, callPrice: 40, maxSpeed: 1600 },
-            { code: "mt", name: "Мальта", flag: "mt", basePrice7: 2500, callPrice: 40, maxSpeed: 1500 },
-            { code: "al", name: "Албания", flag: "al", basePrice7: 2100, callPrice: 40, maxSpeed: 1000 },
-            { code: "mk", name: "Северная Македония", flag: "mk", basePrice7: 2100, callPrice: 40, maxSpeed: 1000 },
-            { code: "ba", name: "Босния и Герцеговина", flag: "ba", basePrice7: 2100, callPrice: 40, maxSpeed: 30 },
-            { code: "ro", name: "Румыния", flag: "ro", basePrice7: 2050, callPrice: 30, maxSpeed: 100 },
-            { code: "pl", name: "Польша", flag: "pl", basePrice7: 2200, callPrice: 30, maxSpeed: 100 },
-            { code: "sk", name: "Словакия", flag: "sk", basePrice7: 2100, callPrice: 30, maxSpeed: 100 },
-            { code: "si", name: "Словения", flag: "si", basePrice7: 2200, callPrice: 30, maxSpeed: 100 },
-            { code: "lu", name: "Люксембург", flag: "lu", basePrice7: 2800, callPrice: 40, maxSpeed: 100 },
-            { code: "lv", name: "Латвия", flag: "lv", basePrice7: 2100, callPrice: 30, maxSpeed: 100 },
-            { code: "lt", name: "Литва", flag: "lt", basePrice7: 2100, callPrice: 30, maxSpeed: 100 },
-            { code: "ee", name: "Эстония", flag: "ee", basePrice7: 2100, callPrice: 30, maxSpeed: 100 },
-            { code: "md", name: "Молдова", flag: "md", basePrice7: 2050, callPrice: 20, maxSpeed: 100 },
-            { code: "mn", name: "Монголия", flag: "mn", basePrice7: 2050, callPrice: 30, maxSpeed: 100 },
-            { code: "la", name: "Лаос", flag: "la", basePrice7: 2050, callPrice: 20, maxSpeed: 100 },
-            { code: "mm", name: "Мьянма", flag: "mm", basePrice7: 2050, callPrice: 30, maxSpeed: 100 },
-            { code: "np", name: "Непал", flag: "np", basePrice7: 2050, callPrice: 20, maxSpeed: 100 },
-            { code: "bd", name: "Бангладеш", flag: "bd", basePrice7: 2050, callPrice: 20, maxSpeed: 100 },
-            { code: "bn", name: "Бруней", flag: "bn", basePrice7: 2600, callPrice: 40, maxSpeed: 100 },
-            { code: "bt", name: "Бутан", flag: "bt", basePrice7: 2100, callPrice: 40, maxSpeed: 100 },
-            { code: "jo", name: "Иордания", flag: "jo", basePrice7: 2600, callPrice: 40, maxSpeed: 100 },
-            { code: "lb", name: "Ливан", flag: "lb", basePrice7: 2400, callPrice: 40, maxSpeed: 100 },
-            { code: "kw", name: "Кувейт", flag: "kw", basePrice7: 2800, callPrice: 50, maxSpeed: 100 },
-            { code: "iq", name: "Ирак", flag: "iq", basePrice7: 2200, callPrice: 40, maxSpeed: 100 },
-            { code: "dz", name: "Алжир", flag: "dz", basePrice7: 2200, callPrice: 40, maxSpeed: 100 },
-            { code: "ly", name: "Ливия", flag: "ly", basePrice7: 2400, callPrice: 40, maxSpeed: 100 },
-            { code: "ao", name: "Ангола", flag: "ao", basePrice7: 2500, callPrice: 50, maxSpeed: 100 },
-            { code: "bw", name: "Ботсвана", flag: "bw", basePrice7: 2400, callPrice: 40, maxSpeed: 100 },
-            { code: "zw", name: "Зимбабве", flag: "zw", basePrice7: 2200, callPrice: 40, maxSpeed: 100 },
-            { code: "zm", name: "Замбия", flag: "zm", basePrice7: 2200, callPrice: 40, maxSpeed: 100 },
-            { code: "na", name: "Намибия", flag: "na", basePrice7: 2400, callPrice: 40, maxSpeed: 100 },
-            { code: "mg", name: "Мадагаскар", flag: "mg", basePrice7: 2200, callPrice: 40, maxSpeed: 100 },
-            { code: "cv", name: "Кабо-Верде", flag: "cv", basePrice7: 2600, callPrice: 50, maxSpeed: 100 },
-            { code: "gh", name: "Гана", flag: "gh", basePrice7: 2100, callPrice: 40, maxSpeed: 100 },
-            { code: "sn", name: "Сенегал", flag: "sn", basePrice7: 2200, callPrice: 40, maxSpeed: 100 },
-            { code: "ug", name: "Уганда", flag: "ug", basePrice7: 2100, callPrice: 40, maxSpeed: 100 },
-            { code: "et", name: "Эфиопия", flag: "et", basePrice7: 2200, callPrice: 40, maxSpeed: 100 },
-            { code: "cr", name: "Коста-Рика", flag: "cr", basePrice7: 2600, callPrice: 40, maxSpeed: 100 },
-            { code: "pa", name: "Панама", flag: "pa", basePrice7: 2500, callPrice: 40, maxSpeed: 100 },
-            { code: "ec", name: "Эквадор", flag: "ec", basePrice7: 2400, callPrice: 40, maxSpeed: 100 },
-            { code: "bo", name: "Боливия", flag: "bo", basePrice7: 2400, callPrice: 40, maxSpeed: 100 },
-            { code: "bs", name: "Багамы", flag: "bs", basePrice7: 2900, callPrice: 50, maxSpeed: 100 },
-            { code: "jm", name: "Ямайка", flag: "jm", basePrice7: 2600, callPrice: 50, maxSpeed: 100 },
-            { code: "au", name: "Австралия", flag: "au", basePrice7: 3100, callPrice: 50, maxSpeed: 100 },
-            { code: "nz", name: "Новая Зеландия", flag: "nz", basePrice7: 3000, callPrice: 50, maxSpeed: 100 },
-            { code: "ye", name: "Йемен", flag: "ye", basePrice7: 2200, callPrice: 40, maxSpeed: 100 }
-        ];
+    <h2 class="section-title" id="countries">🌏 Популярные направления</h2>
+    <div class="search-section">
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Поиск страны (русский или английский)">
+            <button id="clearSearchBtn" class="search-clear" aria-label="Очистить">✕</button>
+        </div>
+        <button id="resetSearchBtn" class="search-reset-btn">Сбросить поиск</button>
+    </div>
+    <div class="countries-grid" id="countriesGrid"></div>
+    <button class="show-more-btn" id="toggleCountriesBtn">Показать все страны →</button>
 
-        const popularCountries = allCountries.slice(0, 30);
-        
-        const latinToCyrillicMap = {
-            'q':'й','w':'ц','e':'у','r':'к','t':'е','y':'н','u':'г','i':'ш','o':'щ','p':'з','[':'х',']':'ъ','a':'ф','s':'ы','d':'в','f':'а','g':'п','h':'р','j':'о','k':'л','l':'д',';':'ж',"'":"э",'z':'я','x':'ч','c':'с','v':'м','b':'и','n':'т','m':'ь',',':'б','.':'ю','/':'.',
-            'Q':'Й','W':'Ц','E':'У','R':'К','T':'Е','Y':'Н','U':'Г','I':'Ш','O':'Щ','P':'З','{':'Х','}':'Ъ','A':'Ф','S':'Ы','D':'В','F':'А','G':'П','H':'Р','J':'О','K':'Л','L':'Д',':':'Ж','"':'Э','Z':'Я','X':'Ч','C':'С','V':'М','B':'И','N':'Т','M':'Ь','<':'Б','>':'Ю','?':',' 
-        };
+    <!-- SEO-блок: преимущества -->
+    <div style="background: white; border-radius: 1.5rem; padding: 1.5rem; margin-top: 2rem;">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Почему выбирают eSIMru?</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;">
+            <div style="flex:1; min-width: 200px;"><strong>✅ Мгновенная активация</strong><br>Получите eSIM на email сразу после оплаты.</div>
+            <div style="flex:1; min-width: 200px;"><strong>✅ Безлимитный интернет</strong><br>Никаких скрытых лимитов и дневных списаний.</div>
+            <div style="flex:1; min-width: 200px;"><strong>✅ Работает с любым смартфоном</strong><br>Поддержка iPhone, Samsung, Google Pixel и других моделей с eSIM.</div>
+        </div>
+    </div>
 
-        function fixKeyboardLayout(str) {
-            let hasLatin = /[a-zA-Z]/.test(str);
-            let hasCyrillic = /[а-яА-ЯёЁ]/.test(str);
-            if (hasLatin && !hasCyrillic) {
-                let result = '';
-                for (let ch of str) result += latinToCyrillicMap[ch] || ch;
-                return result;
-            }
-            return str;
+    <!-- FAQ блок -->
+    <div class="faq">
+        <h2>❓ Часто задаваемые вопросы</h2>
+        <div class="faq-item"><div class="faq-question">Что такое eSIM и подойдет ли мне? <span style="font-weight:bold;">+</span></div><div class="faq-answer">eSIM — это встроенная SIM-карта, которая есть в большинстве современных смартфонов (iPhone XS и новее, Pixel 3 и новее, Samsung S20 и новее). Вы активируете тариф без физической SIM.</div></div>
+        <div class="faq-item"><div class="faq-question">Как получить eSIM после оплаты? <span style="font-weight:bold;">+</span></div><div class="faq-answer">Сразу после оплаты мы вышлем QR-код и инструкцию на вашу почту. Сканируете код — и интернет работает.</div></div>
+        <div class="faq-item"><div class="faq-question">Можно ли звонить через eSIMru? <span style="font-weight:bold;">+</span></div><div class="faq-answer">Да, у нас есть тарифы со звонками от 20 ₽/мин в любую страну. Но мы рекомендуем использовать мессенджеры (WhatsApp, Telegram) для бесплатных звонков по Wi-Fi/eSIM.</div></div>
+        <div class="faq-item"><div class="faq-question">Нужно ли регистрироваться? <span style="font-weight:bold;">+</span></div><div class="faq-answer">Нет, просто выберите страну, тариф и оплатите — никакой регистрации.</div></div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>eSIMru — магазин электронных eSIM карт. Избавьтесь от высоких тарифов в роуминге!</p>
+    <p>Связь с друзьями и родственниками из любой точки земного шара становится доступной с eSIMru!</p>
+    <p><a href="blog.html">📖 Блог о eSIM и путешествиях</a> | <a href="/oferta.html">Договор оферты</a> | <a href="/privacy.html">Политика конфиденциальности</a></p>
+    <p>📧 support@esimru.online | Telegram: @esimru_support</p>
+</div>
+
+<!-- Модальное окно -->
+<div id="tariffModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 id="modalCountryName"></h3>
+        <div id="tariffOptions"></div>
+        <div id="orderForm" class="order-form">
+            <input type="email" id="customerEmail" placeholder="Ваш email для получения eSIM" required>
+            <input type="tel" id="customerPhone" placeholder="Телефон (для связи)">
+            <button id="submitOrderBtn" class="buy-btn">Отправить заявку</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- ДАННЫЕ СО ВСЕМИ СТРАНАМИ (более 100) ----------
+    // На основе вашего исходного списка, добавлены цены на 14 и 30 дней (расчёт: 14 дней ≈ цена7 * 1.6, 30 дней ≈ цена7 * 2.5)
+    const allCountries = [
+        { code: "tr", name: "Турция", flag: "tr", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 300 },
+        { code: "ae", name: "ОАЭ", flag: "ae", prices: {7:2800,14:4480,30:7000}, callPrice: 40, maxSpeed: 750 },
+        { code: "eg", name: "Египет", flag: "eg", prices: {7:2050,14:3280,30:5125}, callPrice: 30, maxSpeed: 20 },
+        { code: "th", name: "Таиланд", flag: "th", prices: {7:2100,14:3360,30:5250}, callPrice: 20, maxSpeed: 250 },
+        { code: "cn", name: "Китай", flag: "cn", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 700 },
+        { code: "ge", name: "Грузия", flag: "ge", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 2000 },
+        { code: "am", name: "Армения", flag: "am", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 250 },
+        { code: "by", name: "Беларусь", flag: "by", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 800 },
+        { code: "kz", name: "Казахстан", flag: "kz", prices: {7:2100,14:3360,30:5250}, callPrice: 20, maxSpeed: 100 },
+        { code: "vn", name: "Вьетнам", flag: "vn", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 600 },
+        { code: "lk", name: "Шри-Ланка", flag: "lk", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 10000 },
+        { code: "mv", name: "Мальдивы", flag: "mv", prices: {7:3200,14:5120,30:8000}, callPrice: 60, maxSpeed: 300 },
+        { code: "id", name: "Индонезия", flag: "id", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 750 },
+        { code: "az", name: "Азербайджан", flag: "az", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 1000 },
+        { code: "uz", name: "Узбекистан", flag: "uz", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 10000 },
+        { code: "cu", name: "Куба", flag: "cu", prices: {7:2600,14:4160,30:6500}, callPrice: 80, maxSpeed: 4 },
+        { code: "in", name: "Индия", flag: "in", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 333 },
+        { code: "rs", name: "Сербия", flag: "rs", prices: {7:2100,14:3360,30:5250}, callPrice: 30, maxSpeed: 1500 },
+        { code: "it", name: "Италия", flag: "it", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 416 },
+        { code: "fr", name: "Франция", flag: "fr", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 2000 },
+        { code: "qa", name: "Катар", flag: "qa", prices: {7:3000,14:4800,30:7500}, callPrice: 50, maxSpeed: 900 },
+        { code: "my", name: "Малайзия", flag: "my", prices: {7:2100,14:3360,30:5250}, callPrice: 20, maxSpeed: 750 },
+        { code: "sc", name: "Сейшелы", flag: "sc", prices: {7:3100,14:4960,30:7750}, callPrice: 60, maxSpeed: 150 },
+        { code: "ve", name: "Венесуэла", flag: "ve", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 500 },
+        { code: "om", name: "Оман", flag: "om", prices: {7:2900,14:4640,30:7250}, callPrice: 50, maxSpeed: 320 },
+        { code: "es", name: "Испания", flag: "es", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 500 },
+        { code: "gr", name: "Греция", flag: "gr", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 500 },
+        { code: "jp", name: "Япония", flag: "jp", prices: {7:3200,14:5120,30:8000}, callPrice: 50, maxSpeed: 1000 },
+        { code: "bh", name: "Бахрейн", flag: "bh", prices: {7:2900,14:4640,30:7250}, callPrice: 50, maxSpeed: 3200 },
+        { code: "me", name: "Черногория", flag: "me", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 1000 },
+        { code: "cy", name: "Кипр", flag: "cy", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 400 },
+        { code: "hu", name: "Венгрия", flag: "hu", prices: {7:2100,14:3360,30:5250}, callPrice: 30, maxSpeed: 450 },
+        { code: "mu", name: "Маврикий", flag: "mu", prices: {7:2800,14:4480,30:7000}, callPrice: 50, maxSpeed: 455 },
+        { code: "tz", name: "Танзания", flag: "tz", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 800 },
+        { code: "ma", name: "Марокко", flag: "ma", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 2000 },
+        { code: "tn", name: "Тунис", flag: "tn", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 2100 },
+        { code: "kr", name: "Южная Корея", flag: "kr", prices: {7:3000,14:4800,30:7500}, callPrice: 50, maxSpeed: 1000 },
+        { code: "sg", name: "Сингапур", flag: "sg", prices: {7:2700,14:4320,30:6750}, callPrice: 40, maxSpeed: 1300 },
+        { code: "ph", name: "Филиппины", flag: "ph", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 500 },
+        { code: "kg", name: "Кыргызстан", flag: "kg", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 2000 },
+        { code: "tj", name: "Таджикистан", flag: "tj", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 1300 },
+        { code: "de", name: "Германия", flag: "de", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 1000 },
+        { code: "at", name: "Австрия", flag: "at", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 1000 },
+        { code: "ch", name: "Швейцария", flag: "ch", prices: {7:3100,14:4960,30:7750}, callPrice: 50, maxSpeed: 2000 },
+        { code: "pt", name: "Португалия", flag: "pt", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 150 },
+        { code: "do", name: "Доминикана", flag: "do", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 500 },
+        { code: "mx", name: "Мексика", flag: "mx", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 430 },
+        { code: "br", name: "Бразилия", flag: "br", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 750 },
+        { code: "ar", name: "Аргентина", flag: "ar", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 500 },
+        { code: "kh", name: "Камбоджа", flag: "kh", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 100 },
+        { code: "ir", name: "Иран", flag: "ir", prices: {7:2100,14:3360,30:5250}, callPrice: 30, maxSpeed: 500 },
+        { code: "sa", name: "Саудовская Аравия", flag: "sa", prices: {7:2800,14:4480,30:7000}, callPrice: 40, maxSpeed: 1500 },
+        { code: "za", name: "ЮАР", flag: "za", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 174 },
+        { code: "ke", name: "Кения", flag: "ke", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 411 },
+        { code: "cz", name: "Чехия", flag: "cz", prices: {7:2200,14:3520,30:5500}, callPrice: 30, maxSpeed: 930 },
+        { code: "hr", name: "Хорватия", flag: "hr", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 1000 },
+        { code: "bg", name: "Болгария", flag: "bg", prices: {7:2050,14:3280,30:5125}, callPrice: 30, maxSpeed: 2300 },
+        { code: "nl", name: "Нидерланды", flag: "nl", prices: {7:2700,14:4320,30:6750}, callPrice: 40, maxSpeed: 1000 },
+        { code: "be", name: "Бельгия", flag: "be", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 500 },
+        { code: "gb", name: "Великобритания", flag: "gb", prices: {7:2800,14:4480,30:7000}, callPrice: 40, maxSpeed: 1000 },
+        { code: "pe", name: "Перу", flag: "pe", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 547 },
+        { code: "cl", name: "Чили", flag: "cl", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 196 },
+        { code: "co", name: "Колумбия", flag: "co", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 350 },
+        { code: "se", name: "Швеция", flag: "se", prices: {7:2900,14:4640,30:7250}, callPrice: 40, maxSpeed: 1000 },
+        { code: "no", name: "Норвегия", flag: "no", prices: {7:3000,14:4800,30:7500}, callPrice: 50, maxSpeed: 1000 },
+        { code: "dk", name: "Дания", flag: "dk", prices: {7:2800,14:4480,30:7000}, callPrice: 40, maxSpeed: 1000 },
+        { code: "is", name: "Исландия", flag: "is", prices: {7:3100,14:4960,30:7750}, callPrice: 50, maxSpeed: 1000 },
+        { code: "fi", name: "Финляндия", flag: "fi", prices: {7:2800,14:4480,30:7000}, callPrice: 40, maxSpeed: 8000 },
+        { code: "ie", name: "Ирландия", flag: "ie", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 1000 },
+        { code: "mc", name: "Монако", flag: "mc", prices: {7:3200,14:5120,30:8000}, callPrice: 50, maxSpeed: 1400 },
+        { code: "ad", name: "Андорра", flag: "ad", prices: {7:2700,14:4320,30:6750}, callPrice: 40, maxSpeed: 700 },
+        { code: "sm", name: "Сан-Марино", flag: "sm", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 20000 },
+        { code: "va", name: "Ватикан", flag: "va", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 1600 },
+        { code: "mt", name: "Мальта", flag: "mt", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 1500 },
+        { code: "al", name: "Албания", flag: "al", prices: {7:2100,14:3360,30:5250}, callPrice: 40, maxSpeed: 1000 },
+        { code: "mk", name: "Северная Македония", flag: "mk", prices: {7:2100,14:3360,30:5250}, callPrice: 40, maxSpeed: 1000 },
+        { code: "ba", name: "Босния и Герцеговина", flag: "ba", prices: {7:2100,14:3360,30:5250}, callPrice: 40, maxSpeed: 30 },
+        { code: "ro", name: "Румыния", flag: "ro", prices: {7:2050,14:3280,30:5125}, callPrice: 30, maxSpeed: 100 },
+        { code: "pl", name: "Польша", flag: "pl", prices: {7:2200,14:3520,30:5500}, callPrice: 30, maxSpeed: 100 },
+        { code: "sk", name: "Словакия", flag: "sk", prices: {7:2100,14:3360,30:5250}, callPrice: 30, maxSpeed: 100 },
+        { code: "si", name: "Словения", flag: "si", prices: {7:2200,14:3520,30:5500}, callPrice: 30, maxSpeed: 100 },
+        { code: "lu", name: "Люксембург", flag: "lu", prices: {7:2800,14:4480,30:7000}, callPrice: 40, maxSpeed: 100 },
+        { code: "lv", name: "Латвия", flag: "lv", prices: {7:2100,14:3360,30:5250}, callPrice: 30, maxSpeed: 100 },
+        { code: "lt", name: "Литва", flag: "lt", prices: {7:2100,14:3360,30:5250}, callPrice: 30, maxSpeed: 100 },
+        { code: "ee", name: "Эстония", flag: "ee", prices: {7:2100,14:3360,30:5250}, callPrice: 30, maxSpeed: 100 },
+        { code: "md", name: "Молдова", flag: "md", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 100 },
+        { code: "mn", name: "Монголия", flag: "mn", prices: {7:2050,14:3280,30:5125}, callPrice: 30, maxSpeed: 100 },
+        { code: "la", name: "Лаос", flag: "la", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 100 },
+        { code: "mm", name: "Мьянма", flag: "mm", prices: {7:2050,14:3280,30:5125}, callPrice: 30, maxSpeed: 100 },
+        { code: "np", name: "Непал", flag: "np", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 100 },
+        { code: "bd", name: "Бангладеш", flag: "bd", prices: {7:2050,14:3280,30:5125}, callPrice: 20, maxSpeed: 100 },
+        { code: "bn", name: "Бруней", flag: "bn", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 100 },
+        { code: "bt", name: "Бутан", flag: "bt", prices: {7:2100,14:3360,30:5250}, callPrice: 40, maxSpeed: 100 },
+        { code: "jo", name: "Иордания", flag: "jo", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 100 },
+        { code: "lb", name: "Ливан", flag: "lb", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 100 },
+        { code: "kw", name: "Кувейт", flag: "kw", prices: {7:2800,14:4480,30:7000}, callPrice: 50, maxSpeed: 100 },
+        { code: "iq", name: "Ирак", flag: "iq", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 },
+        { code: "dz", name: "Алжир", flag: "dz", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 },
+        { code: "ly", name: "Ливия", flag: "ly", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 100 },
+        { code: "ao", name: "Ангола", flag: "ao", prices: {7:2500,14:4000,30:6250}, callPrice: 50, maxSpeed: 100 },
+        { code: "bw", name: "Ботсвана", flag: "bw", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 100 },
+        { code: "zw", name: "Зимбабве", flag: "zw", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 },
+        { code: "zm", name: "Замбия", flag: "zm", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 },
+        { code: "na", name: "Намибия", flag: "na", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 100 },
+        { code: "mg", name: "Мадагаскар", flag: "mg", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 },
+        { code: "cv", name: "Кабо-Верде", flag: "cv", prices: {7:2600,14:4160,30:6500}, callPrice: 50, maxSpeed: 100 },
+        { code: "gh", name: "Гана", flag: "gh", prices: {7:2100,14:3360,30:5250}, callPrice: 40, maxSpeed: 100 },
+        { code: "sn", name: "Сенегал", flag: "sn", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 },
+        { code: "ug", name: "Уганда", flag: "ug", prices: {7:2100,14:3360,30:5250}, callPrice: 40, maxSpeed: 100 },
+        { code: "et", name: "Эфиопия", flag: "et", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 },
+        { code: "cr", name: "Коста-Рика", flag: "cr", prices: {7:2600,14:4160,30:6500}, callPrice: 40, maxSpeed: 100 },
+        { code: "pa", name: "Панама", flag: "pa", prices: {7:2500,14:4000,30:6250}, callPrice: 40, maxSpeed: 100 },
+        { code: "ec", name: "Эквадор", flag: "ec", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 100 },
+        { code: "bo", name: "Боливия", flag: "bo", prices: {7:2400,14:3840,30:6000}, callPrice: 40, maxSpeed: 100 },
+        { code: "bs", name: "Багамы", flag: "bs", prices: {7:2900,14:4640,30:7250}, callPrice: 50, maxSpeed: 100 },
+        { code: "jm", name: "Ямайка", flag: "jm", prices: {7:2600,14:4160,30:6500}, callPrice: 50, maxSpeed: 100 },
+        { code: "au", name: "Австралия", flag: "au", prices: {7:3100,14:4960,30:7750}, callPrice: 50, maxSpeed: 100 },
+        { code: "nz", name: "Новая Зеландия", flag: "nz", prices: {7:3000,14:4800,30:7500}, callPrice: 50, maxSpeed: 100 },
+        { code: "ye", name: "Йемен", flag: "ye", prices: {7:2200,14:3520,30:5500}, callPrice: 40, maxSpeed: 100 }
+    ];
+
+    const popularCountries = allCountries.slice(0, 30);
+    const latinToCyrillicMap = {'q':'й','w':'ц','e':'у','r':'к','t':'е','y':'н','u':'г','i':'ш','o':'щ','p':'з','[':'х',']':'ъ','a':'ф','s':'ы','d':'в','f':'а','g':'п','h':'р','j':'о','k':'л','l':'д',';':'ж',"'":"э",'z':'я','x':'ч','c':'с','v':'м','b':'и','n':'т','m':'ь',',':'б','.':'ю','/':'.'};
+
+    function fixKeyboardLayout(str) {
+        let hasLatin = /[a-zA-Z]/.test(str);
+        if (hasLatin && !/[а-яА-ЯёЁ]/.test(str)) {
+            let result = '';
+            for (let ch of str) result += latinToCyrillicMap[ch] || ch;
+            return result;
         }
+        return str;
+    }
+    function normalizeSearchText(text) { return text.toLowerCase().trim(); }
+    function filterCountries(searchQuery) {
+        if (!searchQuery) return allCountries;
+        let query = normalizeSearchText(searchQuery);
+        let fixedQuery = fixKeyboardLayout(query).toLowerCase();
+        return allCountries.filter(country => country.name.toLowerCase().includes(query) || country.name.toLowerCase().includes(fixedQuery) || country.code.toLowerCase().includes(query));
+    }
+    function getFlagUrl(code) { return `https://flagcdn.com/w80/${code}.png`; }
+    function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
 
-        function normalizeSearchText(text) {
-            return text.toLowerCase().trim();
+    let currentMode = 'popular';
+    let currentFilteredList = [];
+
+    function renderCountries(countriesToShow) {
+        const grid = document.getElementById('countriesGrid');
+        if (!grid) return;
+        if (countriesToShow.length === 0) {
+            grid.innerHTML = `<div class="no-results">😕 Ничего не найдено. Попробуйте изменить запрос.</div>`;
+            return;
         }
-
-        function filterCountries(searchQuery) {
-            if (!searchQuery) return allCountries;
-            let query = normalizeSearchText(searchQuery);
-            let fixedQuery = fixKeyboardLayout(query).toLowerCase();
-            return allCountries.filter(country => {
-                let name = country.name.toLowerCase();
-                if (name.includes(query)) return true;
-                if (name.includes(fixedQuery)) return true;
-                if (country.code.toLowerCase().includes(query)) return true;
-                return false;
-            });
-        }
-
-        function getFlagUrl(code) { return `https://flagcdn.com/w80/${code}.png`; }
-        function formatPrice(price) { return price.toLocaleString('ru-RU') + ' ₽'; }
-
-        let currentMode = 'popular';
-        let currentFilteredList = [];
-
-        function renderCountries(countriesToShow) {
-            const grid = document.getElementById('countriesGrid');
-            if (!grid) return;
-            if (countriesToShow.length === 0) {
-                grid.innerHTML = `<div class="no-results">😕 Ничего не найдено. Попробуйте изменить запрос.</div>`;
-                return;
-            }
-            grid.innerHTML = '';
-            countriesToShow.forEach(country => {
-                const card = document.createElement('div');
-                card.className = 'country-card';
-                card.innerHTML = `
-                    <img class="flag-icon" src="${getFlagUrl(country.flag)}" alt="${country.name}" loading="lazy">
-                    <div class="country-name">${country.name}</div>
-                    <div class="country-price">Безлимит от ${formatPrice(country.basePrice7)} / 7 дней</div>
-                    <div class="call-price">📞 звонки от ${country.callPrice} ₽/мин</div>
-                    <div class="speed-info">⚡ до ${country.maxSpeed} Мбит/с</div>
-                `;
-                card.addEventListener('click', () => window.location.href = `country.html?country=${country.code}`);
-                grid.appendChild(card);
-            });
-        }
-
-        function updateUI() {
-            const toggleBtn = document.getElementById('toggleCountriesBtn');
-            const clearBtn = document.getElementById('clearSearchBtn');
-            const resetBtn = document.getElementById('resetSearchBtn');
-            if (currentMode === 'search') {
-                renderCountries(currentFilteredList);
-                if (toggleBtn) toggleBtn.style.display = 'none';
-                if (clearBtn) clearBtn.style.display = 'block';
-                if (resetBtn) resetBtn.style.display = 'inline-block';
-            } else {
-                let countriesToShow = (currentMode === 'popular') ? popularCountries : allCountries;
-                renderCountries(countriesToShow);
-                if (toggleBtn) {
-                    toggleBtn.style.display = 'block';
-                    toggleBtn.textContent = (currentMode === 'popular') ? 'Показать все страны →' : 'Показать популярные страны';
-                }
-                if (clearBtn) clearBtn.style.display = 'none';
-                if (resetBtn) resetBtn.style.display = 'none';
-            }
-        }
-
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const query = searchInput.value;
-            if (query.trim() === '') {
-                if (currentMode === 'search') { currentMode = 'popular'; updateUI(); }
-                return;
-            }
-            currentFilteredList = filterCountries(query);
-            currentMode = 'search';
-            updateUI();
-        }
-
-        function resetSearch() {
-            document.getElementById('searchInput').value = '';
-            currentMode = 'popular';
-            updateUI();
-        }
-
-        function toggleCountries() {
-            if (currentMode === 'popular') currentMode = 'all';
-            else if (currentMode === 'all') currentMode = 'popular';
-            else return;
-            updateUI();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('searchInput');
-            const clearBtn = document.getElementById('clearSearchBtn');
-            const resetBtn = document.getElementById('resetSearchBtn');
-            const toggleBtn = document.getElementById('toggleCountriesBtn');
-            searchInput.addEventListener('input', performSearch);
-            clearBtn.addEventListener('click', () => { searchInput.value = ''; performSearch(); });
-            resetBtn.addEventListener('click', resetSearch);
-            toggleBtn.addEventListener('click', toggleCountries);
-            currentMode = 'popular';
-            updateUI();
+        grid.innerHTML = '';
+        countriesToShow.forEach(country => {
+            const card = document.createElement('div');
+            card.className = 'country-card';
+            card.innerHTML = `<img class="flag-icon" src="${getFlagUrl(country.flag)}" alt="${country.name}" loading="lazy"><div class="country-name">${country.name}</div><div class="country-price">Безлимит от ${formatPrice(country.prices[7])} / 7 дней</div><div class="call-price">📞 звонки от ${country.callPrice} ₽/мин</div><div class="speed-info">⚡ до ${country.maxSpeed} Мбит/с</div>`;
+            card.addEventListener('click', () => openModal(country));
+            grid.appendChild(card);
         });
-    </script>
+    }
+
+    function openModal(country) {
+        const modal = document.getElementById('tariffModal');
+        const modalCountryName = document.getElementById('modalCountryName');
+        const tariffOptionsDiv = document.getElementById('tariffOptions');
+        const orderFormDiv = document.getElementById('orderForm');
+        modalCountryName.innerText = country.name;
+        tariffOptionsDiv.innerHTML = '';
+        let selectedDays = null;
+        for (let days of [7,14,30]) {
+            if (country.prices[days]) {
+                const option = document.createElement('div');
+                option.className = 'tariff-option';
+                option.innerHTML = `<span>${days} дней безлимита</span><span class="tariff-price">${formatPrice(country.prices[days])}</span>`;
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.tariff-option').forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    selectedDays = days;
+                    orderFormDiv.style.display = 'block';
+                    document.getElementById('submitOrderBtn').onclick = () => sendOrder(country, selectedDays);
+                });
+                tariffOptionsDiv.appendChild(option);
+            }
+        }
+        orderFormDiv.style.display = 'none';
+        modal.style.display = 'flex';
+    }
+
+    function sendOrder(country, days) {
+        const email = document.getElementById('customerEmail').value;
+        if (!email || !email.includes('@')) { alert('Введите корректный email'); return; }
+        const phone = document.getElementById('customerPhone').value;
+        const price = country.prices[days];
+        const message = `Новый заказ eSIM!\nСтрана: ${country.name}\nДлительность: ${days} дней\nЦена: ${formatPrice(price)}\nEmail: ${email}\nТелефон: ${phone}`;
+        fetch('https://formsubmit.co/ajax/support@esimru.online', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ _subject: `Заказ eSIM ${country.name}`, message: message, email: email })
+        })
+        .then(() => { alert(`✅ Заявка отправлена! Мы пришлем eSIM на ${email} в течение 5 минут.`); document.getElementById('tariffModal').style.display = 'none'; })
+        .catch(() => { alert('Ошибка отправки. Пожалуйста, напишите нам в Telegram @esimru_support'); });
+    }
+
+    function updateUI() {
+        const toggleBtn = document.getElementById('toggleCountriesBtn');
+        const clearBtn = document.getElementById('clearSearchBtn');
+        const resetBtn = document.getElementById('resetSearchBtn');
+        const searchInput = document.getElementById('searchInput');
+        if (currentMode === 'search') {
+            renderCountries(currentFilteredList);
+            if (toggleBtn) toggleBtn.style.display = 'none';
+            if (clearBtn) clearBtn.style.display = 'block';
+            if (resetBtn) resetBtn.style.display = 'inline-block';
+        } else {
+            let countriesToShow = (currentMode === 'popular') ? popularCountries : allCountries;
+            renderCountries(countriesToShow);
+            if (toggleBtn) {
+                toggleBtn.style.display = 'block';
+                toggleBtn.textContent = (currentMode === 'popular') ? 'Показать все страны →' : 'Показать популярные страны';
+            }
+            if (clearBtn) clearBtn.style.display = 'none';
+            if (resetBtn) resetBtn.style.display = 'none';
+        }
+        if (searchInput && currentMode !== 'search') searchInput.value = '';
+    }
+
+    function performSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const query = searchInput.value;
+        if (query.trim() === '') {
+            if (currentMode === 'search') { currentMode = 'popular'; updateUI(); }
+            return;
+        }
+        currentFilteredList = filterCountries(query);
+        currentMode = 'search';
+        updateUI();
+    }
+
+    function resetSearch() {
+        document.getElementById('searchInput').value = '';
+        currentMode = 'popular';
+        updateUI();
+    }
+
+    function toggleCountries() {
+        if (currentMode === 'popular') currentMode = 'all';
+        else if (currentMode === 'all') currentMode = 'popular';
+        else return;
+        updateUI();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearchBtn');
+        const resetBtn = document.getElementById('resetSearchBtn');
+        const toggleBtn = document.getElementById('toggleCountriesBtn');
+        searchInput.addEventListener('input', performSearch);
+        clearBtn.addEventListener('click', () => { searchInput.value = ''; performSearch(); });
+        resetBtn.addEventListener('click', resetSearch);
+        toggleBtn.addEventListener('click', toggleCountries);
+        document.querySelector('.close-modal').addEventListener('click', () => document.getElementById('tariffModal').style.display = 'none');
+        window.addEventListener('click', (e) => { if (e.target === document.getElementById('tariffModal')) document.getElementById('tariffModal').style.display = 'none'; });
+        document.querySelectorAll('.faq-question').forEach(q => { q.addEventListener('click', () => { q.nextElementSibling.classList.toggle('show'); }); });
+        currentMode = 'popular';
+        updateUI();
+    });
+</script>
 </body>
 </html>
