@@ -87,7 +87,7 @@
             if (!response.ok) throw new Error('Не удалось загрузить список статей');
             allArticles = await response.json();
             allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-            loadedCount = Math.min(6, allArticles.length);
+            loadedCount = Math.min(12, allArticles.length);
             renderArticles(loadedCount);
         } catch (error) {
             console.error(error);
