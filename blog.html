@@ -47,12 +47,50 @@
         .article-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: #0a2a3b; }
         .article-excerpt { font-size: 0.85rem; color: #4a627a; margin-bottom: 0.8rem; line-height: 1.4; }
         .read-more { color: #2c7da0; font-weight: 600; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.3rem; }
-        .loading-trigger { height: 80px; margin: 2rem 0; text-align: center; color: #94a3b8; }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            background: white;
+            border: 1px solid #d0d7e2;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
+            color: #1a2c3e;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+            min-width: 2.5rem;
+        }
+        .pagination button:hover:not(:disabled) {
+            background: #e8f0fe;
+            border-color: #2c7da0;
+        }
+        .pagination button.active {
+            background: #2c7da0;
+            border-color: #2c7da0;
+            color: white;
+            font-weight: 600;
+        }
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .pagination .page-info {
+            font-size: 0.9rem;
+            color: #4a627a;
+            margin: 0 0.5rem;
+        }
         .footer { background: #0a2a3b; color: white; text-align: center; padding: 1.5rem; margin-top: 2rem; font-size: 0.8rem; }
         .footer a { color: #8bb9d0; text-decoration: none; }
         @media (max-width: 640px) {
             .articles-grid { grid-template-columns: 1fr; gap: 1rem; }
             h1 { font-size: 1.5rem; }
+            .pagination button { padding: 0.4rem 0.7rem; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -65,7 +103,9 @@
     <h1><i class="bi bi-journal-bookmark-fill"></i> Блог о eSIM и путешествиях</h1>
     <div class="subhead">Полезные статьи, лайфхаки, сравнения тарифов и новости роуминга</div>
     <div id="articlesGrid" class="articles-grid"></div>
-    <div id="loadingTrigger" class="loading-trigger"><i class="bi bi-arrow-down-circle"></i> Прокрутите вниз, чтобы загрузить ещё статьи...</div>
+
+    <!-- Блок пагинации -->
+    <div id="pagination" class="pagination"></div>
 </div>
 <div class="footer">
     <p><a href="index.html"><i class="bi bi-house"></i> Главная</a> | <a href="blog.html"><i class="bi bi-journal-bookmark-fill"></i> Блог</a> | <a href="/oferta.html">Оферта</a> | <a href="/privacy.html">Политика</a></p>
@@ -74,12 +114,11 @@
 
 <script>
     let allArticles = [];
-    let loadedCount = 12;
-    const step = 4;
-    let isLoading = false;
-    let hasMore = true;
+    const perPage = 10;
+    let currentPage = 1;
+    let totalPages = 0;
     const grid = document.getElementById('articlesGrid');
-    const trigger = document.getElementById('loadingTrigger');
+    const paginationContainer = document.getElementById('pagination');
 
     async function loadArticlesList() {
         try {
@@ -87,71 +126,97 @@
             if (!response.ok) throw new Error('Не удалось загрузить список статей');
             allArticles = await response.json();
             allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-            loadedCount = Math.min(12, allArticles.length);
-            renderArticles(loadedCount);
+            totalPages = Math.ceil(allArticles.length / perPage);
+            if (totalPages === 0) totalPages = 1; // если статей нет, покажем пустую страницу
+            currentPage = 1;
+            renderPage(currentPage);
         } catch (error) {
             console.error(error);
             grid.innerHTML = '<div class="no-results" style="text-align:center; padding:2rem;">❌ Ошибка загрузки статей. Пожалуйста, обновите страницу.</div>';
-            trigger.style.display = 'none';
+            paginationContainer.innerHTML = '';
         }
     }
 
-    function renderArticles(limit) {
-        const articlesToShow = allArticles.slice(0, limit);
+    function renderPage(page) {
+        // Проверяем границы
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+        currentPage = page;
+
+        // Вычисляем срез
+        const start = (page - 1) * perPage;
+        const end = start + perPage;
+        const pageArticles = allArticles.slice(start, end);
+
+        // Отображаем карточки
         grid.innerHTML = '';
-        articlesToShow.forEach(article => {
-            const card = document.createElement('div');
-            card.className = 'article-card';
-            const articleUrl = `articles/${article.id}.html`;
-            card.onclick = () => { window.location.href = articleUrl; };
-            
-            // Формируем блок с изображением: если есть imageUrl, показываем <img>, иначе эмодзи
-            let imageHtml = '';
-            if (article.imageUrl) {
-                imageHtml = `<img src="${article.imageUrl}" alt="${article.title}">`;
-            } else {
-                imageHtml = article.image || '📄';
-            }
-            
-            card.innerHTML = `
-                <div class="article-image">${imageHtml}</div>
-                <div class="article-content">
-                    <span class="article-tag"><i class="bi bi-bookmark"></i> ${article.tag}</span>
-                    <div class="article-title">${article.title}</div>
-                    <div class="article-excerpt">${article.excerpt}</div>
-                    <div class="read-more">Читать далее <i class="bi bi-arrow-right-short"></i></div>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
-        if (loadedCount >= allArticles.length) {
-            hasMore = false;
-            trigger.innerHTML = '<i class="bi bi-check-circle"></i> Вы прочитали все статьи. Заходите за новыми!';
+        if (pageArticles.length === 0) {
+            grid.innerHTML = '<div class="no-results" style="text-align:center; padding:2rem;">Статей пока нет.</div>';
         } else {
-            trigger.innerHTML = '<i class="bi bi-arrow-down-circle"></i> Прокрутите вниз, чтобы загрузить ещё статьи...';
+            pageArticles.forEach(article => {
+                const card = document.createElement('div');
+                card.className = 'article-card';
+                const articleUrl = `articles/${article.id}.html`;
+                card.onclick = () => { window.location.href = articleUrl; };
+
+                let imageHtml = '';
+                if (article.imageUrl) {
+                    imageHtml = `<img src="${article.imageUrl}" alt="${article.title}">`;
+                } else {
+                    imageHtml = article.image || '📄';
+                }
+
+                card.innerHTML = `
+                    <div class="article-image">${imageHtml}</div>
+                    <div class="article-content">
+                        <span class="article-tag"><i class="bi bi-bookmark"></i> ${article.tag}</span>
+                        <div class="article-title">${article.title}</div>
+                        <div class="article-excerpt">${article.excerpt}</div>
+                        <div class="read-more">Читать далее <i class="bi bi-arrow-right-short"></i></div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
         }
+
+        // Обновляем пагинацию
+        renderPagination();
     }
 
-    function loadMore() {
-        if (isLoading || !hasMore) return;
-        isLoading = true;
-        trigger.innerHTML = '<i class="bi bi-hourglass-split"></i> Загрузка новых статей...';
-        setTimeout(() => {
-            const newLimit = loadedCount + step;
-            loadedCount = Math.min(newLimit, allArticles.length);
-            renderArticles(loadedCount);
-            isLoading = false;
-        }, 500);
-    }
-
-    function handleScroll() {
-        if (!hasMore || isLoading) return;
-        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 200) {
-            loadMore();
+    function renderPagination() {
+        if (totalPages <= 1) {
+            paginationContainer.innerHTML = ''; // если одна страница, ничего не показываем
+            return;
         }
+
+        let html = '';
+
+        // Кнопка "Назад"
+        html += `<button class="prev" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><i class="bi bi-chevron-left"></i></button>`;
+
+        // Номера страниц (показываем все, можно ограничить, но для простоты покажем все)
+        for (let i = 1; i <= totalPages; i++) {
+            const activeClass = (i === currentPage) ? 'active' : '';
+            html += `<button class="${activeClass}" onclick="goToPage(${i})">${i}</button>`;
+        }
+
+        // Кнопка "Вперёд"
+        html += `<button class="next" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}><i class="bi bi-chevron-right"></i></button>`;
+
+        // Информация о странице (опционально)
+        html += `<span class="page-info">${currentPage} / ${totalPages}</span>`;
+
+        paginationContainer.innerHTML = html;
     }
 
-    window.addEventListener('scroll', handleScroll);
+    function goToPage(page) {
+        if (page < 1 || page > totalPages) return;
+        renderPage(page);
+        // Прокручиваем к началу сетки (плавно)
+        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Загружаем статьи при старте
     loadArticlesList();
 </script>
 </body>
