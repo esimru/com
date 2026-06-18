@@ -103,8 +103,6 @@
     <h1><i class="bi bi-journal-bookmark-fill"></i> Блог о eSIM и путешествиях</h1>
     <div class="subhead">Полезные статьи, лайфхаки, сравнения тарифов и новости роуминга</div>
     <div id="articlesGrid" class="articles-grid"></div>
-
-    <!-- Блок пагинации -->
     <div id="pagination" class="pagination"></div>
 </div>
 <div class="footer">
@@ -114,7 +112,7 @@
 
 <script>
     let allArticles = [];
-    const perPage = 12;
+    const perPage = 10;
     let currentPage = 1;
     let totalPages = 0;
     const grid = document.getElementById('articlesGrid');
@@ -126,9 +124,14 @@
             if (!response.ok) throw new Error('Не удалось загрузить список статей');
             allArticles = await response.json();
             allArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-            totalPages = Math.ceil(allArticles.length / perPage);
-            if (totalPages === 0) totalPages = 1; // если статей нет, покажем пустую страницу
-            currentPage = 1;
+            totalPages = Math.ceil(allArticles.length / perPage) || 1;
+
+            // Читаем параметр page из URL
+            const params = new URLSearchParams(window.location.search);
+            let page = parseInt(params.get('page'), 10);
+            if (isNaN(page) || page < 1 || page > totalPages) page = 1;
+            currentPage = page;
+
             renderPage(currentPage);
         } catch (error) {
             console.error(error);
@@ -138,17 +141,19 @@
     }
 
     function renderPage(page) {
-        // Проверяем границы
         if (page < 1) page = 1;
         if (page > totalPages) page = totalPages;
         currentPage = page;
 
-        // Вычисляем срез
+        // Обновляем URL без перезагрузки (сохраняем параметр page)
+        const url = new URL(window.location);
+        url.searchParams.set('page', currentPage);
+        window.history.pushState({ page: currentPage }, '', url);
+
         const start = (page - 1) * perPage;
         const end = start + perPage;
         const pageArticles = allArticles.slice(start, end);
 
-        // Отображаем карточки
         grid.innerHTML = '';
         if (pageArticles.length === 0) {
             grid.innerHTML = '<div class="no-results" style="text-align:center; padding:2rem;">Статей пока нет.</div>';
@@ -156,7 +161,8 @@
             pageArticles.forEach(article => {
                 const card = document.createElement('div');
                 card.className = 'article-card';
-                const articleUrl = `articles/${article.id}.html`;
+                // Добавляем параметр page в ссылку на статью
+                const articleUrl = `articles/${article.id}.html?page=${currentPage}`;
                 card.onclick = () => { window.location.href = articleUrl; };
 
                 let imageHtml = '';
@@ -179,31 +185,24 @@
             });
         }
 
-        // Обновляем пагинацию
         renderPagination();
     }
 
     function renderPagination() {
         if (totalPages <= 1) {
-            paginationContainer.innerHTML = ''; // если одна страница, ничего не показываем
+            paginationContainer.innerHTML = '';
             return;
         }
 
         let html = '';
-
-        // Кнопка "Назад"
         html += `<button class="prev" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><i class="bi bi-chevron-left"></i></button>`;
 
-        // Номера страниц (показываем все, можно ограничить, но для простоты покажем все)
         for (let i = 1; i <= totalPages; i++) {
             const activeClass = (i === currentPage) ? 'active' : '';
             html += `<button class="${activeClass}" onclick="goToPage(${i})">${i}</button>`;
         }
 
-        // Кнопка "Вперёд"
         html += `<button class="next" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}><i class="bi bi-chevron-right"></i></button>`;
-
-        // Информация о странице (опционально)
         html += `<span class="page-info">${currentPage} / ${totalPages}</span>`;
 
         paginationContainer.innerHTML = html;
@@ -212,11 +211,19 @@
     function goToPage(page) {
         if (page < 1 || page > totalPages) return;
         renderPage(page);
-        // Прокручиваем к началу сетки (плавно)
         grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // Загружаем статьи при старте
+    // Обрабатываем изменение истории (кнопки "назад/вперёд" в браузере)
+    window.addEventListener('popstate', function(event) {
+        const params = new URLSearchParams(window.location.search);
+        let page = parseInt(params.get('page'), 10);
+        if (isNaN(page) || page < 1 || page > totalPages) page = 1;
+        if (page !== currentPage) {
+            renderPage(page);
+        }
+    });
+
     loadArticlesList();
 </script>
 </body>
